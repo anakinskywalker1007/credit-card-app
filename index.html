@@ -151,6 +151,42 @@ body{background:#f1f5f9}
 .tier-badge.tier-B{background:linear-gradient(135deg,#10b981,#14b8a6);color:#fff;border:none}
 .tier-badge.tier-C{background:#e5e7eb;color:#6b7280;border:none}
 .val-big{font-size:20px;font-weight:900;color:#059669}
+
+.cmp-btn{background:transparent;border:1.5px solid #e5e7eb;color:#9ca3af;padding:5px 10px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;white-space:nowrap}
+.cmp-btn:hover{border-color:#2563eb;color:#2563eb;background:#eff6ff}
+.cmp-btn.active{background:#2563eb;border-color:#2563eb;color:#fff}
+.cmp-bar{position:fixed;bottom:0;left:0;right:0;background:#0f172a;border-top:1px solid #1e293b;padding:14px 32px;display:none;align-items:center;gap:16px;z-index:200;box-shadow:0 -4px 24px rgba(0,0,0,0.3)}
+.cmp-bar.visible{display:flex}
+.cmp-bar-label{font-size:13px;font-weight:600;color:#94a3b8;white-space:nowrap}
+.cmp-chips{display:flex;gap:8px;flex:1;flex-wrap:wrap}
+.cmp-chip{background:#1e293b;border:1px solid #334155;color:#e2e8f0;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px}
+.cmp-chip-x{cursor:pointer;color:#64748b;font-size:14px;line-height:1;transition:color 0.1s}
+.cmp-chip-x:hover{color:#ef4444}
+.cmp-go-btn{background:#2563eb;color:#fff;border:none;padding:9px 20px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:background 0.15s}
+.cmp-go-btn:hover{background:#1d4ed8}
+.cmp-clear-btn{background:transparent;border:1.5px solid #334155;color:#64748b;padding:8px 14px;border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s}
+.cmp-clear-btn:hover{border-color:#ef4444;color:#ef4444}
+.cmp-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:400;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
+.cmp-overlay.active{display:flex}
+.cmp-modal{background:#fff;border-radius:16px;width:100%;max-width:900px;margin-top:20px;box-shadow:0 32px 80px rgba(0,0,0,0.25);overflow:hidden}
+.cmp-modal-hd{background:#0f172a;padding:20px 28px;display:flex;justify-content:space-between;align-items:center}
+.cmp-modal-hd h2{color:#fff;font-size:18px;font-weight:800;letter-spacing:-0.02em}
+.cmp-modal-hd p{color:#475569;font-size:12px;margin-top:2px}
+.cmp-tbl{width:100%;border-collapse:collapse}
+.cmp-tbl th{padding:14px 18px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#9ca3af;background:#f9fafb;border-bottom:1px solid #f3f4f6;width:130px}
+.cmp-tbl td{padding:13px 18px;border-bottom:1px solid #f9fafb;font-size:13px;color:#374151;vertical-align:top}
+.cmp-tbl tr:last-child td,.cmp-tbl tr:last-child th{border-bottom:none}
+.cmp-card-hd{text-align:center;padding:22px 16px !important;background:#f8faff}
+.cmp-card-nm{font-size:15px;font-weight:800;color:#111;margin-bottom:3px;line-height:1.3}
+.cmp-card-is{font-size:11px;color:#9ca3af;margin-bottom:10px}
+.cmp-apply{display:block;background:#2563eb;color:#fff;text-align:center;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;margin-top:10px;transition:background 0.15s}
+.cmp-apply:hover{background:#1d4ed8}
+.cmp-best-cell{color:#059669;font-weight:800}
+.cmp-best-pill{background:#f0fdf4;color:#059669;font-size:10px;font-weight:700;padding:1px 6px;border-radius:8px;margin-left:4px;text-transform:uppercase;letter-spacing:0.04em;display:inline-block}
+.cmp-perks{list-style:none;padding:0;margin:0}
+.cmp-perks li{font-size:12px;color:#374151;padding:2px 0;display:flex;gap:5px}
+.cmp-perks li::before{content:'·';color:#9ca3af;flex-shrink:0}
+.best-tag{display:inline-block;background:#fef3c7;color:#92400e;border:1px solid #fde68a;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;margin-left:6px;vertical-align:middle;text-transform:uppercase;letter-spacing:0.04em}
 </style>
 </head>
 <body>
@@ -268,11 +304,99 @@ function openModal(id){const x=cards.find(c=>c.id===id);if(!x)return;document.ge
   if(t.type==='bonus'){return'<div class="perk-item"><span>'+t.label+'</span><strong>'+t.value+'</strong></div>'+(t.note?'<div style="font-size:10px;color:#9ca3af;padding:2px 0 4px">* '+t.note+'</div>':'');}
   return'<div class="perk-item"><span>'+t.label+'</span><strong>'+t.value+'</strong></div>';
 }).join("");document.getElementById('m-title').textContent=x.name;document.getElementById('m-issuer').textContent=x.issuer+' • '+x.net;document.getElementById('m-bonus').textContent=x.bonus;document.getElementById('m-value').textContent=x.valDisp;document.getElementById('m-fee').textContent='$'+x.fee;document.getElementById('m-fee-note').textContent=x.feeNote;document.getElementById('m-score').textContent=x.score;document.getElementById('m-score-label').textContent=x.scLabel;document.getElementById('m-apr').textContent=x.apr;document.getElementById('m-intro').textContent=x.introApr;document.getElementById('m-spend').textContent=x.spend+' in '+x.time;var applyBtn=document.getElementById('m-apply');if(applyBtn){applyBtn.href=x.link||'#';applyBtn.style.background=x.link&&x.link!=='#'?'#2563eb':'#111';}document.getElementById('m-rewards').innerHTML=x.rewards.map(r=>`<div class="perk-item"><strong>${r[1]}</strong> ${r[0]}</div>`).join('');document.getElementById('m-perks').innerHTML=x.perks.filter(p=>p.charAt(0)!=='$').map(p=>`<div class="perk-item">✓ ${p}</div>`).join('');const ts=document.getElementById('m-transfer-section');if(x.transfers.length){ts.style.display='block';document.getElementById('m-transfer').innerHTML=x.transfers.map(t=>`<div class="transfer-item">${t}</div>`).join('')}else{ts.style.display='none'}document.getElementById('modal').classList.add('active')}
+var compareList=[];
+function toggleCompare(id){
+  var idx=compareList.indexOf(id);
+  var btn=document.getElementById("cmpbtn-"+id);
+  if(idx>-1){
+    compareList.splice(idx,1);
+    if(btn){btn.textContent="+ Compare";btn.classList.remove("active");}
+  } else {
+    if(compareList.length>=3){alert("Max 3 cards.");return;}
+    compareList.push(id);
+    if(btn){btn.textContent="Added ✓";btn.classList.add("active");}
+  }
+  renderCmpBar();
+}
+function renderCmpBar(){
+  var bar=document.getElementById("cmpBar");
+  var chips=document.getElementById("cmpChips");
+  var goBtn=document.getElementById("cmpGoBtn");
+  if(compareList.length===0){bar.classList.remove("visible");return;}
+  bar.classList.add("visible");
+  chips.innerHTML=compareList.map(function(id){
+    var c=cards.find(function(x){return x.id===id;});
+    return "<div class=\"cmp-chip\">"+c.name+"<span class=\"cmp-chip-x\" onclick=\"toggleCompare("+id+")\">×</span></div>";
+  }).join("");
+  goBtn.textContent=compareList.length<2?"Select "+(2-compareList.length)+" more...":"Compare "+compareList.length+" Cards →";
+  goBtn.style.opacity=compareList.length<2?"0.5":"1";
+}
+function clearCompare(){
+  compareList.slice().forEach(function(id){toggleCompare(id);});
+}
+function getYr1Val(c){
+  var cr=0;
+  c.perks.forEach(function(p){
+    if(p.charAt(0)==="$"&&p.indexOf(" X ")===-1&&p.charAt(1)!=="X"){
+      var m=p.match(/[$][0-9,]+/);
+      if(m)cr+=parseInt(m[0].replace(/[^0-9]/g,""))||0;
+    }
+  });
+  return c.val+cr-(c.feeNote.indexOf("Waived")>-1?0:c.fee);
+}
+function openCompare(){
+  if(compareList.length<2)return;
+  var sel=compareList.map(function(id){return cards.find(function(x){return x.id===id;});});
+  var rowDefs=[
+    {lbl:"Signup Bonus",fn:function(c){return c.bonus;},num:function(c){return c.val;}},
+    {lbl:"Bonus Value",fn:function(c){return c.valDisp;},num:function(c){return c.val;}},
+    {lbl:"Annual Fee",fn:function(c){return c.fee===0?"$0 — Free":"$"+c.fee+(c.feeNote.indexOf("Waived")>-1?" (waived yr 1)":"");},num:function(c){return -c.fee;}},
+    {lbl:"Year 1 Net",fn:function(c){var n=getYr1Val(c);return(n>=0?"$":"−$")+Math.abs(n).toLocaleString();},num:function(c){return getYr1Val(c);}},
+    {lbl:"Top Rewards",fn:function(c){return c.rewards.slice(0,3).map(function(r){return "<span style=\"display:block;font-size:12px\"><strong>"+r[1]+"</strong> "+r[0]+"</span>";}).join("");},num:null},
+    {lbl:"Annual Credits",fn:function(c){var cr=c.perks.filter(function(p){return p.charAt(0)==="$"&&p.indexOf(" X ")===-1&&p.charAt(1)!=="X";}).slice(0,4);return cr.length?"<ul class=\"cmp-perks\">"+cr.map(function(p){return"<li>"+p+"</li>";}).join("")+"</ul>":"—";},num:null},
+    {lbl:"Transfers",fn:function(c){return c.transfers&&c.transfers.length?c.transfers.slice(0,4).join(", ")+(c.transfers.length>4?" +more":""):"—";},num:null},
+    {lbl:"Foreign Fee",fn:function(c){return c.ftf;},num:null},
+    {lbl:"Tier",fn:function(c){return"<span class=\"tier-badge tier-"+c.tier+"\">"+c.tier+"</span>";},num:null}
+  ];
+  var thead="<thead><tr><th></th>"+sel.map(function(c){
+    return"<td class=\"cmp-card-hd\"><div class=\"cmp-card-nm\">"+c.name+"</div><div class=\"cmp-card-is\">"+c.issuer+"</div>"+(c.best?"<div style=\"font-size:11px;color:#2563eb;font-weight:600;margin-bottom:6px\">"+c.best+"</div>":"")+"<a class=\"cmp-apply\" href=\""+( c.link||"#")+"\" target=\"_blank\">Apply Now →</a></td>";
+  }).join("")+"</tr></thead>";
+  var tbody="<tbody>"+rowDefs.map(function(row){
+    var nums=row.num?sel.map(function(c){return row.num(c);}):null;
+    var best=nums?Math.max.apply(null,nums):null;
+    return"<tr><th>"+row.lbl+"</th>"+sel.map(function(c,i){
+      var val=row.fn(c);
+      var isBest=nums&&nums[i]===best&&sel.length>1;
+      return"<td class=\""+( isBest?"cmp-best-cell":"")+"\">"+val+(isBest?"<span class=\"cmp-best-pill\">Best</span>":"")+"</td>";
+    }).join("")+"</tr>";
+  }).join("")+"</tbody>";
+  document.getElementById("cmpTable").innerHTML=thead+tbody;
+  document.getElementById("cmpModal").classList.add("active");
+}
+function closeCmp(){document.getElementById("cmpModal").classList.remove("active");}
+document.getElementById("cmpModal").addEventListener("click",function(e){if(e.target.id==="cmpModal")closeCmp();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeModal();closeCmp();}});
 function closeModal(){document.getElementById('modal').classList.remove('active')}
 
 document.getElementById('modal').addEventListener('click',function(e){if(e.target.id==='modal')closeModal()});
 ['travel','cash','business','premium','noaf'].forEach(function(f){var el=document.getElementById('cnt-'+f);if(el)el.textContent=cards.filter(function(x){return x.cat.includes(f)}).length});
 render('all');
 </script>
+
+<div class="cmp-bar" id="cmpBar">
+  <span class="cmp-bar-label">Comparing:</span>
+  <div class="cmp-chips" id="cmpChips"></div>
+  <button class="cmp-clear-btn" onclick="clearCompare()">Clear</button>
+  <button class="cmp-go-btn" id="cmpGoBtn" onclick="openCompare()">Compare Cards</button>
+</div>
+<div class="cmp-overlay" id="cmpModal">
+  <div class="cmp-modal">
+    <div class="cmp-modal-hd">
+      <div><h2>Side-by-Side Comparison</h2><p>Best value in each row highlighted in green</p></div>
+      <button class="modal-close" onclick="closeCmp()" style="color:#94a3b8">&#x2715;</button>
+    </div>
+    <div style="overflow-x:auto"><table class="cmp-tbl" id="cmpTable"></table></div>
+  </div>
+</div>
 </body>
 </html>

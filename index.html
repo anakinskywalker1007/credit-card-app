@@ -376,13 +376,13 @@ function openCompare(){
   document.getElementById("cmpModal").classList.add("active");
 }
 function closeCmp(){document.getElementById("cmpModal").classList.remove("active");}
-document.getElementById("cmpModal").addEventListener("click",function(e){if(e.target.id==="cmpModal")closeCmp();});
+var _cm=document.getElementById("cmpModal");if(_cm)_cm.addEventListener("click",function(e){if(e.target.id==="cmpModal")closeCmp();});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeModal();closeCmp();}});
 function closeModal(){document.getElementById('modal').classList.remove('active')}
 
-document.getElementById('modal').addEventListener('click',function(e){if(e.target.id==='modal')closeModal()});
+var _mo=document.getElementById('modal');if(_mo)_mo.addEventListener('click',function(e){if(e.target.id==='modal')closeModal();});
 ['travel','cash','business','premium','noaf'].forEach(function(f){var el=document.getElementById('cnt-'+f);if(el)el.textContent=cards.filter(function(x){return x.cat.includes(f)}).length});
-render('all');
+document.addEventListener('DOMContentLoaded',function(){render('all');});
 </script>
 
 <div class="cmp-bar" id="cmpBar">

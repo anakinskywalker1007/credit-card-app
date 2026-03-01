@@ -64,9 +64,9 @@ nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 40px;display:flex;
 .top-bar{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
 .search-box{border:1.5px solid #e5e7eb;border-radius:9px;padding:9px 14px;font-size:14px;font-family:'Inter',sans-serif;outline:none;width:260px;color:#111;background:#fff;transition:border-color 0.15s}
 .search-box:focus{border-color:#2563eb}
-.sort-label{font-size:12px;color:#9ca3af;font-weight:500;white-space:nowrap}
-.sort-select{border:1.5px solid #e5e7eb;border-radius:7px;padding:8px 12px;font-size:13px;font-family:'Inter',sans-serif;outline:none;color:#374151;background:#fff;cursor:pointer}
-.sort-select:focus{border-color:#2563eb}
+
+
+
 .result-count{font-size:12px;color:#9ca3af;margin-left:auto;font-weight:500}
 .card-row{background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;padding:16px 20px;margin-bottom:8px;display:grid;grid-template-columns:2fr 110px 110px 90px 1fr 120px;gap:12px;align-items:center;cursor:pointer;transition:all 0.15s;position:relative;overflow:hidden}
 .card-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
@@ -256,6 +256,12 @@ body{background:#f1f5f9}
 .cmp-perks li{font-size:12px;color:#374151;padding:3px 0;display:flex;gap:6px;line-height:1.4}
 .cmp-perks li::before{content:'·';color:#9ca3af;flex-shrink:0;margin-top:1px}
 .best-tag{display:inline-block;background:#fef3c7;color:#92400e;border:1px solid #fde68a;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;margin-left:6px;vertical-align:middle;text-transform:uppercase;letter-spacing:0.04em}
+
+.sort-pills{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.sort-pill-label{font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:0.06em;margin-right:2px;white-space:nowrap}
+.sort-pill{background:#fff;border:1.5px solid #e5e7eb;color:#6b7280;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;white-space:nowrap}
+.sort-pill:hover{border-color:#2563eb;color:#2563eb}
+.sort-pill.active{background:#0f172a;border-color:#0f172a;color:#fff}
 </style>
 </head>
 <body>
@@ -352,7 +358,7 @@ function getTier(v){if(v>=2000)return'S';if(v>=1000)return'A';if(v>=500)return'B
 cards.forEach(c=>c.tier=getTier(c.val));
 let currentFilter='all';
 function setFilter(f,el){currentFilter=f;document.querySelectorAll('.sb-item').forEach(function(b){b.classList.remove('active')});el.classList.add('active');render(f)}
-function render(f){if(f===undefined)f=currentFilter;currentFilter=f;var c=f==='all'?cards.slice():cards.filter(function(x){return x.cat.includes(f)});var s=(document.getElementById('searchInput')||{value:''}).value.toLowerCase();if(s){c=c.filter(function(x){return x.name.toLowerCase().includes(s)||x.issuer.toLowerCase().includes(s)})}var sort=(document.getElementById('sortSelect')||{value:'val-desc'}).value||'val-desc';if(sort==='val-desc')c.sort(function(a,b){return b.val-a.val});else if(sort==='val-asc')c.sort(function(a,b){return a.val-b.val});else if(sort==='bonus'){c.sort(function(a,b){var an=parseInt(a.bonus.replace(/[^0-9]/g,''))||0;var bn=parseInt(b.bonus.replace(/[^0-9]/g,''))||0;return bn-an})}else if(sort==='fee')c.sort(function(a,b){return a.fee-b.fee});else if(sort==='name')c.sort(function(a,b){return a.name.localeCompare(b.name)});var rc=document.getElementById('resultCount');if(rc)rc.textContent=c.length+' of 50 cards';document.getElementById('cards').innerHTML=c.map(function(x){var badges=x.badges.map(function(b){return'<span class="card-badge badge-'+b+'">'+(b==='hot'?'HOT':b==='free'?'$0':b==='premium'?'Premium':'Biz')+'</span>'}).join('');var rtags=x.rewards.slice(0,2).map(function(r){return'<span class="rtag"><strong>'+r[1]+'</strong> '+r[0]+'</span>'}).join('');return'<div class="card-row tier-'+x.tier+'" onclick="openModal('+x.id+')"><div class="card-main"><div class="card-name"><span class="tier-badge tier-'+x.tier+'">'+x.tier+'</span>'+x.name+badges+'</div><div class="card-sub">'+x.issuer+' · '+x.net+'</div></div><div><div class="cell-label">Value</div><div class="val-big">'+x.valDisp+'</div></div><div><div class="cell-label">Bonus</div><div class="bonus-val">'+x.bonus+'</div></div><div><div class="cell-label">Ann. Fee</div><div class="fee-val '+(x.fee===0?'fee-free-text':'')+'">'+(x.fee===0?'$0':'$'+x.fee)+'</div></div><div><div class="reward-tags">'+rtags+'</div></div><div style="text-align:right;display:flex;flex-direction:column;gap:6px;align-items:flex-end"><button class="view-btn" onclick="event.stopPropagation();openModal('+x.id+')">View Details</button><button class="cmp-btn" id="cmpbtn-'+x.id+'" onclick="event.stopPropagation();toggleCompare('+x.id+')">+ Compare</button></div></div>'}).join('')}
+function render(f){if(f===undefined)f=currentFilter;currentFilter=f;var c=f==='all'?cards.slice():cards.filter(function(x){return x.cat.includes(f)});var s=(document.getElementById('searchInput')||{value:''}).value.toLowerCase();if(s){c=c.filter(function(x){return x.name.toLowerCase().includes(s)||x.issuer.toLowerCase().includes(s)})}var sort=currentSort||'val-desc';if(sort==='val-desc')c.sort(function(a,b){return b.val-a.val});else if(sort==='val-asc')c.sort(function(a,b){return a.val-b.val});else if(sort==='bonus'){c.sort(function(a,b){var an=parseInt(a.bonus.replace(/[^0-9]/g,''))||0;var bn=parseInt(b.bonus.replace(/[^0-9]/g,''))||0;return bn-an})}else if(sort==='fee')c.sort(function(a,b){return a.fee-b.fee});else if(sort==='name')c.sort(function(a,b){return a.name.localeCompare(b.name)});var rc=document.getElementById('resultCount');if(rc)rc.textContent=c.length+' of 50 cards';document.getElementById('cards').innerHTML=c.map(function(x){var badges=x.badges.map(function(b){return'<span class="card-badge badge-'+b+'">'+(b==='hot'?'HOT':b==='free'?'$0':b==='premium'?'Premium':'Biz')+'</span>'}).join('');var rtags=x.rewards.slice(0,2).map(function(r){return'<span class="rtag"><strong>'+r[1]+'</strong> '+r[0]+'</span>'}).join('');return'<div class="card-row tier-'+x.tier+'" onclick="openModal('+x.id+')"><div class="card-main"><div class="card-name"><span class="tier-badge tier-'+x.tier+'">'+x.tier+'</span>'+x.name+badges+'</div><div class="card-sub">'+x.issuer+' · '+x.net+'</div></div><div><div class="cell-label">Value</div><div class="val-big">'+x.valDisp+'</div></div><div><div class="cell-label">Bonus</div><div class="bonus-val">'+x.bonus+'</div></div><div><div class="cell-label">Ann. Fee</div><div class="fee-val '+(x.fee===0?'fee-free-text':'')+'">'+(x.fee===0?'$0':'$'+x.fee)+'</div></div><div><div class="reward-tags">'+rtags+'</div></div><div style="text-align:right;display:flex;flex-direction:column;gap:6px;align-items:flex-end"><button class="view-btn" onclick="event.stopPropagation();openModal('+x.id+')">View Details</button><button class="cmp-btn" id="cmpbtn-'+x.id+'" onclick="event.stopPropagation();toggleCompare('+x.id+')">+ Compare</button></div></div>'}).join('')}
 function getCPP(card){var n=card.name,is=card.issuer;if(n.indexOf('Delta')>-1)return 1.2;if(n.indexOf('United')>-1||n.indexOf('Quest')>-1)return 1.5;if(n.indexOf('Southwest')>-1)return 1.5;if(n.indexOf('Hilton')>-1)return 0.6;if(n.indexOf('Alaska')>-1)return 1.8;if(n.indexOf('AAdvantage')>-1)return 1.77;if(n.indexOf('Bilt')>-1)return 2.2;if(is==='Chase')return 2.05;if(is==='Amex')return 2.0;if(is==='Capital One')return 1.85;if(is==='Citi')return 1.9;return 1.0;}
 function getVB(x){
   var i=[];
@@ -378,6 +384,13 @@ function openModal(id){const x=cards.find(c=>c.id===id);if(!x)return;document.ge
 function syncMobileFilter(el){
   document.querySelectorAll('.mobile-filter-btn').forEach(function(b){b.classList.remove('active');});
   if(el&&el.classList.contains('mobile-filter-btn'))el.classList.add('active');
+}
+var currentSort='val-desc';
+function setSortPill(el,val){
+  currentSort=val;
+  document.querySelectorAll('.sort-pill').forEach(function(b){b.classList.remove('active');});
+  el.classList.add('active');
+  render();
 }
 var compareList=[];
 function toggleCompare(id){

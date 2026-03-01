@@ -35,7 +35,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',sans-serif;background:#f8f9fc;color:#111827;line-height:1.5;min-height:100vh}
 nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 40px;display:flex;justify-content:space-between;align-items:center;height:60px;position:sticky;top:0;z-index:50}
-.logo{font-weight:900;font-size:20px;color:#111;letter-spacing:-0.03em;display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo{font-weight:900;font-size:21px;letter-spacing:-0.04em;display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo em{color:#2563eb;font-style:normal}
 
 .nav-links{display:flex;gap:32px;font-size:14px;font-weight:500}
@@ -129,16 +129,17 @@ footer{text-align:center;padding:28px;font-size:12px;color:#9ca3af;border-top:1p
 </head>
 <body>
 <nav>
-  <a href="/" style="text-decoration:none" class="logo">
-    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="34" height="34" rx="9" fill="#2563eb"/>
-      <rect x="5" y="24" width="4" height="5" rx="1" fill="rgba(255,255,255,0.35)"/>
-      <rect x="11" y="19" width="4" height="10" rx="1" fill="rgba(255,255,255,0.55)"/>
-      <rect x="17" y="14" width="4" height="15" rx="1" fill="rgba(255,255,255,0.78)"/>
-      <rect x="23" y="9" width="4" height="20" rx="1" fill="white"/>
-      <rect x="5" y="5" width="14" height="3" rx="1" fill="rgba(255,255,255,0.5)"/>
+  <a href="/" class="logo">
+    <svg width="36" height="26" viewBox="0 0 36 26" fill="none">
+      <rect x="4" y="4" width="28" height="18" rx="3" fill="#93c5fd"/>
+      <rect x="4" y="8" width="28" height="3" fill="#bfdbfe"/>
+      <rect x="0" y="6" width="28" height="18" rx="3" fill="#2563eb"/>
+      <rect x="0" y="10" width="28" height="3" fill="#1d4ed8"/>
+      <rect x="4" y="17" width="8" height="4" rx="1" fill="rgba(255,255,255,0.4)"/>
+      <circle cx="23" cy="19" r="3" fill="rgba(255,255,255,0.3)"/>
+      <circle cx="26" cy="19" r="3" fill="rgba(255,255,255,0.5)"/>
     </svg>
-    <span style="color:#111">Card</span><em>Tier</em>
+    <span style="color:#111;font-style:normal">Card</span><span style="color:#2563eb;font-style:normal">Tier</span>
   </a>
   <div class="nav-links"><a href="#">Cards</a><a href="#">Compare</a><a href="#">Guides</a></div>
 </nav>

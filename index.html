@@ -181,7 +181,7 @@ footer{text-align:center;padding:28px;font-size:12px;color:#9ca3af;border-top:1p
   .cmp-bar-label{display:none}
 
   /* Compare modal */
-  .cmp-modal{margin:0;border-radius:16px 16px 0 0;max-height:90vh;overflow-y:auto;position:fixed;bottom:0;left:0;right:0;width:100%}
+  .cmp-modal{margin:0;border-radius:16px 16px 0 0;max-height:90vh;overflow:hidden;position:fixed;bottom:0;left:0;right:0;width:100%;display:flex;flex-direction:column}
   .cmp-overlay{align-items:flex-end;padding:0}
   .cmp-tbl th{padding:12px 12px;font-size:9px;width:100px}
   .cmp-tbl td{padding:12px 12px;font-size:12px}
@@ -235,7 +235,7 @@ body{background:#f1f5f9}
 .cmp-clear-btn:hover{border-color:#ef4444;color:#ef4444}
 .cmp-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:400;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
 .cmp-overlay.active{display:flex}
-.cmp-modal{background:#fff;border-radius:16px;width:100%;max-width:900px;margin-top:20px;box-shadow:0 32px 80px rgba(0,0,0,0.25);overflow:hidden}
+.cmp-modal{background:#fff;border-radius:16px;width:100%;max-width:900px;margin-top:20px;box-shadow:0 32px 80px rgba(0,0,0,0.25);overflow:hidden;display:flex;flex-direction:column;max-height:90vh}
 .cmp-modal-hd{background:#0f172a;padding:20px 28px;display:flex;justify-content:space-between;align-items:center}
 .cmp-modal-hd h2{color:#fff;font-size:18px;font-weight:800;letter-spacing:-0.02em}
 .cmp-modal-hd p{color:#475569;font-size:12px;margin-top:2px}
@@ -483,7 +483,7 @@ document.addEventListener('DOMContentLoaded',function(){render('all');});
       <div><h2>Side-by-Side Comparison</h2><p>Best value in each row highlighted in green</p></div>
       <button class="modal-close" onclick="closeCmp()" style="color:#94a3b8">&#x2715;</button>
     </div>
-    <div style="overflow-x:auto"><table class="cmp-tbl" id="cmpTable"></table></div>
+    <div style="overflow:auto;flex:1;-webkit-overflow-scrolling:touch"><table class="cmp-tbl" id="cmpTable"></table></div>
   </div>
 </div>
 </body>

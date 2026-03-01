@@ -9,19 +9,19 @@
   <meta name="keywords" content="best credit cards 2026, credit card comparison, travel credit cards, cash back credit cards, signup bonus, no annual fee credit cards">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="CardTier — Best Credit Cards of 2026">
-  <meta property="og:description" content="51 credit cards ranked by real net value. Compare signup bonuses, annual credits, and fees side by side.">
+  <meta property="og:description" content="50 credit cards ranked by real net value. Compare signup bonuses, annual credits, and fees side by side.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://anakinskywalker1007.github.io/credit-card-app/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="CardTier — Best Credit Cards of 2026">
-  <meta name="twitter:description" content="51 credit cards ranked by real net value. Signup bonuses, annual credits, and fees all calculated.">
+  <meta name="twitter:description" content="50 credit cards ranked by real net value. Signup bonuses, annual credits, and fees all calculated.">
   <link rel="canonical" href="https://anakinskywalker1007.github.io/credit-card-app/">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "CardTier — Best Credit Cards of 2026",
-    "description": "Compare 51 credit cards ranked by net value. Signup bonuses, annual credits, and fees all calculated.",
+    "description": "Compare 50 credit cards ranked by net value. Signup bonuses, annual credits, and fees all calculated.",
     "url": "https://anakinskywalker1007.github.io/credit-card-app/",
     "dateModified": "2026-02-01",
     "publisher": {
@@ -283,7 +283,7 @@ body{background:#f1f5f9}
   <div class="hero-inner">
     <div class="eyebrow"><span class="eyebrow-dot"></span>Updated February 2026</div>
     <h1>Find your <em>best</em><br>credit card.</h1>
-    <p>51 cards ranked by real net value — signup bonuses, annual credits, and fees all factored in.</p>
+    <p>50 cards ranked by real net value — signup bonuses, annual credits, and fees all factored in.</p>
     <div class="hero-stats">
       <div><div class="stat-val">$8,500</div><div class="stat-label">Highest bonus value</div></div>
       <div><div class="stat-val">51</div><div class="stat-label">Cards tracked</div></div>
@@ -363,7 +363,7 @@ function getTier(v){if(v>=2000)return'S';if(v>=1000)return'A';if(v>=500)return'B
 cards.forEach(c=>c.tier=getTier(c.val));
 let currentFilter='all';
 function setFilter(f,el){currentFilter=f;document.querySelectorAll('.sb-item').forEach(function(b){b.classList.remove('active')});el.classList.add('active');render(f)}
-function render(f){if(f===undefined)f=currentFilter;currentFilter=f;var c=f==='all'?cards.slice():cards.filter(function(x){return x.cat.includes(f)});var s=(document.getElementById('searchInput')||{value:''}).value.toLowerCase();if(s){c=c.filter(function(x){return x.name.toLowerCase().includes(s)||x.issuer.toLowerCase().includes(s)})}var sort=(document.getElementById('sortSelect')||{value:'val-desc'}).value||'val-desc';if(sort==='val-desc')c.sort(function(a,b){return b.val-a.val});else if(sort==='val-asc')c.sort(function(a,b){return a.val-b.val});else if(sort==='bonus'){c.sort(function(a,b){var an=parseInt(a.bonus.replace(/[^0-9]/g,''))||0;var bn=parseInt(b.bonus.replace(/[^0-9]/g,''))||0;return bn-an})}else if(sort==='fee')c.sort(function(a,b){return a.fee-b.fee});else if(sort==='name')c.sort(function(a,b){return a.name.localeCompare(b.name)});var rc=document.getElementById('resultCount');if(rc)rc.textContent=c.length+' of 51 cards';document.getElementById('cards').innerHTML=c.map(function(x){var badges=x.badges.map(function(b){return'<span class="card-badge badge-'+b+'">'+(b==='hot'?'HOT':b==='free'?'$0':b==='premium'?'Premium':'Biz')+'</span>'}).join('');var rtags=x.rewards.slice(0,2).map(function(r){return'<span class="rtag"><strong>'+r[1]+'</strong> '+r[0]+'</span>'}).join('');return'<div class="card-row tier-'+x.tier+'" onclick="openModal('+x.id+')"><div class="card-main"><div class="card-name"><span class="tier-badge tier-'+x.tier+'">'+x.tier+'</span>'+x.name+badges+'</div><div class="card-sub">'+x.issuer+' · '+x.net+'</div></div><div><div class="cell-label">Value</div><div class="val-big">'+x.valDisp+'</div></div><div><div class="cell-label">Bonus</div><div class="bonus-val">'+x.bonus+'</div></div><div><div class="cell-label">Ann. Fee</div><div class="fee-val '+(x.fee===0?'fee-free-text':'')+'">'+(x.fee===0?'$0':'$'+x.fee)+'</div></div><div><div class="reward-tags">'+rtags+'</div></div><div style="text-align:right;display:flex;flex-direction:column;gap:6px;align-items:flex-end"><button class="view-btn" onclick="event.stopPropagation();openModal('+x.id+')">View Details</button><button class="cmp-btn" id="cmpbtn-'+x.id+'" onclick="event.stopPropagation();toggleCompare('+x.id+')">+ Compare</button></div></div>'}).join('')}
+function render(f){if(f===undefined)f=currentFilter;currentFilter=f;var c=f==='all'?cards.slice():cards.filter(function(x){return x.cat.includes(f)});var s=(document.getElementById('searchInput')||{value:''}).value.toLowerCase();if(s){c=c.filter(function(x){return x.name.toLowerCase().includes(s)||x.issuer.toLowerCase().includes(s)})}var sort=(document.getElementById('sortSelect')||{value:'val-desc'}).value||'val-desc';if(sort==='val-desc')c.sort(function(a,b){return b.val-a.val});else if(sort==='val-asc')c.sort(function(a,b){return a.val-b.val});else if(sort==='bonus'){c.sort(function(a,b){var an=parseInt(a.bonus.replace(/[^0-9]/g,''))||0;var bn=parseInt(b.bonus.replace(/[^0-9]/g,''))||0;return bn-an})}else if(sort==='fee')c.sort(function(a,b){return a.fee-b.fee});else if(sort==='name')c.sort(function(a,b){return a.name.localeCompare(b.name)});var rc=document.getElementById('resultCount');if(rc)rc.textContent=c.length+' of 50 cards';document.getElementById('cards').innerHTML=c.map(function(x){var badges=x.badges.map(function(b){return'<span class="card-badge badge-'+b+'">'+(b==='hot'?'HOT':b==='free'?'$0':b==='premium'?'Premium':'Biz')+'</span>'}).join('');var rtags=x.rewards.slice(0,2).map(function(r){return'<span class="rtag"><strong>'+r[1]+'</strong> '+r[0]+'</span>'}).join('');return'<div class="card-row tier-'+x.tier+'" onclick="openModal('+x.id+')"><div class="card-main"><div class="card-name"><span class="tier-badge tier-'+x.tier+'">'+x.tier+'</span>'+x.name+badges+'</div><div class="card-sub">'+x.issuer+' · '+x.net+'</div></div><div><div class="cell-label">Value</div><div class="val-big">'+x.valDisp+'</div></div><div><div class="cell-label">Bonus</div><div class="bonus-val">'+x.bonus+'</div></div><div><div class="cell-label">Ann. Fee</div><div class="fee-val '+(x.fee===0?'fee-free-text':'')+'">'+(x.fee===0?'$0':'$'+x.fee)+'</div></div><div><div class="reward-tags">'+rtags+'</div></div><div style="text-align:right;display:flex;flex-direction:column;gap:6px;align-items:flex-end"><button class="view-btn" onclick="event.stopPropagation();openModal('+x.id+')">View Details</button><button class="cmp-btn" id="cmpbtn-'+x.id+'" onclick="event.stopPropagation();toggleCompare('+x.id+')">+ Compare</button></div></div>'}).join('')}
 function getCPP(card){var n=card.name,is=card.issuer;if(n.indexOf('Delta')>-1)return 1.2;if(n.indexOf('United')>-1||n.indexOf('Quest')>-1)return 1.5;if(n.indexOf('Southwest')>-1)return 1.5;if(n.indexOf('Hilton')>-1)return 0.6;if(n.indexOf('Alaska')>-1)return 1.8;if(n.indexOf('AAdvantage')>-1)return 1.77;if(n.indexOf('Bilt')>-1)return 2.2;if(is==='Chase')return 2.05;if(is==='Amex')return 2.0;if(is==='Capital One')return 1.85;if(is==='Citi')return 1.9;return 1.0;}
 function getVB(x){
   var i=[];

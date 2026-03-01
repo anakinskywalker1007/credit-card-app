@@ -1,134 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CardTier — Credit Cards with APR</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root{--black:#0a0a0a;--gray-800:#1f2937;--gray-600:#4b5563;--gray-400:#9ca3af;--gray-200:#e5e7eb;--gray-100:#f3f4f6;--white:#fff;--blue-600:#2563eb;--green-600:#16a34a;--green-50:#f0fdf4;--amber-500:#f59e0b;--red-500:#ef4444;--border:#e5e7eb}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Inter',-apple-system,sans-serif;background:var(--white);color:var(--gray-800);line-height:1.5}
-        h1,h2,h3{font-weight:700;letter-spacing:-0.02em}
-        nav{position:sticky;top:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100}
-        .nav-inner{max-width:1400px;margin:0 auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
-        .logo{font-size:20px;font-weight:800;color:var(--black);display:flex;align-items:center;gap:8px}
-        .logo-icon{width:32px;height:32px;background:var(--black);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px}
-        .hero{padding:50px 24px;text-align:center;background:linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);color:white}
-        .hero h1{font-size:38px;color:white;margin-bottom:8px}
-        .hero h1 span{color:white}
-        .hero p{font-size:16px;color:white;margin-bottom:20px}
-        .hero-stats{display:flex;justify-content:center;gap:40px}
-        .hero-stat{text-align:center}
-        .hero-stat-value{font-size:26px;font-weight:800;color:white}
-        .hero-stat-label{font-size:11px;color:white;text-transform:uppercase}
-        main{max-width:1400px;margin:0 auto;padding:30px 24px 60px}
-        .search-input{padding:12px 16px;border-radius:8px;font-size:14px;background:white;border:1px solid #e5e7eb}.email-bar{display:flex;align-items:center;gap:16px;background:var(--blue-600);color:#fff;padding:16px 24px;border-radius:12px;margin-bottom:24px;flex-wrap:wrap}.email-bar h3{font-size:18px;margin:0}.email-bar p{font-size:14px;opacity:0.9;margin:0}.email-bar input{flex:1;min-width:200px;padding:10px 14px;border:none;border-radius:6px;font-size:14px}.email-bar button{padding:10px 20px;background:#fff;color:var(--blue-600);border:none;border-radius:6px;font-weight:600;cursor:pointer}.filters{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;align-items:center}
-        .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:24px}
-        .filter-btn{padding:10px 18px;border-radius:8px;font-size:14px;background:white;border:1px solid #e5e7eb;font-weight:500;transition:all .15s}
-        .filter-btn:hover{background:#f3f4f6;border-color:#9ca3af}
-        .filter-btn.active{background:#2563eb;color:white;border-color:#2563eb}
-        .table-wrapper{background:transparent;border:none;border-radius:16px;overflow:hidden}
-        .table-header{display:grid;grid-template-columns:1.5fr 1fr 0.8fr 0.7fr 0.7fr 0.7fr 1.2fr 0.6fr;padding:12px 20px;background:var(--gray-100);border-bottom:1px solid var(--border);font-size:10px;font-weight:600;color:var(--gray-600);text-transform:uppercase}
-        @keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-        .card-row{display:grid;grid-template-columns:1.5fr 1fr 0.8fr 0.7fr 0.7fr 0.7fr 1.2fr 0.6fr;padding:14px 20px;align-items:center;background:white;border-radius:12px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,0.08);cursor:pointer;transition:background .15s,transform .2s ease,box-shadow .2s ease;animation:fadeInUp 0.3s ease both}
-        .card-row:hover{background:var(--gray-50);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
-        .card-info h3{font-size:14px;font-weight:600;color:var(--black);margin-bottom:2px}
-        .card-issuer{font-size:11px;color:var(--gray-600)}
-        .card-badge{font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px;margin-right:4px}
-        .badge-hot{background:#fef3c7;color:#b45309}
-        .badge-free{background:var(--green-50);color:var(--green-600)}
-        .badge-premium{background:#f3e8ff;color:#7c3aed}
-        .tier-badge{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;margin-right:6px;display:inline-block;line-height:1.2;vertical-align:middle}
-        .tier-S{background:#fef3c7;color:#b45309}.tier-A{background:#dbeafe;color:#1d4ed8}.tier-B{background:#dcfce7;color:#16a34a}.tier-C{background:#f3f4f6;color:#6b7280}.tier-D{background:#fee2e2;color:#dc2626}
-        .cell{text-align:center}
-        .bonus-val{font-size:14px;font-weight:700;color:var(--green-600)}
-        .cash-val{font-size:14px;font-weight:600}
-        .fee-val{font-size:14px;font-weight:600}
-        .fee-free{color:var(--green-600)}
-        .score-val{font-size:13px;font-weight:600;color:var(--amber-500)}
-        .apr-val{font-size:13px;font-weight:600;color:var(--gray-800)}
-        .apr-intro{font-size:11px;color:var(--green-600)}
-        .rewards-list{font-size:10px;color:var(--gray-600);text-align:left;line-height:1.5}
-        .rewards-list strong{color:var(--green-600)}
-        .ftf-val{font-size:13px;font-weight:600}
-        .ftf-no{color:var(--green-600)}
-        .ftf-yes{color:var(--red-500)}
-        .view-btn{font-size:11px;color:var(--blue-600);text-decoration:underline;cursor:pointer;background:none;border:none;font-weight:500}
-        @keyframes slideIn{from{opacity:0;transform:translateX(100px)}to{opacity:1;transform:translateX(0)}}
-        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:none;justify-content:center;align-items:center;z-index:1000;padding:20px}
-        .modal-overlay.active{display:flex}
-        .modal{background:var(--white);border-radius:16px;max-width:580px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 48px rgba(0,0,0,0.2);animation:slideIn 0.35s cubic-bezier(0.16,1,0.3,1) both}
-        .modal-header{padding:24px 28px 20px;border-bottom:1px solid var(--gray-200);display:flex;justify-content:space-between;align-items:flex-start}
-        .modal-close{background:var(--gray-100);border:none;font-size:18px;cursor:pointer;color:var(--gray-600);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .15s}
-        .modal-close:hover{background:var(--gray-200)}
-        .modal-title{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:-0.02em}
-        .modal-issuer{color:var(--gray-600);font-size:13px;font-weight:500}
-        .modal-body{padding:24px 28px 28px}
-        .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
-        .modal-stat{background:var(--gray-100);padding:16px;border-radius:10px;border:1px solid var(--gray-200)}
-        .modal-stat-label{font-size:10px;font-weight:600;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px}
-        .modal-stat-value{font-size:18px;font-weight:700;color:var(--black);line-height:1.2}
-        .modal-stat-value.green{color:var(--green-600)}
-        .modal-stat-sub{font-size:11px;color:var(--gray-400);margin-top:4px}
-        .modal-section-title{font-size:11px;font-weight:600;color:var(--gray-800);text-transform:uppercase;letter-spacing:0.06em;margin:20px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--gray-200)}
-        .perks-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-        .perk-item{font-size:12px;color:var(--gray-700);padding:10px 12px;background:var(--gray-100);border-radius:8px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--gray-200)}
-        .transfer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-        .transfer-item{font-size:11px;padding:8px;background:#eff6ff;border-radius:6px;text-align:center;color:var(--blue-600);font-weight:600;border:1px solid #dbeafe}
-        .modal-cta{display:block;width:100%;padding:14px;background:var(--black);color:#fff;text-align:center;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:24px;letter-spacing:-0.01em;transition:opacity .15s}
-        .modal-cta:hover{opacity:0.85}
-        footer{background:var(--gray-800);color:var(--gray-400);padding:30px 24px;text-align:center;font-size:13px}
-        @media(max-width:768px){
-            .table-header{display:none}
-            .card-row{display:flex;flex-direction:column;gap:12px;padding:16px;border-bottom:1px solid var(--gray-200);grid-template-columns:none}
-            .card-row:hover{transform:none;box-shadow:none}
-            .cell{display:flex;justify-content:space-between;align-items:center;text-align:left}
-            .cell::before{font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;min-width:70px}
-            .card-row .cell:nth-child(2)::before{content:'Bonus'}
-            .card-row .cell:nth-child(3)::before{content:'Value'}
-            .card-row .cell:nth-child(4)::before{content:'Fee'}
-            .card-row .cell:nth-child(5)::before{content:'Credit'}
-            .card-row .cell:nth-child(6)::before{content:'APR'}
-            .card-row .cell:nth-child(7)::before{content:'Rewards'}
-            .card-row .cell:nth-child(8){display:none}
-            .card-info{margin-bottom:4px}
-            .rewards-list{text-align:right}
-            .hero h1{font-size:26px}
-            .hero-stats{gap:20px}
-            .hero{padding:30px 16px}
-            .email-bar{flex-direction:column;text-align:center}
-            .email-bar input{width:100%}
-            .search-input{width:100%}
-            .filters{justify-content:center}
-            .modal-grid,.perks-list{grid-template-columns:1fr}
-            .transfer-grid{grid-template-columns:1fr 1fr}
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardTier — Find Your Best Credit Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#f8f9fc;color:#111827;line-height:1.5;min-height:100vh}
+nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 40px;display:flex;justify-content:space-between;align-items:center;height:60px;position:sticky;top:0;z-index:50}
+.logo{font-weight:900;font-size:20px;color:#111;letter-spacing:-0.03em;display:flex;align-items:center;gap:8px}
+.logo em{color:#2563eb;font-style:normal}
+.logo-icon{width:30px;height:30px;background:#2563eb;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px}
+.nav-links{display:flex;gap:32px;font-size:14px;font-weight:500}
+.nav-links a{text-decoration:none;color:#6b7280;transition:color 0.15s}
+.nav-links a:hover{color:#111}
+.hero{padding:52px 40px 44px;background:#fff;border-bottom:1px solid #e5e7eb}
+.hero-inner{max-width:860px}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#2563eb;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:16px}
+.eyebrow-dot{width:6px;height:6px;background:#2563eb;border-radius:50%;display:inline-block}
+.hero h1{font-size:42px;font-weight:900;letter-spacing:-0.04em;color:#111;line-height:1.1;margin-bottom:12px}
+.hero h1 em{color:#2563eb;font-style:normal}
+.hero p{font-size:16px;color:#6b7280;max-width:540px;margin-bottom:28px}
+.hero-stats{display:flex;gap:48px}
+.stat-val{font-size:26px;font-weight:800;color:#111;letter-spacing:-0.03em}
+.stat-label{font-size:12px;color:#9ca3af;font-weight:500;margin-top:2px}
+.layout{display:flex;max-width:1400px;margin:0 auto;min-height:calc(100vh - 300px)}
+.sidebar{width:232px;flex-shrink:0;padding:24px 16px;border-right:1px solid #e5e7eb;background:#fff;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto}
+.sb-section{margin-bottom:24px}
+.sb-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;margin-bottom:10px;padding:0 4px}
+.sb-item{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;cursor:pointer;font-size:13px;font-weight:500;color:#6b7280;margin-bottom:2px;transition:all 0.12s;border:none;background:transparent;width:100%;text-align:left;font-family:'Inter',sans-serif}
+.sb-item:hover{background:#f3f4f6;color:#111}
+.sb-item.active{background:#eff6ff;color:#2563eb;font-weight:600}
+.sb-count{font-size:11px;background:#e5e7eb;color:#6b7280;padding:2px 7px;border-radius:10px;font-weight:600;flex-shrink:0}
+.sb-item.active .sb-count{background:#dbeafe;color:#2563eb}
+.main{flex:1;padding:24px 28px 48px;min-width:0}
+.top-bar{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+.search-box{border:1.5px solid #e5e7eb;border-radius:9px;padding:9px 14px;font-size:14px;font-family:'Inter',sans-serif;outline:none;width:260px;color:#111;background:#fff;transition:border-color 0.15s}
+.search-box:focus{border-color:#2563eb}
+.sort-label{font-size:12px;color:#9ca3af;font-weight:500;white-space:nowrap}
+.sort-select{border:1.5px solid #e5e7eb;border-radius:7px;padding:8px 12px;font-size:13px;font-family:'Inter',sans-serif;outline:none;color:#374151;background:#fff;cursor:pointer}
+.sort-select:focus{border-color:#2563eb}
+.result-count{font-size:12px;color:#9ca3af;margin-left:auto;font-weight:500}
+.card-row{background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;padding:16px 20px;margin-bottom:8px;display:grid;grid-template-columns:2fr 110px 110px 90px 1fr 120px;gap:12px;align-items:center;cursor:pointer;transition:all 0.15s;position:relative;overflow:hidden}
+.card-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.card-row.tier-S::before{background:linear-gradient(180deg,#f59e0b,#ef4444)}
+.card-row.tier-A::before{background:linear-gradient(180deg,#3b82f6,#6366f1)}
+.card-row.tier-B::before{background:linear-gradient(180deg,#10b981,#06b6d4)}
+.card-row.tier-C::before{background:linear-gradient(180deg,#d1d5db,#9ca3af)}
+.card-row.tier-D::before{background:#f3f4f6}
+.card-row:hover{border-color:#93c5fd;box-shadow:0 4px 16px rgba(37,99,235,0.07);transform:translateY(-1px)}
+.card-main{}
+.card-name{font-size:14px;font-weight:700;color:#111;margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.tier-badge{font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px}
+.tier-S{background:#fef3c7;color:#d97706}
+.tier-A{background:#dbeafe;color:#2563eb}
+.tier-B{background:#d1fae5;color:#059669}
+.tier-C{background:#f3f4f6;color:#6b7280}
+.tier-D{background:#fef2f2;color:#dc2626}
+.card-sub{font-size:12px;color:#9ca3af}
+.card-badge{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px}
+.badge-hot{background:#fee2e2;color:#ef4444}
+.badge-free{background:#d1fae5;color:#059669}
+.badge-premium{background:#ede9fe;color:#7c3aed}
+.badge-business{background:#fef3c7;color:#d97706}
+.cell-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:#d1d5db;margin-bottom:3px}
+.val-big{font-size:17px;font-weight:800;color:#059669;letter-spacing:-0.02em}
+.bonus-val{font-size:14px;font-weight:700;color:#374151}
+.fee-val{font-size:14px;font-weight:600;color:#ef4444}
+.fee-free-text{color:#059669}
+.reward-tags{display:flex;flex-wrap:wrap;gap:4px}
+.rtag{font-size:11px;padding:3px 7px;background:#f3f4f6;color:#4b5563;border-radius:4px;font-weight:500}
+.view-btn{background:#111;color:#fff;border:none;padding:9px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:background 0.15s;width:100%}
+.view-btn:hover{background:#2563eb}
+footer{text-align:center;padding:28px;font-size:12px;color:#9ca3af;border-top:1px solid #e5e7eb;background:#fff}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.active{display:flex}
+.modal{background:#fff;border-radius:16px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.15)}
+.modal-header{padding:24px 24px 16px;border-bottom:1px solid #f3f4f6;display:flex;justify-content:space-between;align-items:flex-start;position:sticky;top:0;background:#fff;z-index:1;border-radius:16px 16px 0 0}
+.modal-title{font-size:20px;font-weight:800;color:#111;letter-spacing:-0.02em}
+.modal-issuer{font-size:13px;color:#9ca3af;margin-top:2px}
+.modal-close{background:none;border:none;font-size:22px;cursor:pointer;color:#9ca3af;line-height:1;padding:2px 8px;border-radius:6px;font-family:'Inter',sans-serif}
+.modal-close:hover{background:#f3f4f6;color:#111}
+.modal-body{padding:20px 24px 24px}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.modal-stat{background:#f9fafb;border-radius:10px;padding:12px 14px}
+.modal-stat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#9ca3af;margin-bottom:4px}
+.modal-stat-value{font-size:18px;font-weight:800;color:#111;letter-spacing:-0.02em}
+.modal-stat-value.green{color:#059669}
+.modal-stat-sub{font-size:11px;color:#9ca3af;margin-top:2px}
+.modal-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;margin-bottom:8px;margin-top:16px}
+.perk-item{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#374151;padding:7px 0;border-bottom:1px solid #f3f4f6}
+.perk-item:last-child{border-bottom:none}
+.perk-item strong{color:#111;font-weight:700;white-space:nowrap;margin-left:8px}
+.perk-item span{color:#6b7280}
+.transfer-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.transfer-item{font-size:12px;font-weight:600;padding:4px 10px;background:#f3f4f6;border-radius:6px;color:#374151}
+.modal-cta{display:block;width:100%;background:#111;color:#fff;border:none;padding:14px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:20px;transition:background 0.15s}
+.modal-cta:hover{background:#2563eb}
+@media(max-width:900px){.sidebar{display:none}.card-row{grid-template-columns:1fr 90px 90px}.card-row>div:nth-child(4),.card-row>div:nth-child(5){display:none}.hero h1{font-size:30px}.main{padding:16px}}
+</style>
 </head>
 <body>
-<nav><div class="nav-inner"><div class="logo"><div class="logo-icon">💳</div>CardTier</div></div></nav>
-<section class="hero"><h1>Find the <span>Best Credit Card</span>for You</h1><p>Compare 51 cards with the biggest signup bonuses. Find your perfect match.</p><div class="hero-stats"><div class="hero-stat"><div class="hero-stat-value">51</div><div class="hero-stat-label">Cards</div></div><div class="hero-stat"><div class="hero-stat-value">$38K+</div><div class="hero-stat-label">Total Bonuses</div></div><div class="hero-stat"><div class="hero-stat-value">0%</div><div class="hero-stat-label">Intro APR</div></div></div></section><div class="email-bar"><h3>🔔 Get Bonus Alerts</h3><p>Get notified when signup bonuses increase.</p><input type="email" id="emailInput" placeholder="your@email.com"><button id="emailBtn">Subscribe</button></div>
-<main>
-<div class="controls"><input type="text" class="search-input" id="searchInput" placeholder="Search cards..."><select id="sortSelect" class="search-input" style="width:180px;cursor:pointer"><option value="val-desc">Value: High→Low</option><option value="val-asc">Value: Low→High</option><option value="bonus">Bonus</option><option value="fee">Fee</option><option value="name">Name A-Z</option></select><div class="filters"><button class="filter-btn active" data-filter="all">All</button><button class="filter-btn" data-filter="travel">Travel</button><button class="filter-btn" data-filter="cash">Cash Back</button><button class="filter-btn" data-filter="premium">Premium</button><button class="filter-btn" data-filter="noaf">No Fee</button></div></div>
-<div class="table-wrapper"><div class="table-header"><div>Card</div><div>Bonus</div><div>Value</div><div>Fee</div><div>Credit</div><div>APR</div><div>Rewards</div><div></div></div><div id="cards"></div></div>
-</main>
-<footer>© 2026 CardTier — Verify terms before applying.</footer>
-<div class="modal-overlay" id="modal"><div class="modal"><div class="modal-header"><div><h2 class="modal-title" id="m-title"></h2><p class="modal-issuer" id="m-issuer"></p></div><button class="modal-close" onclick="closeModal()">×</button></div><div class="modal-body"><div class="modal-grid"><div class="modal-stat"><div class="modal-stat-label">Sign-Up Bonus</div><div class="modal-stat-value green" id="m-bonus"></div><div class="modal-stat-sub" id="m-value"></div></div><div class="modal-stat"><div class="modal-stat-label">Annual Fee</div><div class="modal-stat-value" id="m-fee"></div><div class="modal-stat-sub" id="m-fee-note"></div></div><div class="modal-stat"><div class="modal-stat-label">Credit Score</div><div class="modal-stat-value" id="m-score"></div><div class="modal-stat-sub" id="m-score-label"></div></div><div class="modal-stat"><div class="modal-stat-label">Regular APR</div><div class="modal-stat-value" id="m-apr"></div><div class="modal-stat-sub" id="m-intro"></div></div></div><div class="modal-section-title">Value Breakdown</div><div id="m-vb" class="perks-list" style="margin-bottom:12px"></div><div class="modal-section-title">Rewards</div><div class="perks-list" id="m-rewards" style="margin-bottom:12px"></div><div class="modal-section-title">Perks</div><div class="perks-list" id="m-perks" style="margin-bottom:12px"></div><div id="m-transfer-section"><div class="modal-section-title">Transfer Partners</div><div class="transfer-grid" id="m-transfer"></div></div><div style="margin-top:16px;font-size:12px;color:var(--gray-400)"><strong style="color:var(--gray-600)">Spend Requirement:</strong> <span id="m-spend"></span></div><button class="modal-cta">Apply Now</button></div></div></div>
+<nav>
+  <div class="logo"><div class="logo-icon">💳</div>Card<em>Tier</em></div>
+  <div class="nav-links"><a href="#">Cards</a><a href="#">Compare</a><a href="#">Guides</a></div>
+</nav>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="eyebrow-dot"></span>Updated February 2026</div>
+    <h1>Find your <em>best</em><br>credit card.</h1>
+    <p>51 cards ranked by real net value — signup bonuses, annual credits, and fees all factored in.</p>
+    <div class="hero-stats">
+      <div><div class="stat-val">$8,500</div><div class="stat-label">Highest bonus value</div></div>
+      <div><div class="stat-val">51</div><div class="stat-label">Cards tracked</div></div>
+      <div><div class="stat-val">S–D</div><div class="stat-label">Tier rankings</div></div>
+    </div>
+  </div>
+</div>
+<div class="layout">
+  <div class="sidebar">
+    <div class="sb-section">
+      <div class="sb-title">Category</div>
+      <button class="sb-item active" onclick="setFilter('all',this)">All Cards <span class="sb-count">51</span></button>
+      <button class="sb-item" onclick="setFilter('travel',this)">Travel <span class="sb-count" id="cnt-travel"></span></button>
+      <button class="sb-item" onclick="setFilter('cash',this)">Cash Back <span class="sb-count" id="cnt-cash"></span></button>
+      <button class="sb-item" onclick="setFilter('business',this)">Business <span class="sb-count" id="cnt-business"></span></button>
+      <button class="sb-item" onclick="setFilter('premium',this)">Premium <span class="sb-count" id="cnt-premium"></span></button>
+      <button class="sb-item" onclick="setFilter('noaf',this)">No Annual Fee <span class="sb-count" id="cnt-noaf"></span></button>
+    </div>
+  </div>
+  <div class="main">
+    <div class="top-bar">
+      <input type="text" class="search-box" id="searchInput" placeholder="Search cards or issuers..." oninput="render()">
+      <span class="sort-label">Sort:</span>
+      <select class="sort-select" id="sortSelect" onchange="render()">
+        <option value="val-desc">Value: High to Low</option>
+        <option value="val-asc">Value: Low to High</option>
+        <option value="bonus">Bonus Size</option>
+        <option value="fee">Annual Fee</option>
+        <option value="name">Name A-Z</option>
+      </select>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+    <div id="cards"></div>
+  </div>
+</div>
+<footer>© 2026 CardTier — Always verify terms directly with the issuer before applying.</footer>
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div class="modal-title" id="m-title"></div><div class="modal-issuer" id="m-issuer"></div></div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-grid">
+        <div class="modal-stat"><div class="modal-stat-label">Sign-Up Bonus</div><div class="modal-stat-value green" id="m-bonus"></div><div class="modal-stat-sub" id="m-value"></div></div>
+        <div class="modal-stat"><div class="modal-stat-label">Annual Fee</div><div class="modal-stat-value" id="m-fee"></div><div class="modal-stat-sub" id="m-fee-note"></div></div>
+        <div class="modal-stat"><div class="modal-stat-label">Credit Score</div><div class="modal-stat-value" id="m-score"></div><div class="modal-stat-sub" id="m-score-label"></div></div>
+        <div class="modal-stat"><div class="modal-stat-label">Regular APR</div><div class="modal-stat-value" id="m-apr"></div><div class="modal-stat-sub" id="m-intro"></div></div>
+      </div>
+      <div class="modal-section-title">Value Breakdown</div>
+      <div id="m-vb" class="perks-list"></div>
+      <div class="modal-section-title">Rewards</div>
+      <div class="perks-list" id="m-rewards"></div>
+      <div class="modal-section-title">Perks & Benefits</div>
+      <div class="perks-list" id="m-perks"></div>
+      <div id="m-transfer-section" style="display:none">
+        <div class="modal-section-title">Transfer Partners</div>
+        <div class="transfer-grid" id="m-transfer"></div>
+      </div>
+      <div style="margin-top:16px;font-size:12px;color:#9ca3af"><strong style="color:#6b7280">Spend Requirement:</strong> <span id="m-spend"></span></div>
+      <button class="modal-cta">Apply Now →</button>
+    </div>
+  </div>
+</div>
 <script>
+
 const cards=[{id:1,name:"Chase Sapphire Preferred®",issuer:"Chase",net:"Visa",bonus:"75K pts",val:1500,valDisp:"$1,500",fee:95,feeNote:"Waived 1st yr",score:"750+",scLabel:"Excellent",apr:"19.99%",introApr:"0% for 12 months",spend:"$4,000",time:"3 mo",ftf:"No",rewards:[["Dining, Uber","3X"],["Travel","2X"],["Streaming","3X"]],perks:["$50 Annual Hotel Credit via Chase Travel","DoorDash DashPass (free delivery through Dec 2027)","5X on Lyft through Sept 2027","3X Dining Worldwide","3X Streaming Services","3X Online Groceries","2X Travel","14 Airline and Hotel Transfer Partners","No Foreign Tx Fee","Trip Cancellation Insurance","Baggage Delay Insurance","Travel and Emergency Assistance"],transfers:["United","Southwest","Hyatt","Marriott","IHG","Virgin"],cat:["travel","premium"],badges:["hot"],best:"Best all-around"},{id:2,name:"Chase Sapphire Reserve®",issuer:"Chase",net:"Visa",bonus:"125K pts",val:2500,valDisp:"$2,500",fee:795,feeNote:"",score:"760+",scLabel:"Excellent",apr:"19.99%",introApr:"None",spend:"$6,000",time:"3 mo",ftf:"No",rewards:[["Travel, Dining","3X"]],perks:["$300 Annual Travel Credit","$500 The Edit Hotel Credit ($250 semi-annually)","$250 Select Hotels Credit (2026)","Priority Pass Lounges","Global Entry or TSA PreCheck","3X on Travel and Dining","DoorDash DashPass","No Foreign Tx Fee","Trip Cancellation Insurance","Baggage Delay Insurance"],transfers:["United","Hyatt","Marriott","Air Canada","Virgin"],cat:["travel","premium"],badges:["premium"],best:"Premium travelers"},{id:3,name:"Chase Freedom Unlimited®",issuer:"Chase",net:"Visa",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"19.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"3%",rewards:[["Dining, Travel","3%"],["Everything","1.5%"]],perks:["1.5% on Everything","3% Dining and Drugstores","5% on Travel via Chase","DoorDash DashPass (free delivery through Dec 2027)","0% APR 15 months","No Annual Fee","Purchase Protection","Trip Cancellation Insurance"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Flat cash back"},{id:4,name:"Chase Freedom Flex℠",issuer:"Chase",net:"Visa",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"19.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"3%",rewards:[["Rotating 5%","5%"],["Dining, Drugstores","3%"]],perks:["5% Rotating Categories (activate quarterly)","3% Dining and Drugstores","5% on Travel via Chase","DoorDash DashPass (free delivery through Dec 2027)","Cell Phone Protection","0% APR 15 months","No Annual Fee","Purchase Protection"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Rotating categories"},{id:5,name:"Chase Ink Business Preferred®",issuer:"Chase",net:"Visa",bonus:"100K pts",val:2050,valDisp:"$2,050",fee:95,feeNote:"",score:"720+",scLabel:"Good+",apr:"19.99%",introApr:"0% for 12 months",spend:"$8,000",time:"3 mo",ftf:"No",rewards:[["Travel","3X"],["Advertising","3X"],["Internet","3X"]],perks:["$600 Cell Phone Protection","3X Travel","3X Shipping","3X Advertising","3X Internet and Cable","Trip Cancellation Insurance","No Foreign Tx Fee","Employee Cards Free","14 Transfer Partners","Purchase Protection"],transfers:["United","Southwest","Hyatt","Marriott"],cat:["business"],badges:["business"],best:"Business spending"},{id:6,name:"Capital One Venture X",issuer:"Capital One",net:"Visa",bonus:"75K mi",val:1125,valDisp:"$1,388",fee:395,feeNote:"Net ~$195",score:"750+",scLabel:"Excellent",apr:"24.99%",introApr:"0% for 12 months",spend:"$4,000",time:"3 mo",ftf:"No",rewards:[["Everything","2X"]],perks:["$300 Annual Capital One Travel Credit","10,000 Anniversary Miles (~$185)","Capital One Lounges Access (3 locations)","Priority Pass (1,300+ lounges)","Global Entry or TSA PreCheck Credit","2X Miles on Everything","10X Hotels & Rental Cars via C1 Travel","5X Flights via C1 Travel","No Foreign Tx Fee","Travel Accident Insurance","Lost Luggage Insurance"],transfers:["Air Canada","British Airways","Virgin Atlantic"],cat:["travel","premium"],badges:["premium"],best:"Premium travel"},{id:7,name:"Capital One Venture",issuer:"Capital One",net:"Visa",bonus:"75K mi",val:1125,valDisp:"$925",fee:95,feeNote:"",score:"700+",scLabel:"Good+",apr:"24.99%",introApr:"0% for 12 months",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Everything","2X"]],perks:["$100 Global Entry or TSA PreCheck Credit","2X Miles on Everything","5X on Hotels and Rental Cars via C1 Travel","No Foreign Tx Fee","Travel Accident Insurance","Rental Car Insurance"],transfers:["Air Canada","British Airways"],cat:["travel"],badges:[],best:"Simple travel"},{id:8,name:"Capital One Quicksilver",issuer:"Capital One",net:"Visa",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"24.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"No",rewards:[["Everything","1.5%"]],perks:["1.5% Cash Back on Everything","0% APR 15 months","No Annual Fee","No Foreign Tx Fee","Purchase Protection"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Flat rate"},{id:9,name:"Capital One SavorCash",issuer:"Capital One",net:"Visa",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"24.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"No",rewards:[["Dining","4%"],["Entertainment","4%"],["Groceries","4%"]],perks:["No FTF","Purchase Security"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Dining & entertainment"},{id:10,name:"Capital One SavorOne",issuer:"Capital One",net:"Visa",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"24.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"No",rewards:[["Dining","3%"],["Entertainment","3%"],["Groceries","3%"]],perks:["No FTF"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"No fee dining"},{id:11,name:"Amex Platinum®",issuer:"Amex",net:"Amex",bonus:"175K pts",val:3500,valDisp:"$3,500",fee:895,feeNote:"",score:"740+",scLabel:"Excellent",apr:"19.99%",introApr:"None",spend:"$12,000",time:"6 mo",ftf:"No",rewards:[["Flights","5X"],["Hotels","5X"],["Airbnb","5X"]],perks:["$400 Resy Credit ($100/qtr)","$300 Lululemon ($75/qtr)","$300 Digital Entertainment ($25/mo)","$200 Uber Cash ($15/mo + $20 Dec)","$200 Airline Fee Credit","$200 CLEAR Plus","$155 Walmart+ Membership","$100 Saks Fifth Avenue ($50 2x/yr)","$100 Global Entry/TSA PreCheck","Centurion Lounge Access","Delta Sky Club (flying Delta)","Priority Pass Select","Hilton Honors Gold Status","Marriott Bonvoy Gold Status","No Foreign Transaction Fees","5X Flights & Hotels Direct"],transfers:["Delta","Marriott","Hilton","British Airways","Singapore","Emirates","Virgin","Aer Lingus"],cat:["travel","premium"],badges:["premium"],best:"Maximum perks"},{id:12,name:"Amex Gold Card®",issuer:"Amex",net:"Amex",bonus:"100K pts",val:2000,valDisp:"$2,000",fee:325,feeNote:"",score:"720+",scLabel:"Good+",apr:"19.99%",introApr:"None",spend:"$5,000",time:"6 mo",ftf:"No",rewards:[["Dining Worldwide","4X"],["U.S. Supermarkets","4X"],["Flights Direct","3X"]],perks:["$120 Dining Credit ($10/mo - Grubhub, Cheesecake Factory, Five Guys)","$120 Uber Cash ($10/mo)","$100 Resy Credit ($50 semi-annually)","$84 Dunkin Credit ($7/mo)","4X Dining Worldwide (up to 50K/yr)","4X U.S. Supermarkets","3X Flights Booked Direct","No Foreign Tx Fee","Baggage Insurance","Trip Delay Coverage"],transfers:["Delta","Marriott","Hilton","British Airways","Singapore"],cat:["travel"],badges:[],best:"Dining & groceries"},{id:13,name:"Amex Green Card®",issuer:"Amex",net:"Amex",bonus:"60K pts",val:1200,valDisp:"$1,200",fee:150,feeNote:"",score:"700+",scLabel:"Good+",apr:"19.99%",introApr:"None",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Dining","3X"],["Travel","3X"],["Transit","3X"]],perks:["$100 CLEAR Credit","Lounge Access"],transfers:["Delta","Marriott","Hilton"],cat:["travel"],badges:[],best:"Travel & transit"},{id:14,name:"Amex Blue Business Plus®",issuer:"Amex",net:"Amex",bonus:"15K pts",val:300,valDisp:"$300",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"19.99%",introApr:"0% for 12 months",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Everything","2X"]],perks:["No FTF","Employee Cards Free"],transfers:["Delta","Marriott","Hilton"],cat:["business","noaf"],badges:["free"],best:"Business flat rate"},{id:15,name:"Amex Business Platinum®",issuer:"Amex",net:"Amex",bonus:"250K pts",val:5000,valDisp:"$4,000",fee:895,feeNote:"",score:"740+",scLabel:"Excellent",apr:"19.99%",introApr:"None",spend:"$15,000",time:"3 mo",ftf:"No",rewards:[["Flights, Hotels","5X"],["Dining","2.5X"],["Everything","1.5X"]],perks:["$1,200 AmexTravel Flights Credit","$600 Fine Hotels Credit ($300 semi-annually)","$200 Airline Fee Credit","$209 CLEAR Plus","$150 Dell Credit","35% Points Rebate on Award Flights","Centurion Lounges","Priority Pass","Global Entry or TSA PreCheck","Marriott Bonvoy Gold","Hilton Honors Gold","No Foreign Tx Fee","5X Flights and Hotels","1.5X on Everything over $5,000"],transfers:["Delta","Marriott","Hilton","British Airways","Singapore","Emirates"],cat:["business","premium"],badges:["premium"],best:"Premium business"},{id:16,name:"Citi Strata Elite",issuer:"Citi",net:"Mastercard",bonus:"100K pts",val:2000,valDisp:"$2,000",fee:95,feeNote:"Waived 1st yr",score:"720+",scLabel:"Good+",apr:"29.99%",introApr:"0% 12mo",spend:"$4,000",time:"3 mo",ftf:"No",rewards:[["Travel","3X"],["Dining","3X"],["Groceries","3X"],["Gas","3X"]],perks:["$300 Air Travel Credit","$100 Hotel Credit","$100 Experience Credit","No Foreign Tx Fee","3X Dining","3X Travel","3X Gas","3X Groceries","10 Transfer Partners (JetBlue, Avianca, Singapore, Turkish, Virgin Atlantic, Cathay Pacific, Malaysia, Thai, Etihad, Wyndham)"],transfers:["JetBlue","Avianca","Singapore","Turkish","Virgin Atlantic","Cathay Pacific","Malaysia","Thai","Etihad","Wyndham"],cat:["travel"],badges:[],best:"Flexible travel"},{id:17,name:"Citi Custom Cash℠",issuer:"Citi",net:"Mastercard",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"29.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"3%",rewards:[["Top Category","5%"],["Everything","1%"]],perks:["Automatic 5%","No activation"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Auto category"},{id:18,name:"Citi Double Cash®",issuer:"Citi",net:"Mastercard",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"29.99%",introApr:"0% for 18 months",spend:"$1,000",time:"3 mo",ftf:"3%",rewards:[["Everything","2%"]],perks:["2% on Everything (1% when you buy, 1% when you pay)","0% APR 18 months on balance transfers","No Annual Fee","Citi Entertainment Access","Purchase Protection"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Simple 2%"},{id:19,name:"Bilt Mastercard®",issuer:"Bilt",net:"Mastercard",bonus:"50K pts",val:1100,valDisp:"$1,100",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"29.99%",introApr:"None",spend:"$2,000",time:"3 mo",ftf:"No",rewards:[["Dining","3X"],["Travel","2X"],["Rent","1X"]],perks:["Earn Points on Rent (No Fee)","3X Dining","2X Travel","1X Rent","Monthly Rent Day Bonuses (1st of each month)","1:1 Transfer Partners","Trip Cancellation Insurance","Cell Phone Protection","No Foreign Tx Fee"],transfers:["Hyatt","Marriott","United","American","Alaska","Air Canada","Emirates"],cat:["travel","noaf"],badges:["free"],best:"Renters"},{id:20,name:"Wells Fargo Active Cash®",issuer:"Wells Fargo",net:"Visa",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"670+",scLabel:"Good",apr:"28.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"3%",rewards:[["Everything","2%"]],perks:["$600 Cell Phone Protection","2% Cash Back on Everything","0% APR 15 months","No Annual Fee","Roadside Dispatch"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Flat cash"},{id:21,name:"Wells Fargo Autograph℠",issuer:"Wells Fargo",net:"Visa",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"28.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"No",rewards:[["Travel, Transit","3X"],["Dining","3X"],["Gas","3X"]],perks:["No FTF","Cell Phone Protection"],transfers:["Aer Lingus","British Airways","Virgin"],cat:["cash","noaf"],badges:["free"],best:"Bonus categories"},{id:22,name:"Discover it® Cash Back",issuer:"Discover",net:"Discover",bonus:"MATCH",val:0,valDisp:"Match Yr1",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"28.99%",introApr:"0% for 15 months",spend:"—",time:"",ftf:"No",rewards:[["Rotating","5%"],["Everything","1%"]],perks:["5% Rotating Categories (activate quarterly up to $1,500/qtr)","1% on Everything Else","Cashback Match First Year","No Annual Fee","No Foreign Tx Fee","Freeze It Security Feature","Free FICO Credit Score"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Rotating"},{id:23,name:"Discover it® Miles",issuer:"Discover",net:"Discover",bonus:"MATCH",val:0,valDisp:"Match Yr1",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"28.99%",introApr:"0% for 15 months",spend:"—",time:"",ftf:"No",rewards:[["Everything","1.5X"]],perks:["🎯 MATCH 1ST YEAR","No FTF"],transfers:[],cat:["travel","noaf"],badges:["free"],best:"Flat travel"},{id:24,name:"BoA Customized Cash",issuer:"Bank of America",net:"Mastercard",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"670+",scLabel:"Good",apr:"29.99%",introApr:"0% for 15 months",spend:"$1,000",time:"3 mo",ftf:"3%",rewards:[["Choice Category","3%"],["Everything","2%"]],perks:["Choose your category"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Custom categories"},{id:25,name:"BoA Travel Rewards",issuer:"Bank of America",net:"Visa",bonus:"$250",val:250,valDisp:"$250",fee:0,feeNote:"No fee",score:"670+",scLabel:"Good",apr:"29.99%",introApr:"0% for 15 months",spend:"$1,000",time:"3 mo",ftf:"No",rewards:[["Everything","1.5%"]],perks:["No FTF"],transfers:[],cat:["travel","noaf"],badges:["free"],best:"Simple travel"},{id:26,name:"Amazon Prime Rewards Visa",issuer:"Amazon/Chase",net:"Visa",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"Prime required",score:"670+",scLabel:"Good",apr:"27.99%",introApr:"0% 12mo",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Amazon","5%"],["Whole Foods","5%"]],perks:["No FTF","Purchase Protection"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Amazon shoppers"},{id:27,name:"Costco Anywhere Visa",issuer:"Citi",net:"Visa",bonus:"$100",val:100,valDisp:"$100",fee:0,feeNote:"Costco member",score:"670+",scLabel:"Good",apr:"19.99%",introApr:"0% 12mo",spend:"$1,000",time:"3 mo",ftf:"No",rewards:[["Gas","4%"],["Costco","2%"]],perks:["No FTF"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Costco"},{id:28,name:"Apple Card",issuer:"Goldman Sachs",net:"Mastercard",bonus:"$75",val:75,valDisp:"$50",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"27.99%",introApr:"0% 12mo",spend:"$500",time:"3 mo",ftf:"No",rewards:[["Apple","3%"],["Gold","3%"]],perks:["No FTF","Daily Cash"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Apple"},{id:29,name:"Venmo Card",issuer:"Synchrony",net:"Visa",bonus:"$100",val:100,valDisp:"$100",fee:0,feeNote:"No fee",score:"620+",scLabel:"Fair",apr:"29.99%",introApr:"0% 12mo",spend:"$500",time:"3 mo",ftf:"No",rewards:[["Venmo","3%"],["Groceries","2%"]],perks:["No FTF"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Venmo"},{id:30,name:"Navy Federal GoRewards",issuer:"Navy Federal",net:"Visa",bonus:"20K pts",val:250,valDisp:"$250",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"14.90%-18%",introApr:"0% 12mo",spend:"$1,500",time:"3 mo",ftf:"No",rewards:[["Dining","3X"],["Gas","3X"]],perks:["No FTF"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Military"},{id:31,name:"Delta SkyMiles Gold",issuer:"Amex",net:"Amex",bonus:"50K mi + $400",val:1025,valDisp:"$875",fee:0,feeNote:"Waived 1st yr",score:"700+",scLabel:"Good+",apr:"20.99%-29.99%",introApr:"0% 15mo",spend:"$2,000",time:"3 mo",ftf:"No",rewards:[["Delta","2X"],["Groceries","2X"]],perks:["Free First Checked Bag","Priority Boarding","20% Back on Delta In-Flight Purchases","$200 Delta Stays Credit","2X Delta Purchases","2X Dining","2X U.S. Supermarkets","No Foreign Tx Fee","Trip Delay Insurance"],transfers:["Delta","Marriott"],cat:["travel","noaf"],badges:["free"],best:"Delta"},{id:32,name:"Delta SkyMiles Platinum",issuer:"Amex",net:"Amex",bonus:"100K mi",val:1250,valDisp:"$1,125",fee:350,feeNote:"",score:"720+",scLabel:"Good+",apr:"20.99%-29.99%",introApr:"0% 15mo",spend:"$4,000",time:"3 mo",ftf:"No",rewards:[["Delta","3X"],["Hotels","3X"]],perks:["Free First Checked Bag","Priority Boarding","20% In-Flight Savings","MQD Headstart (2,500 MQDs Annually)","Companion Certificate Annually","3X Delta Purchases","3X Hotels","2X Dining","No Foreign Tx Fee","Global Entry or TSA PreCheck Credit","Trip Cancellation Insurance"],transfers:["Delta","Marriott"],cat:["travel","premium"],badges:["premium"],best:"Delta Plus"},{id:33,name:"Delta SkyMiles Reserve",issuer:"Amex",net:"Amex",bonus:"125K mi",val:1563,valDisp:"$1,563",fee:650,feeNote:"",score:"750+",scLabel:"Excellent",apr:"20.99%-29.99%",introApr:"0% 15mo",spend:"$6,000",time:"3 mo",ftf:"No",rewards:[["Delta","3X"]],perks:["15 Delta Sky Club Visits/yr (unlimited after $75K spend)","Centurion Lounge Access (flying Delta)","$120 Rideshare Credit ($10/mo)","$240 Resy Credit ($20/mo)","First Class Companion Certificate Annually","Free First Checked Bag","Priority Boarding","3X Miles on Delta Purchases","Global Entry or TSA PreCheck Credit","No Foreign Tx Fee","15,000 Bonus Miles on Card Anniversary"],transfers:["Delta","Marriott"],cat:["travel","premium"],badges:["premium"],best:"Delta Elite"},{id:34,name:"United Quest Card",issuer:"United",net:"Visa",bonus:"100K pts",val:1500,valDisp:"$1,200",fee:350,feeNote:"",score:"720+",scLabel:"Good+",apr:"21.99%-28.99%",introApr:"0% 12mo",spend:"$5,000",time:"3 mo",ftf:"No",rewards:[["United","3X"],["Dining","2X"],["All Other Travel","2X"]],perks:["$125 United Travel Credit Annually","$100 Rideshare Credit ($8/mo, $12 in Dec)","10,000 Mile Award Flight Discount Annually","2 Free Checked Bags","Economy Plus Seat Upgrades","Priority Boarding","3X Miles on United Purchases","2X Miles on Dining and All Other Travel","Global Entry or TSA PreCheck Credit","No Foreign Tx Fee","Trip Cancellation Insurance","Baggage Delay Insurance"],transfers:["United","Marriott"],cat:["travel","premium"],badges:["premium"],best:"United"},{id:35,name:"United Explorer Card",issuer:"United",net:"Visa",bonus:"85K pts",val:1275,valDisp:"$1,275",fee:150,feeNote:"Waived 1st yr",score:"700+",scLabel:"Good+",apr:"21.99%-28.99%",introApr:"0% 12mo",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["United","2X"],["Dining","2X"],["Hotels","2X"]],perks:["Free First Checked Bag (saves $35/flight)","Priority Boarding","2 United Club Passes Annually","25% Back on United In-Flight Purchases","Global Entry or TSA PreCheck Credit","$100 United Travel Bank Credit","2X United Purchases","2X Dining","2X Hotels","No Foreign Tx Fee","Trip Cancellation Insurance"],transfers:["United"],cat:["travel"],badges:[],best:"United occasional"},{id:36,name:"Southwest Priority",issuer:"Chase",net:"Visa",bonus:"60K pts",val:870,valDisp:"$725",fee:229,feeNote:"",score:"720+",scLabel:"Good+",apr:"21.99%-28.99%",introApr:"0% 12mo",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Southwest","3X"],["Hotel & Car Partners","2X"]],perks:["$75 Southwest Annual Travel Credit","7,500 Anniversary Points (~$100)","4 Upgraded Boardings/yr","20% Back on In-Flight Purchases","3X Southwest Purchases","2X Hotel and Car Partners","No Foreign Tx Fee","Tier Qualifying Points toward A-List Status"],transfers:["Southwest"],cat:["travel"],badges:[],best:"Southwest"},{id:37,name:"Hilton Honors Amex",issuer:"Amex",net:"Amex",bonus:"130K pts + FN",val:780,valDisp:"$480",fee:95,feeNote:"Waived 1st yr",score:"700+",scLabel:"Good+",apr:"19.99%-28.99%",introApr:"0% 15mo",spend:"$2,000",time:"3 mo",ftf:"No",rewards:[["Hilton","7X"],["Gas","5X"]],perks:["Hilton Gold Status"],transfers:["Hilton"],cat:["travel"],badges:[],best:"Hilton"},{id:38,name:"Hilton Surpass",issuer:"Amex",net:"Amex",bonus:"130K pts + FN",val:1080,valDisp:"$780",fee:250,feeNote:"",score:"720+",scLabel:"Good+",apr:"19.99%-28.99%",introApr:"0% 15mo",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Hilton Hotels","12X"],["Dining","6X"],["U.S. Groceries","6X"],["Gas","6X"]],perks:["Hilton Gold Status","Free Weekend Night after $15K Spend","Priority Pass (10 visits/yr)","No Foreign Tx Fee","Trip Cancellation Insurance"],transfers:["Hilton"],cat:["travel","premium"],badges:["premium"],best:"Hilton Elite"},{id:39,name:"Alaska Airlines Visa",issuer:"BoA",net:"Visa",bonus:"80K mi",val:1440,valDisp:"$875",fee:95,feeNote:"",score:"720+",scLabel:"Good+",apr:"20.99%-27.99%",introApr:"0% 12mo",spend:"$4,000",time:"3 mo",ftf:"No",rewards:[["Alaska","3X"],["Gas","2X"]],perks:["Free Checked Bag"],transfers:["Alaska","British Airways"],cat:["travel"],badges:[],best:"Alaska"},{id:40,name:"Brex 70 Card",issuer:"Brex",net:"Mastercard",bonus:"70K pts",val:1050,valDisp:"$1,050",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"0%",introApr:"0% Always",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Everything","1X"],["Travel","4X"]],perks:["No Personal Guarantee"],transfers:["Air Canada","Virgin"],cat:["business","travel","noaf"],badges:["free"],best:"Startups"},{id:41,name:"Spark Cash Plus",issuer:"Capital One",net:"Visa",bonus:"$2,000",val:2000,valDisp:"$2,000",fee:95,feeNote:"",score:"720+",scLabel:"Good+",apr:"24.99%-29.99%",introApr:"0% 12mo",spend:"$20,000",time:"3 mo",ftf:"No",rewards:[["Everything","2%"]],perks:["No FTF"],transfers:[],cat:["business","cash"],badges:["business"],best:"Business"},{id:42,name:"Spark Miles",issuer:"Capital One",net:"Visa",bonus:"75K mi",val:1125,valDisp:"$750",fee:95,feeNote:"",score:"700+",scLabel:"Good+",apr:"24.99%-29.99%",introApr:"0% 12mo",spend:"$5,000",time:"3 mo",ftf:"No",rewards:[["Everything","2X"]],perks:["No FTF"],transfers:["Air Canada","Virgin"],cat:["business","travel"],badges:["business"],best:"Business Travel"},{id:43,name:"Wells Fargo Business",issuer:"Wells Fargo",net:"Visa",bonus:"$300",val:300,valDisp:"$300",fee:95,feeNote:"",score:"680+",scLabel:"Fair",apr:"21.99%-28.99%",introApr:"0% 12mo",spend:"$3,000",time:"3 mo",ftf:"3%",rewards:[["Travel","3X"],["Dining","3X"]],perks:["No FTF"],transfers:[],cat:["business","travel"],badges:["business"],best:"Wells Business"},{id:44,name:"US Bank Cash+",issuer:"US Bank",net:"Visa",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"670+",scLabel:"Good",apr:"19.99%-29.99%",introApr:"0% 15mo",spend:"$1,000",time:"3 mo",ftf:"No",rewards:[["Choice categories","5%"],["Everything","1%"]],perks:["No FTF"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Custom"},{id:45,name:"Alliant Cashback",issuer:"Alliant",net:"Visa",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"18.99%-28.99%",introApr:"0% 12mo",spend:"$1,000",time:"3 mo",ftf:"No",rewards:[["Everything","2.5%"]],perks:["No FTF"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Flat 2.5%"},{id:46,name:"Amex Blue Business Cash",issuer:"Amex",net:"Amex",bonus:"$500",val:500,valDisp:"$250",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"19.99%",introApr:"0% 12mo",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Everything","2%"]],perks:["No FTF"],transfers:[],cat:["business","cash","noaf"],badges:["free"],best:"Business Flat"},{id:47,name:"Citi Rewards+",issuer:"Citi",net:"Mastercard",bonus:"15K pts",val:225,valDisp:"$225",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"18.99%-28.99%",introApr:"0% 15mo",spend:"$1,000",time:"3 mo",ftf:"3%",rewards:[["Gas/Groceries","2X"],["Everything","1X"]],perks:["Points Boost"],transfers:["Citi"],cat:["cash","noaf"],badges:["free"],best:"Small bonus"},{id:48,name:"Citi Strata Premier",issuer:"Citi",net:"Mastercard",bonus:"60K pts",val:900,valDisp:"$900",fee:95,feeNote:"Waived 1st yr",score:"720+",scLabel:"Good+",apr:"20.24%-28.24%",introApr:"0% 15mo",spend:"$4,000",time:"3 mo",ftf:"No",rewards:[["Travel","3X"],["Dining","3X"]],perks:["No FTF"],transfers:["JetBlue","Virgin"],cat:["travel"],badges:[],best:"Citi travel"},{id:49,name:"Citi AAdvantage Executive",issuer:"Citi",net:"Mastercard",bonus:"100K mi",val:1250,valDisp:"$625",fee:595,feeNote:"",score:"750+",scLabel:"Excellent",apr:"20.24%-28.24%",introApr:"0% 15mo",spend:"$5,000",time:"3 mo",ftf:"No",rewards:[["American Airlines","4X"]],perks:["Admirals Club"],transfers:["American Airlines"],cat:["travel","premium"],badges:["premium"],best:"AA Elite"},{id:50,name:"Discover it Miles",issuer:"Discover",net:"Discover",bonus:"MATCH",val:0,valDisp:"Match Yr1",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"28.99%",introApr:"0% 15mo",spend:"—",time:"",ftf:"No",rewards:[["Everything","1.5X"]],perks:["MATCH 1ST YEAR","No FTF"],transfers:[],cat:["travel","noaf"],badges:["free"],best:"Miles match"},{id:51,name:"Navy Federal Platinum",issuer:"Navy Federal",net:"Visa",bonus:"$100",val:100,valDisp:"$100",fee:0,feeNote:"No fee",score:"640+",scLabel:"Fair",apr:"14.90%-18%",introApr:"0% 12mo",spend:"$2,000",time:"3 mo",ftf:"No",rewards:[["Everything","1.5%"]],perks:["No FTF"],transfers:[],cat:["cash","noaf"],badges:["free"],best:"Basic card"}];
 function getTier(v){if(v>=2000)return'S';if(v>=1000)return'A';if(v>=500)return'B';if(v>=200)return'C';return'D'}
 cards.forEach(c=>c.tier=getTier(c.val));
-function render(f='all'){let c=f==='all'?[...cards]:cards.filter(x=>x.cat.includes(f));const s=document.getElementById('searchInput')?.value?.toLowerCase()||'';if(s){c=c.filter(x=>x.name.toLowerCase().includes(s)||x.issuer.toLowerCase().includes(s))}const sort=document.getElementById('sortSelect')?.value||'val-desc';if(sort==='val-desc')c.sort((a,b)=>b.val-a.val);else if(sort==='val-asc')c.sort((a,b)=>a.val-b.val);else if(sort==='bonus'){c.sort((a,b)=>{const an=parseInt(a.bonus.replace(/[^0-9]/g,''))||0;const bn=parseInt(b.bonus.replace(/[^0-9]/g,''))||0;return bn-an})}else if(sort==='fee')c.sort((a,b)=>a.fee-b.fee);else if(sort==='name')c.sort((a,b)=>a.name.localeCompare(b.name));document.getElementById('cards').innerHTML=c.map(x=>`<div class="card-row" onclick="openModal(${x.id})"><div class="card-info"><h3><span class="tier-badge tier-${x.tier}">${x.tier}</span>${x.name}</h3><span class="card-issuer">${x.issuer}</span>${x.badges.map(b=>`<span class="card-badge badge-${b}">${b==='hot'?'🔥':b==='free'?'$0':'⭐'}</span>`).join('')}</div><div class="cell"><div class="bonus-val">${x.bonus}</div></div><div class="cell"><div class="cash-val">${x.valDisp}</div></div><div class="cell"><div class="fee-val ${x.fee===0?'fee-free':''}">${x.fee===0?'$0':'$'+x.fee}</div></div><div class="cell"><div class="score-val">${x.score}</div></div><div class="cell"><div class="apr-val">${x.apr}</div><div class="apr-intro">${x.introApr}</div></div><div class="cell"><div class="rewards-list">${x.rewards.map(r=>`<div><strong>${r[1]}</strong> ${r[0]}</div>`).join('')}</div></div><div class="cell"><button class="view-btn">View →</button></div></div>`).join('')}
+let currentFilter='all';
+function setFilter(f,el){currentFilter=f;document.querySelectorAll('.sb-item').forEach(function(b){b.classList.remove('active')});el.classList.add('active');render(f)}
+function render(f){if(f===undefined)f=currentFilter;currentFilter=f;var c=f==='all'?cards.slice():cards.filter(function(x){return x.cat.includes(f)});var s=(document.getElementById('searchInput')||{value:''}).value.toLowerCase();if(s){c=c.filter(function(x){return x.name.toLowerCase().includes(s)||x.issuer.toLowerCase().includes(s)})}var sort=(document.getElementById('sortSelect')||{value:'val-desc'}).value||'val-desc';if(sort==='val-desc')c.sort(function(a,b){return b.val-a.val});else if(sort==='val-asc')c.sort(function(a,b){return a.val-b.val});else if(sort==='bonus'){c.sort(function(a,b){var an=parseInt(a.bonus.replace(/[^0-9]/g,''))||0;var bn=parseInt(b.bonus.replace(/[^0-9]/g,''))||0;return bn-an})}else if(sort==='fee')c.sort(function(a,b){return a.fee-b.fee});else if(sort==='name')c.sort(function(a,b){return a.name.localeCompare(b.name)});var rc=document.getElementById('resultCount');if(rc)rc.textContent=c.length+' of 51 cards';document.getElementById('cards').innerHTML=c.map(function(x){var badges=x.badges.map(function(b){return'<span class="card-badge badge-'+b+'">'+(b==='hot'?'HOT':b==='free'?'$0':b==='premium'?'Premium':'Biz')+'</span>'}).join('');var rtags=x.rewards.slice(0,2).map(function(r){return'<span class="rtag"><strong>'+r[1]+'</strong> '+r[0]+'</span>'}).join('');return'<div class="card-row tier-'+x.tier+'" onclick="openModal('+x.id+')"><div class="card-main"><div class="card-name"><span class="tier-badge tier-'+x.tier+'">'+x.tier+'</span>'+x.name+badges+'</div><div class="card-sub">'+x.issuer+' · '+x.net+'</div></div><div><div class="cell-label">Value</div><div class="val-big">'+x.valDisp+'</div></div><div><div class="cell-label">Bonus</div><div class="bonus-val">'+x.bonus+'</div></div><div><div class="cell-label">Ann. Fee</div><div class="fee-val '+(x.fee===0?'fee-free-text':'')+'">'+(x.fee===0?'$0':'$'+x.fee)+'</div></div><div><div class="reward-tags">'+rtags+'</div></div><div style="text-align:right"><button class="view-btn" onclick="event.stopPropagation();openModal('+x.id+')">View Details</button></div></div>'}).join('')}
 function getVB(x){var i=[];x.perks.forEach(function(p){if(p.charAt(0)==='$'&&p.indexOf('X ')===-1&&!/^\$\d+X/.test(p)){var m=p.match(/\$[\d,]+/);if(m){var lbl=p.replace(m[0],'').replace(/^[^a-zA-Z]*/,'').trim();i.push([lbl||p,m[0]])}}});if(x.fee>0&&x.feeNote.indexOf('Waived')>-1){i.push(['Annual Fee (Waived 1st yr)','$0'])}else{i.push(['Annual Fee','-$'+x.fee])}return i}
 function openModal(id){const x=cards.find(c=>c.id===id);if(!x)return;document.getElementById("m-vb").innerHTML=getVB(x).map(function(t){return'<div class="perk-item"><span>'+t[0]+'</span><strong>'+t[1]+'</strong></div>'}).join("");document.getElementById('m-title').textContent=x.name;document.getElementById('m-issuer').textContent=x.issuer+' • '+x.net;document.getElementById('m-bonus').textContent=x.bonus;document.getElementById('m-value').textContent=x.valDisp;document.getElementById('m-fee').textContent='$'+x.fee;document.getElementById('m-fee-note').textContent=x.feeNote;document.getElementById('m-score').textContent=x.score;document.getElementById('m-score-label').textContent=x.scLabel;document.getElementById('m-apr').textContent=x.apr;document.getElementById('m-intro').textContent=x.introApr;document.getElementById('m-spend').textContent=x.spend+' in '+x.time;document.getElementById('m-rewards').innerHTML=x.rewards.map(r=>`<div class="perk-item"><strong>${r[1]}</strong> ${r[0]}</div>`).join('');document.getElementById('m-perks').innerHTML=x.perks.filter(p=>p.charAt(0)!=='$').map(p=>`<div class="perk-item">✓ ${p}</div>`).join('');const ts=document.getElementById('m-transfer-section');if(x.transfers.length){ts.style.display='block';document.getElementById('m-transfer').innerHTML=x.transfers.map(t=>`<div class="transfer-item">${t}</div>`).join('')}else{ts.style.display='none'}document.getElementById('modal').classList.add('active')}
 function closeModal(){document.getElementById('modal').classList.remove('active')}
-document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
-document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');render(b.dataset.filter)}));
-document.getElementById('searchInput')?.addEventListener('input',()=>render(document.querySelector('.filter-btn.active')?.dataset.filter||'all'));
-document.getElementById('sortSelect')?.addEventListener('change',()=>render(document.querySelector('.filter-btn.active')?.dataset.filter||'all'));
-document.getElementById('emailBtn')?.addEventListener('click',()=>{const e=document.getElementById('emailInput').value;if(e){let s=JSON.parse(localStorage.getItem('cardtier_subs')||'[]');if(!s.includes(e)){s.push(e);localStorage.setItem('cardtier_subs',JSON.stringify(s));alert('Thanks! We\'ll notify you of bonus changes.')}}})
-render();
+
+document.getElementById('modal').addEventListener('click',function(e){if(e.target.id==='modal')closeModal()});
+['travel','cash','business','premium','noaf'].forEach(function(f){var el=document.getElementById('cnt-'+f);if(el)el.textContent=cards.filter(function(x){return x.cat.includes(f)}).length});
+render('all');
 </script>
 </body>
 </html>

@@ -124,7 +124,80 @@ footer{text-align:center;padding:28px;font-size:12px;color:#9ca3af;border-top:1p
 .transfer-item{font-size:12px;font-weight:600;padding:4px 10px;background:#f3f4f6;border-radius:6px;color:#374151}
 .modal-cta{display:block;width:100%;background:#111;color:#fff;border:none;padding:14px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:20px;transition:background 0.15s}
 .modal-cta:hover{background:#2563eb}
-@media(max-width:900px){.sidebar{display:none}.card-row{grid-template-columns:1fr 90px 90px}.card-row>div:nth-child(4),.card-row>div:nth-child(5){display:none}.hero h1{font-size:30px}.main{padding:16px}}
+
+/* ── Mobile filter bar (hidden on desktop) ── */
+.mobile-filters{display:none}
+
+@media(max-width:768px){
+  /* Layout */
+  body{background:#f1f5f9}
+  .layout{flex-direction:column;gap:0;padding:0;min-height:unset}
+  .sidebar{display:none}
+  .main{padding:12px}
+  .content{background:transparent}
+
+  /* Nav */
+  nav{padding:0 16px;height:52px}
+  .logo{font-size:18px}
+  .logo svg{width:28px;height:20px}
+
+  /* Hero */
+  .hero{border-radius:12px;margin:12px 12px 0;padding:28px 20px 24px}
+  .hero h1{font-size:26px;line-height:1.25}
+  .hero p{font-size:13px}
+  .hero-stats{flex-wrap:wrap;gap:12px;margin-top:16px}
+  .hero-stats .stat{min-width:calc(50% - 8px)}
+  .hero-stats .stat-val{font-size:20px}
+
+  /* Mobile filter pills */
+  .mobile-filters{display:flex;gap:8px;overflow-x:auto;padding:12px 12px 4px;scrollbar-width:none;-ms-overflow-style:none}
+  .mobile-filters::-webkit-scrollbar{display:none}
+  .mobile-filter-btn{flex-shrink:0;background:#fff;border:1.5px solid #e5e7eb;color:#6b7280;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:all 0.15s}
+  .mobile-filter-btn.active{background:#0f172a;border-color:#0f172a;color:#fff}
+
+  /* Top bar */
+  .top-bar{flex-wrap:wrap;gap:8px;padding:8px 0 12px}
+  .top-bar input{width:100%;order:-1;font-size:14px}
+  .top-bar select{flex:1;font-size:13px}
+  .result-count{font-size:11px}
+
+  /* Card rows — stack vertically */
+  .card-row{grid-template-columns:1fr 1fr;gap:10px;padding:14px 14px}
+  .card-main{grid-column:1/-1}
+  .card-row>div:nth-child(3){display:none} /* hide bonus col */
+  .card-row>div:nth-child(4){display:none} /* hide fee col */
+  .card-row>div:nth-child(5){display:none} /* hide reward tags */
+  .card-row>div:nth-child(6){grid-column:1/-1;display:flex;gap:8px}
+  .card-row>div:nth-child(6) button{flex:1;font-size:12px;padding:8px 10px}
+  .val-big{font-size:18px}
+  .card-name{font-size:14px}
+
+  /* Modal — full screen on mobile */
+  .modal-box{margin:0;border-radius:16px 16px 0 0;max-height:92vh;position:fixed;bottom:0;left:0;right:0;width:100%;overflow-y:auto}
+  .overlay{align-items:flex-end;padding:0}
+  .modal-grid{grid-template-columns:1fr}
+  .modal-left{border-right:none;border-bottom:1px solid #f3f4f6}
+
+  /* Compare bar */
+  .cmp-bar{padding:10px 16px;flex-wrap:wrap;gap:8px}
+  .cmp-chips{order:-1;width:100%}
+  .cmp-bar-label{display:none}
+
+  /* Compare modal */
+  .cmp-modal{margin:0;border-radius:16px 16px 0 0;max-height:90vh;overflow-y:auto;position:fixed;bottom:0;left:0;right:0;width:100%}
+  .cmp-overlay{align-items:flex-end;padding:0}
+  .cmp-tbl th{padding:12px 12px;font-size:9px;width:100px}
+  .cmp-tbl td{padding:12px 12px;font-size:12px}
+  .cmp-card-hd{padding:16px 12px !important}
+  .cmp-card-nm{font-size:13px}
+}
+
+@media(max-width:480px){
+  .hero h1{font-size:22px}
+  .card-row{grid-template-columns:1fr;padding:12px}
+  .card-row>div:nth-child(2){display:none} /* hide value col on very small */
+  .card-row>div:nth-child(6){grid-column:1}
+}
 
 /* OPTION C: Dark sidebar, light content area, premium feel */
 body{background:#f1f5f9}
@@ -218,7 +291,15 @@ body{background:#f1f5f9}
     </div>
   </div>
 </div>
-<div class="layout">
+<div class="mobile-filters" id="mobileFilters">
+    <button class="mobile-filter-btn active" onclick="setFilter('all',this);syncMobileFilter(this)">All 50</button>
+    <button class="mobile-filter-btn" onclick="setFilter('travel',this);syncMobileFilter(this)">Travel</button>
+    <button class="mobile-filter-btn" onclick="setFilter('cash',this);syncMobileFilter(this)">Cash Back</button>
+    <button class="mobile-filter-btn" onclick="setFilter('business',this);syncMobileFilter(this)">Business</button>
+    <button class="mobile-filter-btn" onclick="setFilter('premium',this);syncMobileFilter(this)">Premium</button>
+    <button class="mobile-filter-btn" onclick="setFilter('noaf',this);syncMobileFilter(this)">No Annual Fee</button>
+  </div>
+  <div class="layout">
   <div class="sidebar">
     <div class="sb-section">
       <div class="sb-title">Category</div>
@@ -305,6 +386,10 @@ function openModal(id){const x=cards.find(c=>c.id===id);if(!x)return;document.ge
   if(t.type==='bonus'){return'<div class="perk-item"><span>'+t.label+'</span><strong>'+t.value+'</strong></div>'+(t.note?'<div style="font-size:10px;color:#9ca3af;padding:2px 0 4px">* '+t.note+'</div>':'');}
   return'<div class="perk-item"><span>'+t.label+'</span><strong>'+t.value+'</strong></div>';
 }).join("");document.getElementById('m-title').textContent=x.name;document.getElementById('m-issuer').textContent=x.issuer+' • '+x.net;document.getElementById('m-bonus').textContent=x.bonus;document.getElementById('m-value').textContent=x.valDisp;document.getElementById('m-fee').textContent='$'+x.fee;document.getElementById('m-fee-note').textContent=x.feeNote;document.getElementById('m-score').textContent=x.score;document.getElementById('m-score-label').textContent=x.scLabel;document.getElementById('m-apr').textContent=x.apr;document.getElementById('m-intro').textContent=x.introApr;document.getElementById('m-spend').textContent=x.spend+' in '+x.time;var applyBtn=document.getElementById('m-apply');if(applyBtn){applyBtn.href=x.link||'#';applyBtn.style.background=x.link&&x.link!=='#'?'#2563eb':'#111';}document.getElementById('m-rewards').innerHTML=x.rewards.map(r=>`<div class="perk-item"><strong>${r[1]}</strong> ${r[0]}</div>`).join('');document.getElementById('m-perks').innerHTML=x.perks.filter(p=>p.charAt(0)!=='$').map(p=>`<div class="perk-item">✓ ${p}</div>`).join('');const ts=document.getElementById('m-transfer-section');if(x.transfers.length){ts.style.display='block';document.getElementById('m-transfer').innerHTML=x.transfers.map(t=>`<div class="transfer-item">${t}</div>`).join('')}else{ts.style.display='none'}document.getElementById('modal').classList.add('active')}
+function syncMobileFilter(el){
+  document.querySelectorAll('.mobile-filter-btn').forEach(function(b){b.classList.remove('active');});
+  if(el&&el.classList.contains('mobile-filter-btn'))el.classList.add('active');
+}
 var compareList=[];
 function toggleCompare(id){
   var idx=compareList.indexOf(id);

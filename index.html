@@ -75,7 +75,30 @@
         .transfer-item{font-size:10px;padding:6px;background:#eff6ff;border-radius:4px;text-align:center;color:var(--blue-600);font-weight:500}
         .modal-cta{display:block;width:100%;padding:12px;background:var(--blue-600);color:#fff;text-align:center;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;margin-top:16px}
         footer{background:var(--gray-800);color:var(--gray-400);padding:30px 24px;text-align:center;font-size:13px}
-        @media(max-width:1000px){.table-header,.card-row{display:none}.modal-grid,.perks-list,.transfer-grid{grid-template-columns:1fr}}
+        @media(max-width:768px){
+            .table-header{display:none}
+            .card-row{display:flex;flex-direction:column;gap:12px;padding:16px;border-bottom:1px solid var(--gray-200);grid-template-columns:none}
+            .card-row:hover{transform:none;box-shadow:none}
+            .cell{display:flex;justify-content:space-between;align-items:center;text-align:left}
+            .cell::before{font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;min-width:70px}
+            .card-row .cell:nth-child(2)::before{content:'Bonus'}
+            .card-row .cell:nth-child(3)::before{content:'Value'}
+            .card-row .cell:nth-child(4)::before{content:'Fee'}
+            .card-row .cell:nth-child(5)::before{content:'Credit'}
+            .card-row .cell:nth-child(6)::before{content:'APR'}
+            .card-row .cell:nth-child(7)::before{content:'Rewards'}
+            .card-row .cell:nth-child(8){display:none}
+            .card-info{margin-bottom:4px}
+            .rewards-list{text-align:right}
+            .hero h1{font-size:26px}
+            .hero-stats{gap:20px}
+            .hero{padding:30px 16px}
+            .email-bar{flex-direction:column;text-align:center}
+            .email-bar input{width:100%}
+            .search-input{width:100%}
+            .filters{justify-content:center}
+            .modal-grid,.perks-list,.transfer-grid{grid-template-columns:1fr}
+        }
     </style>
 </head>
 <body>

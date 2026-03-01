@@ -28,8 +28,9 @@
         .filter-btn.active{background:var(--black);border-color:var(--black);color:#fff}
         .table-wrapper{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden}
         .table-header{display:grid;grid-template-columns:1.5fr 1fr 0.8fr 0.7fr 0.7fr 0.7fr 1.2fr 0.6fr;padding:12px 20px;background:var(--gray-100);border-bottom:1px solid var(--border);font-size:10px;font-weight:600;color:var(--gray-600);text-transform:uppercase}
-        .card-row{display:grid;grid-template-columns:1.5fr 1fr 0.8fr 0.7fr 0.7fr 0.7fr 1.2fr 0.6fr;padding:14px 20px;align-items:center;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .15s}
-        .card-row:hover{background:var(--gray-50)}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+        .card-row{display:grid;grid-template-columns:1.5fr 1fr 0.8fr 0.7fr 0.7fr 0.7fr 1.2fr 0.6fr;padding:14px 20px;align-items:center;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .15s,transform .2s ease,box-shadow .2s ease;animation:fadeInUp 0.3s ease both}
+        .card-row:hover{background:var(--gray-50);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
         .card-info h3{font-size:14px;font-weight:600;color:var(--black);margin-bottom:2px}
         .card-issuer{font-size:11px;color:var(--gray-600)}
         .card-badge{font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px;margin-right:4px}

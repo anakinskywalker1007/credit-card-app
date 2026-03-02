@@ -360,7 +360,7 @@ body{background:#f1f5f9}
         <div class="modal-stat"><div class="modal-stat-label">Credit Score</div><div class="modal-stat-value" id="m-score"></div><div class="modal-stat-sub" id="m-score-label"></div></div>
         <div class="modal-stat"><div class="modal-stat-label">Regular APR</div><div class="modal-stat-value" id="m-apr"></div><div class="modal-stat-sub" id="m-intro"></div></div>
       </div>
-      <div class="modal-section-title">Value Breakdown</div>
+      <div class="modal-tabs"><button class="modal-tab active" onclick="switchTab(this,'vb-panel')">Value Breakdown</button><button class="modal-tab" id="hist-tab" onclick="switchTab(this,'hist-panel')">Bonus History</button></div>
       <div id="vb-panel"><div id="m-vb" class="perks-list"></div></div><div id="hist-panel" style="display:none"></div>
       <div class="modal-section-title">Rewards</div>
       <div class="perks-list" id="m-rewards"></div>

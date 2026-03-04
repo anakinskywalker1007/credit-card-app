@@ -5,6 +5,14 @@
     { "source": "/best-cash-back-credit-cards", "destination": "/best-cash-back-credit-cards.html" },
     { "source": "/best-premium-credit-cards", "destination": "/best-premium-credit-cards.html" },
     { "source": "/best-business-credit-cards", "destination": "/best-business-credit-cards.html" },
-    { "source": "/best-no-annual-fee-credit-cards", "destination": "/best-no-annual-fee-credit-cards.html" }
+    { "source": "/best-no-annual-fee-credit-cards", "destination": "/best-no-annual-fee-credit-cards.html" },
+    { "source": "/compare/amex-gold-vs-chase-sapphire-preferred", "destination": "/content/comparisons/amex-gold-vs-chase-sapphire-preferred.html" },
+    { "source": "/compare/amex-platinum-vs-capital-one-venture-x", "destination": "/content/comparisons/amex-platinum-vs-capital-one-venture-x.html" },
+    { "source": "/compare/capital-one-venture-vs-capital-one-venture-x", "destination": "/content/comparisons/capital-one-venture-vs-capital-one-venture-x.html" },
+    { "source": "/compare/chase-sapphire-preferred-vs-capital-one-venture-x", "destination": "/content/comparisons/chase-sapphire-preferred-vs-capital-one-venture-x.html" },
+    { "source": "/compare/chase-sapphire-preferred-vs-chase-sapphire-reserve", "destination": "/content/comparisons/chase-sapphire-preferred-vs-chase-sapphire-reserve.html" },
+    { "source": "/compare/amex-gold-vs-amex-platinum", "destination": "/content/comparisons/amex-gold-vs-amex-platinum.html" },
+    { "source": "/compare/citi-double-cash-vs-wells-fargo-active-cash", "destination": "/content/comparisons/citi-double-cash-vs-wells-fargo-active-cash.html" },
+    { "source": "/compare/bilt-mastercard-vs-chase-sapphire-preferred", "destination": "/content/comparisons/bilt-mastercard-vs-chase-sapphire-preferred.html" }
   ]
 }

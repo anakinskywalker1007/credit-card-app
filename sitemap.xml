@@ -58,4 +58,13 @@
   <url><loc>https://cardtier.com/cards/citi-strata-premier</loc><lastmod>2026-03-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://cardtier.com/cards/citi-aadvantage-executive</loc><lastmod>2026-03-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://cardtier.com/cards/navy-federal-platinum</loc><lastmod>2026-03-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <!-- Comparison Pages -->
+  <url><loc>https://cardtier.com/compare/amex-gold-vs-chase-sapphire-preferred</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cardtier.com/compare/amex-platinum-vs-capital-one-venture-x</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cardtier.com/compare/capital-one-venture-vs-capital-one-venture-x</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cardtier.com/compare/chase-sapphire-preferred-vs-capital-one-venture-x</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cardtier.com/compare/chase-sapphire-preferred-vs-chase-sapphire-reserve</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cardtier.com/compare/amex-gold-vs-amex-platinum</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cardtier.com/compare/citi-double-cash-vs-wells-fargo-active-cash</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://cardtier.com/compare/bilt-mastercard-vs-chase-sapphire-preferred</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
 </urlset>

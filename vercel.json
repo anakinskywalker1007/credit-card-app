@@ -16,6 +16,7 @@
     { "source": "/compare/bilt-mastercard-vs-chase-sapphire-preferred", "destination": "/content/comparisons/bilt-mastercard-vs-chase-sapphire-preferred.html" },
     { "source": "/best-credit-cards-for-dining", "destination": "/best-credit-cards-for-dining.html" },
     { "source": "/best-first-credit-card", "destination": "/best-first-credit-card.html" },
-    { "source": "/best-credit-cards-for-groceries", "destination": "/best-credit-cards-for-groceries.html" }
+    { "source": "/best-credit-cards-for-groceries", "destination": "/best-credit-cards-for-groceries.html" },
+    { "source": "/best-credit-cards-for-travel", "destination": "/best-credit-cards-for-travel.html" }
   ]
 }

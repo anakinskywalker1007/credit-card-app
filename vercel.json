@@ -17,6 +17,8 @@
     { "source": "/best-credit-cards-for-dining", "destination": "/best-credit-cards-for-dining.html" },
     { "source": "/best-first-credit-card", "destination": "/best-first-credit-card.html" },
     { "source": "/best-credit-cards-for-groceries", "destination": "/best-credit-cards-for-groceries.html" },
-    { "source": "/best-credit-cards-for-travel", "destination": "/best-credit-cards-for-travel.html" }
+    { "source": "/best-credit-cards-for-travel", "destination": "/best-credit-cards-for-travel.html" },
+    { "source": "/best-credit-cards-no-annual-fee", "destination": "/best-credit-cards-no-annual-fee.html" },
+    { "source": "/best-credit-cards-for-cash-back", "destination": "/best-credit-cards-for-cash-back.html" }
   ]
 }

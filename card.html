@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Card Review — CardTier</title>
+<meta name="description" content="Full review, bonus history, and value breakdown.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://cardtier.com/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="author" content="CardTier">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💳</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#111827;line-height:1.5}
+nav{background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #e5e7eb;padding:0 40px;display:flex;justify-content:space-between;align-items:center;height:62px;position:sticky;top:0;z-index:100}
+.logo{font-weight:900;font-size:21px;letter-spacing:-0.04em;display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-link{font-size:13px;font-weight:600;color:#6b7280;text-decoration:none;padding:6px 11px;border-radius:7px;transition:all 0.15s}
+.nav-link:hover{background:#f3f4f6;color:#111}
+.breadcrumb{max-width:900px;margin:0 auto;padding:16px 24px 0;display:flex;align-items:center;gap:6px;font-size:12px;color:#9ca3af}
+.breadcrumb a{color:#6b7280;text-decoration:none;font-weight:500}
+.breadcrumb a:hover{color:#2563eb}
+.breadcrumb-sep{color:#d1d5db}
+.page-wrap{max-width:900px;margin:0 auto;padding:16px 24px 64px}
+.hero-card{background:#0f172a;border-radius:16px;padding:36px 40px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero-card::after{content:'';position:absolute;top:-60px;right:-40px;width:360px;height:360px;background:radial-gradient(circle,rgba(99,102,241,0.2) 0%,transparent 65%);pointer-events:none}
+.hero-card-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.tier-badge{font-size:11px;font-weight:800;padding:4px 10px;border-radius:6px;letter-spacing:0.03em}
+.tier-S{background:#fef3c7;color:#d97706}
+.tier-A{background:linear-gradient(135deg,#2563eb,#6366f1);color:#fff;border:none;box-shadow:0 2px 6px rgba(37,99,235,0.3)}
+.tier-B{background:linear-gradient(135deg,#10b981,#14b8a6);color:#fff;border:none}
+.tier-C{background:#e5e7eb;color:#6b7280;border:none}
+.tier-D{background:#fee2e2;color:#dc2626;border:none}
+.issuer-tag{font-size:12px;font-weight:600;color:#64748b;background:rgba(255,255,255,0.08);padding:4px 10px;border-radius:20px}
+.hero-card h1{font-size:34px;font-weight:900;color:#fff;letter-spacing:-0.03em;margin-bottom:8px;line-height:1.1}
+.hero-card-desc{font-size:15px;color:#94a3b8;margin-bottom:28px;line-height:1.5}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.hero-stat{background:rgba(255,255,255,0.06);border-radius:10px;padding:14px 16px;border:1px solid rgba(255,255,255,0.08)}
+.hero-stat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#64748b;margin-bottom:6px}
+.hero-stat-value{font-size:20px;font-weight:900;color:#fff;letter-spacing:-0.02em}
+.hero-stat-value.green{color:#34d399}
+.hero-stat-sub{font-size:11px;color:#475569;margin-top:3px}
+.apply-cta{display:inline-flex;align-items:center;gap:8px;background:#2563eb;color:#fff;text-decoration:none;padding:14px 28px;border-radius:11px;font-size:15px;font-weight:700;margin-top:20px;transition:background 0.15s;letter-spacing:-0.01em}
+.apply-cta:hover{background:#1d4ed8}
+.section-card{background:#fff;border-radius:14px;padding:28px;margin-bottom:16px;border:1px solid #e5e7eb;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+.section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;margin-bottom:16px}
+.perk-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f3f4f6;font-size:14px;color:#374151}
+.perk-row:last-child{border-bottom:none}
+.perk-row span{color:#6b7280}
+.perk-row strong{color:#111;font-weight:700;white-space:nowrap;margin-left:12px;text-align:right}
+.perk-row.net-row{border-top:2px solid #e5e7eb;margin-top:6px;padding-top:12px}
+.perk-row.net-row strong{font-size:17px}
+.reward-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-top:4px}
+.reward-item{background:#f8faff;border:1px solid #dbeafe;border-radius:10px;padding:12px 14px;text-align:center}
+.reward-rate{font-size:22px;font-weight:900;color:#2563eb;letter-spacing:-0.03em}
+.reward-cat{font-size:12px;color:#6b7280;margin-top:3px;font-weight:500;line-height:1.3}
+.perks-list{list-style:none;padding:0}
+.perks-list li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #f3f4f6;font-size:14px;color:#374151;line-height:1.4}
+.perks-list li:last-child{border-bottom:none}
+.perks-list li::before{content:'✓';color:#059669;font-weight:900;flex-shrink:0;font-size:12px;margin-top:2px}
+.transfer-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.transfer-pill{background:#f3f4f6;border-radius:6px;padding:5px 12px;font-size:13px;font-weight:600;color:#374151}
+.hist-stats{display:flex;gap:8px;margin-bottom:16px}
+.hist-stat{flex:1;text-align:center;background:#f9fafb;border-radius:10px;padding:12px 6px}
+.hist-stat-val{font-size:18px;font-weight:900;letter-spacing:-0.02em}
+.hist-stat-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#9ca3af;margin-top:3px}
+.hist-bar-wrap{margin-bottom:7px;display:flex;align-items:center;gap:8px}
+.hist-date{font-size:10px;color:#9ca3af;font-weight:600;width:55px;flex-shrink:0}
+.hist-bar-bg{flex:1;background:#f3f4f6;border-radius:4px;height:22px;overflow:hidden}
+.hist-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:700;color:#fff}
+.hist-val{font-size:10px;font-weight:700;color:#374151;width:36px;text-align:right;flex-shrink:0}
+.verdict-box{border-radius:10px;padding:14px 16px;margin:16px 0;display:flex;gap:12px;align-items:flex-start}
+.verdict-title{font-size:14px;font-weight:800;margin-bottom:3px}
+.verdict-body{font-size:12px;color:#6b7280;line-height:1.5}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.detail-item{padding:12px 0;border-bottom:1px solid #f3f4f6;display:flex;justify-content:space-between;font-size:14px}
+.detail-item:last-child{border-bottom:none}
+.detail-label{color:#6b7280;font-weight:500}
+.detail-value{font-weight:700;color:#111;text-align:right}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:#6b7280;text-decoration:none;font-size:13px;font-weight:600;margin-bottom:16px;padding:6px 10px;border-radius:7px;transition:all 0.15s}
+.back-link:hover{background:#fff;color:#111}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+.related-card{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:14px;text-decoration:none;transition:all 0.15s;display:block}
+.related-card:hover{border-color:#bfdbfe;background:#fff;transform:translateY(-1px)}
+.related-card-name{font-size:13px;font-weight:700;color:#111;margin-bottom:4px;line-height:1.3}
+.related-card-val{font-size:12px;color:#059669;font-weight:700}
+.related-card-fee{font-size:11px;color:#9ca3af;margin-top:2px}
+footer{text-align:center;padding:28px;font-size:12px;color:#9ca3af;border-top:1px solid #e5e7eb;background:#fff;margin-top:32px}
+@media(max-width:768px){
+  nav{padding:0 16px;height:52px}.logo{font-size:18px}.nav-links{display:none}
+  .page-wrap{padding:12px 16px 48px}.breadcrumb{padding:12px 16px 0}
+  .hero-card{padding:24px 20px}.hero-card h1{font-size:24px}
+  .hero-stats{grid-template-columns:1fr 1fr;gap:8px}.hero-stat-value{font-size:17px}
+  .two-col{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">
+    <svg width="36" height="26" viewBox="0 0 36 26" fill="none">
+      <rect x="4" y="4" width="28" height="18" rx="3" fill="#93c5fd"/>
+      <rect x="4" y="8" width="28" height="3" fill="#bfdbfe"/>
+      <rect x="0" y="6" width="28" height="18" rx="3" fill="#2563eb"/>
+      <rect x="0" y="10" width="28" height="3" fill="#1d4ed8"/>
+      <rect x="4" y="17" width="8" height="4" rx="1" fill="rgba(255,255,255,0.4)"/>
+      <circle cx="23" cy="19" r="3" fill="rgba(255,255,255,0.3)"/>
+      <circle cx="26" cy="19" r="3" fill="rgba(255,255,255,0.5)"/>
+    </svg>
+    <span style="color:#111;font-style:normal">Card</span><span style="color:#2563eb;font-style:normal;letter-spacing:-0.04em">Tier</span>
+  </a>
+  <div class="nav-links">
+    <a href="/best-travel-credit-cards" class="nav-link">Travel</a>
+    <a href="/best-cash-back-credit-cards" class="nav-link">Cash Back</a>
+    <a href="/best-premium-credit-cards" class="nav-link">Premium</a>
+    <a href="/best-business-credit-cards" class="nav-link">Business</a>
+  </div>
+</nav>
+
+<div class="breadcrumb" id="breadcrumb">
+  <a href="/">CardTier</a>
+  <span class="breadcrumb-sep">›</span>
+  <a href="/">All Cards</a>
+  <span class="breadcrumb-sep">›</span>
+  <span id="bc-name">Loading...</span>
+</div>
+
+<div class="page-wrap">
+  <a href="/" class="back-link">← Back to all cards</a>
+
+  <!-- Hero -->
+  <div class="hero-card" id="hero-card">
+    <div class="hero-card-eyebrow">
+      <span class="tier-badge" id="tier-badge"></span>
+      <span class="issuer-tag" id="issuer-tag"></span>
+    </div>
+    <h1 id="card-title">Loading...</h1>
+    <p class="hero-card-desc" id="card-desc"></p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-label">Sign-Up Bonus</div>
+        <div class="hero-stat-value green" id="hs-bonus"></div>
+        <div class="hero-stat-sub" id="hs-value"></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Net First-Year Value</div>
+        <div class="hero-stat-value green" id="hs-net"></div>
+        <div class="hero-stat-sub">After fee + credits</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Annual Fee</div>
+        <div class="hero-stat-value" id="hs-fee"></div>
+        <div class="hero-stat-sub" id="hs-feenote"></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Spend Required</div>
+        <div class="hero-stat-value" id="hs-spend"></div>
+        <div class="hero-stat-sub" id="hs-time"></div>
+      </div>
+    </div>
+    <a id="apply-btn" href="#" target="_blank" rel="noopener" class="apply-cta">Apply Now →</a>
+  </div>
+
+  <div class="two-col">
+    <!-- Left column -->
+    <div>
+      <!-- Value Breakdown -->
+      <div class="section-card">
+        <div class="section-title">Year 1 Value Breakdown</div>
+        <div id="vb-list"></div>
+      </div>
+
+      <!-- Bonus History -->
+      <div class="section-card" id="hist-section">
+        <div class="section-title">Bonus History</div>
+        <div id="hist-content"></div>
+      </div>
+
+      <!-- Card Details -->
+      <div class="section-card">
+        <div class="section-title">Card Details</div>
+        <div id="details-list"></div>
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div>
+      <!-- Rewards Rates -->
+      <div class="section-card">
+        <div class="section-title">Rewards Rates</div>
+        <div class="reward-grid" id="rewards-grid"></div>
+      </div>
+
+      <!-- Perks & Benefits -->
+      <div class="section-card">
+        <div class="section-title">Perks &amp; Benefits</div>
+        <ul class="perks-list" id="perks-list"></ul>
+      </div>
+
+      <!-- Transfer Partners -->
+      <div class="section-card" id="transfers-section" style="display:none">
+        <div class="section-title">Transfer Partners</div>
+        <div class="transfer-grid" id="transfers-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Cards -->
+  <div class="section-card" id="related-section">
+    <div class="section-title">Compare Similar Cards</div>
+    <div class="related-grid" id="related-grid"></div>
+  </div>
+</div>
+
+<footer>© 2026 CardTier — Always verify terms directly with the issuer before applying.</footer>
+
+<script>
+const cards=[{id:1,name:"Chase Sapphire Preferred®",issuer:"Chase",net:"Visa",desc:"Best starter travel card. Strong bonus, low fee.",history:{"typical":65,"ath":100,"atl":50,"verdict":"average","records":[{"d":"Now","v":75},{"d":"Sep '25","v":75},{"d":"Mar '25","v":60},{"d":"Oct '24","v":100},{"d":"Apr '24","v":60},{"d":"Nov '23","v":75}]},bonus:"75K pts",val:1500,valDisp:"$1,500",fee:95,feeNote:"Waived 1st yr",score:"750+",scLabel:"Excellent",apr:"19.99%",introApr:"0% for 12 months",spend:"$4,000",time:"3 mo",ftf:"No",rewards:[["Dining, Uber","3X"],["Travel","2X"],["Streaming","3X"]],perks:["$50 Annual Hotel Credit via Chase Travel","DoorDash DashPass (free delivery through Dec 2027)","5X on Lyft through Sept 2027","3X Dining Worldwide","3X Streaming Services","3X Online Groceries","2X Travel","14 Airline and Hotel Transfer Partners","No Foreign Tx Fee","Trip Cancellation Insurance","Baggage Delay Insurance","Travel and Emergency Assistance"],transfers:["United","Southwest","Hyatt","Marriott","IHG","Virgin"],link:"#",cat:["travel","premium"],badges:[],best:"Best all-around",tier:"A",slug:"chase-sapphire-preferred"},{id:2,name:"Chase Sapphire Reserve®",issuer:"Chase",net:"Visa",desc:"Premium travel perks with a $300 annual travel credit.",history:{"typical":60,"ath":125,"atl":50,"verdict":"elevated","records":[{"d":"Now","v":125},{"d":"Sep '25","v":75},{"d":"Mar '25","v":60},{"d":"Sep '24","v":100},{"d":"Apr '24","v":60},{"d":"Oct '23","v":60}]},bonus:"125K pts",val:2500,valDisp:"$2,500",fee:795,feeNote:"",score:"760+",scLabel:"Excellent",apr:"19.99%",introApr:"None",spend:"$6,000",time:"3 mo",ftf:"No",rewards:[["Travel, Dining","3X"]],perks:["$300 Annual Travel Credit","$500 The Edit Hotel Credit ($250 semi-annually)","$250 Select Hotels Credit (2026)","Priority Pass Lounges","Global Entry or TSA PreCheck","3X on Travel and Dining","DoorDash DashPass","No Foreign Tx Fee","Trip Cancellation Insurance","Baggage Delay Insurance"],transfers:["United","Hyatt","Marriott","Air Canada","Virgin"],link:"#",cat:["travel","premium"],badges:["premium"],best:"Premium travelers",tier:"S",slug:"chase-sapphire-reserve"},{id:3,name:"Chase Freedom Unlimited®",issuer:"Chase",net:"Visa",desc:"Flat 1.5% on everything, no annual fee, no thinking.",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"19.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"3%",rewards:[["Dining, Travel","3%"],["Everything","1.5%"]],perks:["1.5% on Everything","3% Dining and Drugstores","5% on Travel via Chase","DoorDash DashPass (free delivery through Dec 2027)","0% APR 15 months","No Annual Fee","Purchase Protection","Trip Cancellation Insurance"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Flat cash back",tier:"C",slug:"chase-freedom-unlimited"},{id:4,name:"Chase Freedom Flex℠",issuer:"Chase",net:"Visa",desc:"5% rotating categories plus solid base rewards.",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"19.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"3%",rewards:[["Rotating 5%","5%"],["Dining, Drugstores","3%"]],perks:["5% Rotating Categories (activate quarterly)","3% Dining and Drugstores","5% on Travel via Chase","DoorDash DashPass (free delivery through Dec 2027)","Cell Phone Protection","0% APR 15 months","No Annual Fee","Purchase Protection"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Rotating categories",tier:"C",slug:"chase-freedom-flex"},{id:5,name:"Chase Ink Business Preferred®",issuer:"Chase",net:"Visa",desc:"Best business travel card. 3X on travel and shipping.",history:{"typical":100,"ath":120,"atl":80,"verdict":"average","records":[{"d":"Now","v":100},{"d":"Oct '25","v":90},{"d":"Jun '25","v":100},{"d":"Feb '25","v":120},{"d":"Sep '24","v":100},{"d":"May '24","v":80}]},bonus:"100K pts",val:2050,valDisp:"$2,050",fee:95,feeNote:"",score:"720+",scLabel:"Good+",apr:"19.99%",introApr:"0% for 12 months",spend:"$8,000",time:"3 mo",ftf:"No",rewards:[["Travel","3X"],["Advertising","3X"],["Internet","3X"]],perks:["$600 Cell Phone Protection","3X Travel","3X Shipping","3X Advertising","3X Internet and Cable","Trip Cancellation Insurance","No Foreign Tx Fee","Employee Cards Free","14 Transfer Partners","Purchase Protection"],transfers:["United","Southwest","Hyatt","Marriott"],link:"#",cat:["business"],badges:["business"],best:"Business spending",tier:"S",slug:"chase-ink-business-preferred"},{id:6,name:"Capital One Venture X",issuer:"Capital One",net:"Visa",desc:"Best all-in-one travel card. Annual credits cover the fee.",history:{"typical":75,"ath":100,"atl":50,"verdict":"average","records":[{"d":"Now","v":75},{"d":"Oct '25","v":75},{"d":"May '25","v":100},{"d":"Jan '25","v":75},{"d":"Aug '24","v":75},{"d":"Mar '24","v":50}]},bonus:"75K mi",val:1388,valDisp:"$1,388",fee:395,feeNote:"Net ~$195",score:"750+",scLabel:"Excellent",apr:"24.99%",introApr:"0% for 12 months",spend:"$4,000",time:"3 mo",ftf:"No",rewards:[["Everything","2X"]],perks:["$300 Annual Capital One Travel Credit","10,000 Anniversary Miles (~$185)","Capital One Lounges Access (3 locations)","Priority Pass (1,300+ lounges)","Global Entry or TSA PreCheck Credit","2X Miles on Everything","10X Hotels & Rental Cars via C1 Travel","5X Flights via C1 Travel","No Foreign Tx Fee","Travel Accident Insurance","Lost Luggage Insurance"],transfers:["Air Canada","British Airways","Virgin Atlantic"],link:"#",cat:["travel","premium"],badges:["premium"],best:"Premium travel",tier:"A",slug:"capital-one-venture-x"},{id:7,name:"Capital One Venture",issuer:"Capital One",net:"Visa",desc:"Simple 2X miles on everything. Great for beginners.",history:{"typical":60,"ath":100,"atl":40,"verdict":"elevated","records":[{"d":"Now","v":75},{"d":"Oct '25","v":75},{"d":"Jun '25","v":60},{"d":"Jan '25","v":100},{"d":"Jul '24","v":60},{"d":"Feb '24","v":60}]},bonus:"75K mi",val:1388,valDisp:"$1,388",fee:95,feeNote:"",score:"700+",scLabel:"Good+",apr:"24.99%",introApr:"0% for 12 months",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Everything","2X"]],perks:["$100 Global Entry or TSA PreCheck Credit","2X Miles on Everything","5X on Hotels and Rental Cars via C1 Travel","No Foreign Tx Fee","Travel Accident Insurance","Rental Car Insurance"],transfers:["Air Canada","British Airways"],link:"#",cat:["travel"],badges:[],best:"Simple travel",tier:"A",slug:"capital-one-venture"},{id:8,name:"Capital One Quicksilver",issuer:"Capital One",net:"Visa",desc:"Unlimited 1.5% cash back with no annual fee.",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"24.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"No",rewards:[["Everything","1.5%"]],perks:["1.5% Cash Back on Everything","0% APR 15 months","No Annual Fee","No Foreign Tx Fee","Purchase Protection"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Flat rate",tier:"C",slug:"capital-one-quicksilver"},{id:9,name:"Capital One SavorCash",issuer:"Capital One",net:"Visa",desc:"4% on dining and entertainment. Top cash back card.",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"24.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"No",rewards:[["Dining","4%"],["Entertainment","4%"],["Groceries","4%"]],perks:["4% Dining and Bars Worldwide","4% Entertainment (concerts, movies, sports)","4% Popular Streaming Services","3% Grocery Stores (excl. Walmart/Target)","1% Everything Else","No Annual Fee","No Foreign Tx Fee","Purchase Protection","Extended Warranty"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Dining & entertainment",tier:"C",slug:"capital-one-savorcash"},{id:10,name:"Capital One SavorOne",issuer:"Capital One",net:"Visa",desc:"Dining rewards with no annual fee.",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"24.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"No",rewards:[["Dining","3%"],["Entertainment","3%"],["Groceries","3%"]],perks:["3% Dining and Bars Worldwide","3% Entertainment and Streaming","3% Grocery Stores","1% Everything Else","No Annual Fee","No Foreign Tx Fee","0% APR 15 months","Purchase Protection","Travel Accident Insurance"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"No fee dining",tier:"C",slug:"capital-one-savorone"},{id:11,name:"Amex Platinum®",issuer:"Amex",net:"Amex",desc:"The ultimate status card. Unmatched lounge access.",history:{"typical":125,"ath":200,"atl":100,"verdict":"elevated","records":[{"d":"Now","v":175},{"d":"Nov '25","v":175},{"d":"Jul '25","v":150},{"d":"Mar '25","v":200},{"d":"Nov '24","v":150},{"d":"Jun '24","v":100}]},bonus:"175K pts",val:3500,valDisp:"$3,500",fee:895,feeNote:"",score:"740+",scLabel:"Excellent",apr:"19.99%",introApr:"None",spend:"$12,000",time:"6 mo",ftf:"No",rewards:[["Flights","5X"],["Hotels","5X"],["Airbnb","5X"]],perks:["$400 Resy Credit ($100/qtr)","$300 Lululemon ($75/qtr)","$300 Digital Entertainment ($25/mo)","$200 Uber Cash ($15/mo + $20 Dec)","$200 Airline Fee Credit","$200 CLEAR Plus","$155 Walmart+ Membership","$100 Saks Fifth Avenue ($50 2x/yr)","$100 Global Entry/TSA PreCheck","Centurion Lounge Access","Delta Sky Club (flying Delta)","Priority Pass Select","Hilton Honors Gold Status","Marriott Bonvoy Gold Status","No Foreign Transaction Fees","5X Flights & Hotels Direct"],transfers:["Delta","Marriott","Hilton","British Airways","Singapore","Emirates","Virgin","Aer Lingus"],link:"#",cat:["travel","premium"],badges:["premium"],best:"Maximum perks",tier:"S",slug:"amex-platinum"},{id:12,name:"Amex Gold Card®",issuer:"Amex",net:"Amex",desc:"Best card for dining and groceries. 4X on both.",history:{"typical":75,"ath":100,"atl":60,"verdict":"elevated","records":[{"d":"Now","v":100},{"d":"Nov '25","v":100},{"d":"Jul '25","v":75},{"d":"Mar '25","v":75},{"d":"Oct '24","v":75},{"d":"May '24","v":60}]},bonus:"100K pts",val:2000,valDisp:"$2,000",fee:325,feeNote:"",score:"720+",scLabel:"Good+",apr:"19.99%",introApr:"None",spend:"$5,000",time:"6 mo",ftf:"No",rewards:[["Dining Worldwide","4X"],["U.S. Supermarkets","4X"],["Flights Direct","3X"]],perks:["$120 Dining Credit ($10/mo - Grubhub, Cheesecake Factory, Five Guys)","$120 Uber Cash ($10/mo)","$100 Resy Credit ($50 semi-annually)","$84 Dunkin Credit ($7/mo)","4X Dining Worldwide (up to 50K/yr)","4X U.S. Supermarkets","3X Flights Booked Direct","No Foreign Tx Fee","Baggage Insurance","Trip Delay Coverage"],transfers:["Delta","Marriott","Hilton","British Airways","Singapore"],link:"#",cat:["travel"],badges:[],best:"Dining & groceries",tier:"S",slug:"amex-gold"},{id:13,name:"Amex Green Card®",issuer:"Amex",net:"Amex",desc:"Travel and transit rewards at a lower annual fee.",history:{"typical":40,"ath":60,"atl":20,"verdict":"elevated","records":[{"d":"Now","v":60},{"d":"Nov '25","v":60},{"d":"Jun '25","v":40},{"d":"Jan '25","v":45},{"d":"Aug '24","v":30},{"d":"Mar '24","v":20}]},bonus:"60K pts",val:1200,valDisp:"$1,200",fee:150,feeNote:"",score:"700+",scLabel:"Good+",apr:"19.99%",introApr:"None",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Dining","3X"],["Travel","3X"],["Transit","3X"]],perks:["$100 CLEAR Plus Credit","$100 LoungeBuddy Credit","3X Dining Worldwide","3X Travel (Flights, Hotels, Transit)","3X Transit and Rideshare","No Foreign Tx Fee","Trip Delay Insurance","Baggage Insurance"],transfers:["Delta","Marriott","Hilton"],link:"#",cat:["travel"],badges:[],best:"Travel & transit",tier:"A",slug:"amex-green"},{id:14,name:"Amex Blue Business Plus®",issuer:"Amex",net:"Amex",desc:"2X on all business purchases. No annual fee.",bonus:"15K pts",val:300,valDisp:"$300",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"19.99%",introApr:"0% for 12 months",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Everything","2X"]],perks:["2X Amex Membership Rewards on Everything (up to $50K/yr)","1X After $50K","0% APR 12 months","No Annual Fee","No Foreign Tx Fee","Employee Cards Free","Purchase Protection","Extended Warranty"],transfers:["Delta","Marriott","Hilton"],link:"#",cat:["business","noaf"],badges:["free"],best:"Business flat rate",tier:"B",slug:"amex-blue-business-plus"},{id:15,name:"Amex Business Platinum®",issuer:"Amex",net:"Amex",desc:"Massive business perks with up to $1,000 in annual credits.",history:{"typical":175,"ath":250,"atl":120,"verdict":"elevated","records":[{"d":"Now","v":250},{"d":"Nov '25","v":200},{"d":"Jul '25","v":175},{"d":"Mar '25","v":250},{"d":"Nov '24","v":175},{"d":"Jun '24","v":120}]},bonus:"250K pts",val:5000,valDisp:"$5,000",fee:895,feeNote:"",score:"740+",scLabel:"Excellent",apr:"19.99%",introApr:"None",spend:"$15,000",time:"3 mo",ftf:"No",rewards:[["Flights, Hotels","5X"],["Dining","2.5X"],["Everything","1.5X"]],perks:["$1,200 AmexTravel Flights Credit","$600 Fine Hotels Credit ($300 semi-annually)","$200 Airline Fee Credit","$209 CLEAR Plus","$150 Dell Credit","35% Points Rebate on Award Flights","Centurion Lounges","Priority Pass","Global Entry or TSA PreCheck","Marriott Bonvoy Gold","Hilton Honors Gold","No Foreign Tx Fee","5X Flights and Hotels","1.5X on Everything over $5,000"],transfers:["Delta","Marriott","Hilton","British Airways","Singapore","Emirates"],link:"#",cat:["business","premium"],badges:["premium"],best:"Premium business",tier:"S",slug:"amex-business-platinum"},{id:16,name:"Citi Strata Elite",issuer:"Citi",net:"Mastercard",desc:"Top transfer partners for serious points collectors.",history:{"typical":75,"ath":100,"atl":60,"verdict":"elevated","records":[{"d":"Now","v":100},{"d":"Nov '25","v":100},{"d":"Jul '25","v":75},{"d":"Feb '25","v":75},{"d":"Sep '24","v":60},{"d":"Apr '24","v":60}]},bonus:"100K pts",val:1900,valDisp:"$1,900",fee:95,feeNote:"Waived 1st yr",score:"720+",scLabel:"Good+",apr:"29.99%",introApr:"0% 12mo",spend:"$4,000",time:"3 mo",ftf:"No",rewards:[["Travel","3X"],["Dining","3X"],["Groceries","3X"],["Gas","3X"]],perks:["$300 Air Travel Credit","$100 Hotel Credit","$100 Experience Credit","No Foreign Tx Fee","3X Dining","3X Travel","3X Gas","3X Groceries","10 Transfer Partners (JetBlue, Avianca, Singapore, Turkish, Virgin Atlantic, Cathay Pacific, Malaysia, Thai, Etihad, Wyndham)"],transfers:["JetBlue","Avianca","Singapore","Turkish","Virgin Atlantic","Cathay Pacific","Malaysia","Thai","Etihad","Wyndham"],link:"#",cat:["travel"],badges:[],best:"Flexible travel",tier:"A",slug:"citi-strata-elite"},{id:17,name:"Citi Custom Cash℠",issuer:"Citi",net:"Mastercard",desc:"5% on your top spending category automatically.",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"29.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"3%",rewards:[["Top Category","5%"],["Everything","1%"]],perks:["5% on Top Spend Category (up to $500/mo, then 1%)","1% on Everything Else","Automatic Category Detection","0% APR 15 months","No Annual Fee","Citi Entertainment Access","Purchase Protection","Extended Warranty"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Auto category",tier:"C",slug:"citi-custom-cash"},{id:18,name:"Citi Double Cash®",issuer:"Citi",net:"Mastercard",desc:"Simple 2% on everything. One of the best cash back cards.",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"29.99%",introApr:"0% for 18 months",spend:"$1,000",time:"3 mo",ftf:"3%",rewards:[["Everything","2%"]],perks:["2% on Everything (1% when you buy, 1% when you pay)","0% APR 18 months on balance transfers","No Annual Fee","Citi Entertainment Access","Purchase Protection"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Simple 2%",tier:"C",slug:"citi-double-cash"},{id:19,name:"Bilt Mastercard®",issuer:"Bilt",net:"Mastercard",desc:"Only card that earns points on rent. No annual fee.",history:{"typical":50,"ath":75,"atl":25,"verdict":"average","records":[{"d":"Now","v":50},{"d":"Oct '25","v":50},{"d":"May '25","v":75},{"d":"Jan '25","v":50},{"d":"Aug '24","v":50},{"d":"Mar '24","v":25}]},bonus:"50K pts",val:1100,valDisp:"$1,100",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"29.99%",introApr:"None",spend:"$2,000",time:"3 mo",ftf:"No",rewards:[["Dining","3X"],["Travel","2X"],["Rent","1X"]],perks:["Earn Points on Rent (No Fee)","3X Dining","2X Travel","1X Rent","Monthly Rent Day Bonuses (1st of each month)","1:1 Transfer Partners","Trip Cancellation Insurance","Cell Phone Protection","No Foreign Tx Fee"],transfers:["Hyatt","Marriott","United","American","Alaska","Air Canada","Emirates"],link:"#",cat:["travel","noaf"],badges:["free"],best:"Renters",tier:"A",slug:"bilt-mastercard"},{id:20,name:"Wells Fargo Active Cash®",issuer:"Wells Fargo",net:"Visa",desc:"Unlimited 2% cash back. No annual fee, no complexity.",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"670+",scLabel:"Good",apr:"28.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"3%",rewards:[["Everything","2%"]],perks:["$600 Cell Phone Protection","2% Cash Back on Everything","0% APR 15 months","No Annual Fee","Roadside Dispatch"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Flat cash",tier:"C",slug:"wells-fargo-active-cash"},{id:21,name:"Wells Fargo Autograph℠",issuer:"Wells Fargo",net:"Visa",desc:"3X on travel, dining, gas, and more. No annual fee.",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"28.99%",introApr:"0% for 15 months",spend:"$500",time:"3 mo",ftf:"No",rewards:[["Travel, Transit","3X"],["Dining","3X"],["Gas","3X"]],perks:["3X Travel, Gas, Transit, Dining, Streaming, Phone Plans","1X Everything Else","$600 Cell Phone Protection","No Annual Fee","No Foreign Tx Fee","0% APR 12 months","Travel Emergency Assistance","Auto Rental Collision Coverage"],transfers:["Aer Lingus","British Airways","Virgin Atlantic"],link:"#",cat:["cash","noaf"],badges:["free"],best:"Bonus categories",tier:"C",slug:"wells-fargo-autograph"},{id:22,name:"Discover it® Cash Back",issuer:"Discover",net:"Discover",desc:"5% rotating categories with first-year cash back match.",bonus:"MATCH",val:0,valDisp:"Match Yr1",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"28.99%",introApr:"0% for 15 months",spend:"—",time:"",ftf:"No",rewards:[["Rotating","5%"],["Everything","1%"]],perks:["5% Rotating Categories (activate quarterly up to $1,500/qtr)","1% on Everything Else","Cashback Match First Year","No Annual Fee","No Foreign Tx Fee","Freeze It Security Feature","Free FICO Credit Score"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Rotating",tier:"D",slug:"discover-it-cash-back"},{id:23,name:"Discover it® Miles",issuer:"Discover",net:"Discover",desc:"1.5X miles matched after year one. Great starter card.",bonus:"MATCH",val:0,valDisp:"Match Yr1",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"28.99%",introApr:"0% for 15 months",spend:"—",time:"",ftf:"No",rewards:[["Everything","1.5X"]],perks:["1.5X Miles on Everything","Miles Match First Year (unlimited)","No Annual Fee","No Foreign Tx Fee","Free FICO Credit Score Monthly","Freeze It Security Feature","Redeem for Travel or Cash"],transfers:[],link:"#",cat:["travel","noaf"],badges:["free"],best:"Flat travel",tier:"D",slug:"discover-it-miles"},{id:24,name:"BoA Customized Cash",issuer:"Bank of America",net:"Mastercard",desc:"Pick your 3% category. Flexible cash back, no annual fee.",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"670+",scLabel:"Good",apr:"29.99%",introApr:"0% for 15 months",spend:"$1,000",time:"3 mo",ftf:"3%",rewards:[["Choice Category","3%"],["Everything","2%"]],perks:["3% Your Choice Category (gas, online, dining, travel, drug, home)","2% Grocery Stores and Wholesale (up to $2,500/qtr)","1% Everything Else","0% APR 15 months","No Annual Fee","Preferred Rewards Bonus (up to 75% more)","Purchase Protection"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Custom categories",tier:"C",slug:"boa-customized-cash"},{id:25,name:"BoA Travel Rewards",issuer:"Bank of America",net:"Visa",desc:"Simple travel rewards with no annual fee or foreign fees.",bonus:"$250",val:250,valDisp:"$250",fee:0,feeNote:"No fee",score:"670+",scLabel:"Good",apr:"29.99%",introApr:"0% for 15 months",spend:"$1,000",time:"3 mo",ftf:"No",rewards:[["Everything","1.5%"]],perks:["1.5X Points on Everything","Redeem for Travel Statement Credits","No Annual Fee","No Foreign Tx Fee","Preferred Rewards Bonus (up to 75% more)","0% APR 15 months","Travel Accident Insurance"],transfers:[],link:"#",cat:["travel","noaf"],badges:["free"],best:"Simple travel",tier:"B",slug:"boa-travel-rewards"},{id:26,name:"Amazon Prime Rewards Visa",issuer:"Amazon/Chase",net:"Visa",desc:"5% back at Amazon and Whole Foods for Prime members.",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"Prime required",score:"670+",scLabel:"Good",apr:"27.99%",introApr:"0% 12mo",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Amazon","5%"],["Whole Foods","5%"]],perks:["5% at Amazon.com and Whole Foods","2% at Restaurants, Gas Stations, Drugstores","1% Everything Else","No Annual Fee (Prime required)","No Foreign Tx Fee","Purchase Protection","Extended Warranty","Travel Accident Insurance"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Amazon shoppers",tier:"C",slug:"amazon-prime-rewards"},{id:27,name:"Costco Anywhere Visa",issuer:"Citi",net:"Visa",desc:"4% on gas, 3% dining. Best card for Costco members.",bonus:"$100",val:100,valDisp:"$100",fee:0,feeNote:"Costco member",score:"670+",scLabel:"Good",apr:"19.99%",introApr:"0% 12mo",spend:"$1,000",time:"3 mo",ftf:"No",rewards:[["Gas","4%"],["Costco","2%"]],perks:["4% Gas and EV Charging (up to $7,000/yr, then 1%)","3% Restaurants and Eligible Travel","2% Costco and Costco.com","1% Everything Else","No Annual Fee (Costco membership required)","No Foreign Tx Fee","Damage and Theft Purchase Protection","Extended Warranty"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Costco",tier:"D",slug:"costco-anywhere-visa"},{id:28,name:"Apple Card",issuer:"Goldman Sachs",net:"Mastercard",desc:"2% on Apple Pay. Clean design, no fees, no late charges.",bonus:"$75",val:75,valDisp:"$75",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"27.99%",introApr:"0% 12mo",spend:"$500",time:"3 mo",ftf:"No",rewards:[["Apple","3%"],["Gold","3%"]],perks:["3% Daily Cash on Apple Purchases","3% on Select Merchants (Uber, Nike, Walgreens, etc.)","2% on Apple Pay Purchases","1% Physical Card Purchases","No Annual Fee","No Foreign Tx Fee","No Late Fees","No Penalty APR","Titanium Physical Card"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Apple",tier:"D",slug:"apple-card"},{id:30,name:"Navy Federal GoRewards",issuer:"Navy Federal",net:"Visa",desc:"Solid everyday rewards with no annual fee for military.",bonus:"20K pts",val:250,valDisp:"$250",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"14.90%-18%",introApr:"0% 12mo",spend:"$1,500",time:"3 mo",ftf:"No",rewards:[["Dining","3X"],["Gas","3X"]],perks:["3X Dining Worldwide","3X Gas Stations","1X Everything Else","Low APR (14.90%-18%)","No Annual Fee","No Foreign Tx Fee","Points Never Expire","Military-Exclusive Benefits","Fraud Protection"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Military",tier:"B",slug:"navy-federal-gorewards"},{id:31,name:"Delta SkyMiles Gold",issuer:"Amex",net:"Amex",desc:"Best entry-level Delta card. Free checked bag on every flight.",history:{"typical":50,"ath":90,"atl":30,"verdict":"average","records":[{"d":"Now","v":50},{"d":"Oct '25","v":50},{"d":"May '25","v":90},{"d":"Jan '25","v":60},{"d":"Aug '24","v":50},{"d":"Mar '24","v":30}]},bonus:"50K mi + $400",val:1025,valDisp:"$875",fee:0,feeNote:"Waived 1st yr",score:"700+",scLabel:"Good+",apr:"20.99%-29.99%",introApr:"0% 15mo",spend:"$2,000",time:"3 mo",ftf:"No",rewards:[["Delta","2X"],["Groceries","2X"]],perks:["Free First Checked Bag","Priority Boarding","20% Back on Delta In-Flight Purchases","$200 Delta Stays Credit","2X Delta Purchases","2X Dining","2X U.S. Supermarkets","No Foreign Tx Fee","Trip Delay Insurance"],transfers:["Delta","Marriott"],link:"#",cat:["travel","noaf"],badges:["free"],best:"Delta",tier:"A",slug:"delta-skymiles-gold"},{id:32,name:"Delta SkyMiles Platinum",issuer:"Amex",net:"Amex",desc:"Annual companion certificate. Best for Delta loyalists.",history:{"typical":60,"ath":100,"atl":50,"verdict":"elevated","records":[{"d":"Now","v":100},{"d":"Nov '25","v":100},{"d":"Jun '25","v":60},{"d":"Feb '25","v":60},{"d":"Sep '24","v":60},{"d":"Apr '24","v":50}]},bonus:"100K mi",val:1250,valDisp:"$1,125",fee:350,feeNote:"",score:"720+",scLabel:"Good+",apr:"20.99%-29.99%",introApr:"0% 15mo",spend:"$4,000",time:"3 mo",ftf:"No",rewards:[["Delta","3X"],["Hotels","3X"]],perks:["Free First Checked Bag","Priority Boarding","20% In-Flight Savings","MQD Headstart (2,500 MQDs Annually)","Companion Certificate Annually","3X Delta Purchases","3X Hotels","2X Dining","No Foreign Tx Fee","Global Entry or TSA PreCheck Credit","Trip Cancellation Insurance"],transfers:["Delta","Marriott"],link:"#",cat:["travel","premium"],badges:["premium"],best:"Delta Plus",tier:"A",slug:"delta-skymiles-platinum"},{id:33,name:"Delta SkyMiles Reserve",issuer:"Amex",net:"Amex",desc:"Delta's premium card with Sky Club lounge access.",history:{"typical":60,"ath":125,"atl":50,"verdict":"elevated","records":[{"d":"Now","v":125},{"d":"Nov '25","v":125},{"d":"Jun '25","v":60},{"d":"Feb '25","v":60},{"d":"Sep '24","v":60},{"d":"Apr '24","v":50}]},bonus:"125K mi",val:1563,valDisp:"$1,563",fee:650,feeNote:"",score:"750+",scLabel:"Excellent",apr:"20.99%-29.99%",introApr:"0% 15mo",spend:"$6,000",time:"3 mo",ftf:"No",rewards:[["Delta","3X"]],perks:["15 Delta Sky Club Visits/yr (unlimited after $75K spend)","Centurion Lounge Access (flying Delta)","$120 Rideshare Credit ($10/mo)","$240 Resy Credit ($20/mo)","First Class Companion Certificate Annually","Free First Checked Bag","Priority Boarding","3X Miles on Delta Purchases","Global Entry or TSA PreCheck Credit","No Foreign Tx Fee","15,000 Bonus Miles on Card Anniversary"],transfers:["Delta","Marriott"],link:"#",cat:["travel","premium"],badges:["premium"],best:"Delta Elite",tier:"A",slug:"delta-skymiles-reserve"},{id:34,name:"United Quest Card",issuer:"United",net:"Visa",desc:"Mid-tier United card with strong annual statement credits.",history:{"typical":70,"ath":100,"atl":60,"verdict":"elevated","records":[{"d":"Now","v":100},{"d":"Nov '25","v":100},{"d":"Jun '25","v":70},{"d":"Feb '25","v":70},{"d":"Sep '24","v":70},{"d":"Apr '24","v":60}]},bonus:"100K pts",val:1500,valDisp:"$1,200",fee:350,feeNote:"",score:"720+",scLabel:"Good+",apr:"21.99%-28.99%",introApr:"0% 12mo",spend:"$5,000",time:"3 mo",ftf:"No",rewards:[["United","3X"],["Dining","2X"],["All Other Travel","2X"]],perks:["$125 United Travel Credit Annually","$100 Rideshare Credit ($8/mo, $12 in Dec)","10,000 Mile Award Flight Discount Annually","2 Free Checked Bags","Economy Plus Seat Upgrades","Priority Boarding","3X Miles on United Purchases","2X Miles on Dining and All Other Travel","Global Entry or TSA PreCheck Credit","No Foreign Tx Fee","Trip Cancellation Insurance","Baggage Delay Insurance"],transfers:["United","Marriott"],link:"#",cat:["travel","premium"],badges:["premium"],best:"United",tier:"A",slug:"united-quest-card"},{id:35,name:"United Explorer Card",issuer:"United",net:"Visa",desc:"Best entry-level United card with free checked bag.",history:{"typical":55,"ath":90,"atl":40,"verdict":"elevated","records":[{"d":"Now","v":85},{"d":"Nov '25","v":85},{"d":"Jun '25","v":55},{"d":"Feb '25","v":60},{"d":"Sep '24","v":55},{"d":"Apr '24","v":40}]},bonus:"85K pts",val:1275,valDisp:"$1,275",fee:150,feeNote:"Waived 1st yr",score:"700+",scLabel:"Good+",apr:"21.99%-28.99%",introApr:"0% 12mo",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["United","2X"],["Dining","2X"],["Hotels","2X"]],perks:["Free First Checked Bag (saves $35/flight)","Priority Boarding","2 United Club Passes Annually","25% Back on United In-Flight Purchases","Global Entry or TSA PreCheck Credit","$100 United Travel Bank Credit","2X United Purchases","2X Dining","2X Hotels","No Foreign Tx Fee","Trip Cancellation Insurance"],transfers:["United"],link:"#",cat:["travel"],badges:[],best:"United occasional",tier:"A",slug:"united-explorer-card"},{id:36,name:"Southwest Priority",issuer:"Chase",net:"Visa",desc:"Best Southwest card. $75 travel credit offsets the fee.",history:{"typical":50,"ath":75,"atl":30,"verdict":"elevated","records":[{"d":"Now","v":60},{"d":"Nov '25","v":60},{"d":"Jun '25","v":50},{"d":"Jan '25","v":75},{"d":"Aug '24","v":50},{"d":"Mar '24","v":30}]},bonus:"60K pts",val:900,valDisp:"$900",fee:229,feeNote:"",score:"720+",scLabel:"Good+",apr:"21.99%-28.99%",introApr:"0% 12mo",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Southwest","3X"],["Hotel & Car Partners","2X"]],perks:["$75 Southwest Annual Travel Credit","7,500 Anniversary Points (~$100)","4 Upgraded Boardings/yr","20% Back on In-Flight Purchases","3X Southwest Purchases","2X Hotel and Car Partners","No Foreign Tx Fee","Tier Qualifying Points toward A-List Status"],transfers:["Southwest"],link:"#",cat:["travel"],badges:[],best:"Southwest",tier:"A",slug:"southwest-priority"},{id:37,name:"Hilton Honors Amex",issuer:"Amex",net:"Amex",desc:"Free night reward annually. Great entry-level Hilton card.",history:{"typical":80,"ath":130,"atl":60,"verdict":"elevated","records":[{"d":"Now","v":130},{"d":"Nov '25","v":130},{"d":"Jun '25","v":80},{"d":"Feb '25","v":100},{"d":"Sep '24","v":80},{"d":"Apr '24","v":60}]},bonus:"130K pts + FN",val:780,valDisp:"$480",fee:95,feeNote:"Waived 1st yr",score:"700+",scLabel:"Good+",apr:"19.99%-28.99%",introApr:"0% 15mo",spend:"$2,000",time:"3 mo",ftf:"No",rewards:[["Hilton","7X"],["Gas","5X"]],perks:["Hilton Gold Status (automatic)","Free Weekend Night after $15K Spend","7X Hilton Hotels","5X U.S. Gas, Groceries, Restaurants","3X Everything Else","No Foreign Tx Fee","Baggage Insurance","Trip Delay Insurance"],transfers:["Hilton"],link:"#",cat:["travel"],badges:[],best:"Hilton",tier:"A",slug:"hilton-honors-amex"},{id:38,name:"Hilton Surpass",issuer:"Amex",net:"Amex",desc:"Top Hilton card. Free weekend night plus lounge access.",history:{"typical":100,"ath":180,"atl":80,"verdict":"elevated","records":[{"d":"Now","v":130},{"d":"Nov '25","v":130},{"d":"Jun '25","v":150},{"d":"Jan '25","v":180},{"d":"Aug '24","v":130},{"d":"Mar '24","v":80}]},bonus:"130K pts + FN",val:1080,valDisp:"$780",fee:250,feeNote:"",score:"720+",scLabel:"Good+",apr:"19.99%-28.99%",introApr:"0% 15mo",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Hilton Hotels","12X"],["Dining","6X"],["U.S. Groceries","6X"],["Gas","6X"]],perks:["Hilton Gold Status","Free Weekend Night after $15K Spend","Priority Pass (10 visits/yr)","No Foreign Tx Fee","Trip Cancellation Insurance"],transfers:["Hilton"],link:"#",cat:["travel","premium"],badges:["premium"],best:"Hilton Elite",tier:"A",slug:"hilton-surpass"},{id:39,name:"Alaska Airlines Visa",issuer:"BoA",net:"Visa",desc:"Annual companion fare. Best for West Coast travelers.",history:{"typical":60,"ath":80,"atl":40,"verdict":"elevated","records":[{"d":"Now","v":80},{"d":"Nov '25","v":80},{"d":"Jun '25","v":60},{"d":"Feb '25","v":60},{"d":"Sep '24","v":60},{"d":"Apr '24","v":40}]},bonus:"80K mi",val:1440,valDisp:"$1,440",fee:95,feeNote:"",score:"720+",scLabel:"Good+",apr:"20.99%-27.99%",introApr:"0% 12mo",spend:"$4,000",time:"3 mo",ftf:"No",rewards:[["Alaska","3X"],["Gas","2X"]],perks:["Companion Fare Annually (~$121+tax)","Free First Checked Bag (saves $35/flight)","20% Back on Alaska In-Flight Purchases","Priority Boarding (Group B)","3X Alaska Purchases","2X Gas and EV Charging","No Foreign Tx Fee","Alaska Lounge Discount"],transfers:["Alaska","British Airways"],link:"#",cat:["travel"],badges:[],best:"Alaska",tier:"A",slug:"alaska-airlines-visa"},{id:40,name:"Brex 70 Card",issuer:"Brex",net:"Mastercard",desc:"High-limit business card built for startups and scale.",bonus:"70K pts",val:1050,valDisp:"$1,050",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"0%",introApr:"0% Always",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Everything","1X"],["Travel","4X"]],perks:["7X Rideshare","4X Airbnb","3X Restaurants","2X Recurring Software","No Annual Fee","No Personal Guarantee","No Foreign Tx Fee","Employee Cards Free","Real-Time Expense Management"],transfers:["Air Canada","Virgin Atlantic"],link:"#",cat:["business","travel","noaf"],badges:["free"],best:"Startups",tier:"A",slug:"brex-70"},{id:41,name:"Spark Cash Plus",issuer:"Capital One",net:"Visa",desc:"Unlimited 2% cash back for businesses. No preset limit.",bonus:"$2,000",val:2000,valDisp:"$2,000",fee:95,feeNote:"",score:"720+",scLabel:"Good+",apr:"24.99%-29.99%",introApr:"0% 12mo",spend:"$20,000",time:"3 mo",ftf:"No",rewards:[["Everything","2%"]],perks:["2% Cash Back on Everything","5% Hotels and Rental Cars via C1 Travel","No Foreign Tx Fee","Employee Cards Free","Purchase Protection","Extended Warranty","Year-End Spending Summary","No Preset Spending Limit"],transfers:[],link:"#",cat:["business","cash"],badges:["business"],best:"Business",tier:"S",slug:"capital-one-spark-cash-plus"},{id:42,name:"Spark Miles",issuer:"Capital One",net:"Visa",desc:"2X miles on all business spending. Simple and flexible.",history:{"typical":50,"ath":75,"atl":25,"verdict":"elevated","records":[{"d":"Now","v":75},{"d":"Nov '25","v":75},{"d":"Jun '25","v":50},{"d":"Feb '25","v":50},{"d":"Sep '24","v":50},{"d":"Apr '24","v":25}]},bonus:"75K mi",val:1388,valDisp:"$1,388",fee:95,feeNote:"",score:"700+",scLabel:"Good+",apr:"24.99%-29.99%",introApr:"0% 12mo",spend:"$5,000",time:"3 mo",ftf:"No",rewards:[["Everything","2X"]],perks:["2X Miles on Everything","5X Hotels and Rental Cars via C1 Travel","Global Entry or TSA PreCheck Credit","No Foreign Tx Fee","Employee Cards Free","Travel Accident Insurance","15+ Transfer Partners"],transfers:["Air Canada","Virgin Atlantic"],link:"#",cat:["business","travel"],badges:["business"],best:"Business Travel",tier:"A",slug:"capital-one-spark-miles"},{id:44,name:"US Bank Cash+",issuer:"US Bank",net:"Visa",desc:"5% on two categories you choose. Strong cash back card.",bonus:"$200",val:200,valDisp:"$200",fee:0,feeNote:"No fee",score:"670+",scLabel:"Good",apr:"19.99%-29.99%",introApr:"0% 15mo",spend:"$1,000",time:"3 mo",ftf:"No",rewards:[["Choice categories","5%"],["Everything","1%"]],perks:["5% on Two Choice Categories (up to $2,000/qtr combined)","2% on One Everyday Category (groceries or gas)","1% Everything Else","0% APR 15 months","No Annual Fee","No Foreign Tx Fee","Purchase Protection","Extended Warranty"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Custom",tier:"C",slug:"us-bank-cash-plus"},{id:46,name:"Amex Blue Business Cash",issuer:"Amex",net:"Amex",desc:"2% cash back on all business purchases. No annual fee.",bonus:"$500",val:500,valDisp:"$500",fee:0,feeNote:"No fee",score:"700+",scLabel:"Good+",apr:"19.99%",introApr:"0% 12mo",spend:"$3,000",time:"3 mo",ftf:"No",rewards:[["Everything","2%"]],perks:["2% Cash Back on Everything (up to $50K/yr, then 1%)","0% APR 12 months","No Annual Fee","No Foreign Tx Fee","Employee Cards Free","Purchase Protection","Extended Warranty"],transfers:[],link:"#",cat:["business","cash","noaf"],badges:["free"],best:"Business Flat",tier:"B",slug:"amex-blue-business-cash"},{id:47,name:"Citi Rewards+",issuer:"Citi",net:"Mastercard",desc:"Rounds up every purchase to nearest 10 points.",bonus:"15K pts",val:285,valDisp:"$285",fee:0,feeNote:"No fee",score:"660+",scLabel:"Good",apr:"18.99%-28.99%",introApr:"0% 15mo",spend:"$1,000",time:"3 mo",ftf:"3%",rewards:[["Gas/Groceries","2X"],["Everything","1X"]],perks:["2X Gas and Grocery Stores (up to $6,000/yr)","1X Everything Else","Round Up to Nearest 10 Points on Every Purchase","10% Points Back on First 100K Redeemed/yr","0% APR 15 months","No Annual Fee","Citi Entertainment Access","Purchase Protection"],transfers:["Citi ThankYou"],link:"#",cat:["cash","noaf"],badges:["free"],best:"Small bonus",tier:"B",slug:"citi-rewards-plus"},{id:48,name:"Citi Strata Premier",issuer:"Citi",net:"Mastercard",desc:"Broad category bonuses with top-tier transfer partners.",history:{"typical":60,"ath":80,"atl":50,"verdict":"average","records":[{"d":"Now","v":60},{"d":"Nov '25","v":75},{"d":"Jul '25","v":60},{"d":"Feb '25","v":80},{"d":"Sep '24","v":60},{"d":"Apr '24","v":50}]},bonus:"60K pts",val:1140,valDisp:"$1,140",fee:95,feeNote:"Waived 1st yr",score:"720+",scLabel:"Good+",apr:"20.24%-28.24%",introApr:"0% 15mo",spend:"$4,000",time:"3 mo",ftf:"No",rewards:[["Travel","3X"],["Dining","3X"]],perks:["$100 Annual Hotel Savings Benefit","3X Dining Worldwide","3X Groceries","3X Gas Stations","3X Air Travel","3X Hotels","1:1 Transfer to 15+ Partners","No Foreign Tx Fee","Trip Cancellation Insurance","Baggage Delay Insurance"],transfers:["JetBlue","Virgin Atlantic","Avianca","Singapore","Turkish","Cathay Pacific","Etihad"],link:"#",cat:["travel"],badges:[],best:"Citi travel",tier:"A",slug:"citi-strata-premier"},{id:49,name:"Citi AAdvantage Executive",issuer:"Citi",net:"Mastercard",desc:"Premium AA card with full Admirals Club lounge access.",history:{"typical":75,"ath":100,"atl":50,"verdict":"elevated","records":[{"d":"Now","v":100},{"d":"Nov '25","v":100},{"d":"Jun '25","v":75},{"d":"Feb '25","v":100},{"d":"Sep '24","v":75},{"d":"Apr '24","v":50}]},bonus:"100K mi",val:1770,valDisp:"$1,770",fee:595,feeNote:"",score:"750+",scLabel:"Excellent",apr:"20.24%-28.24%",introApr:"0% 15mo",spend:"$5,000",time:"3 mo",ftf:"No",rewards:[["American Airlines","4X"]],perks:["Admirals Club Membership (~$850 value)","Free First Checked Bag (up to 8 companions)","Priority Check-In, Security, and Boarding","4X American Airlines Purchases","10X Hotels via AA Hotels","10X Car Rentals via AA","Global Entry or TSA PreCheck Credit","No Foreign Tx Fee","Trip Cancellation Insurance"],transfers:["American Airlines"],link:"#",cat:["travel","premium"],badges:["premium"],best:"AA Elite",tier:"A",slug:"citi-aadvantage-executive"},{id:51,name:"Navy Federal Platinum",issuer:"Navy Federal",net:"Visa",desc:"Low APR card for military members focused on managing debt.",bonus:"$100",val:100,valDisp:"$100",fee:0,feeNote:"No fee",score:"640+",scLabel:"Fair",apr:"14.90%-18%",introApr:"0% 12mo",spend:"$2,000",time:"3 mo",ftf:"No",rewards:[["Everything","1.5%"]],perks:["Low APR (14.90%-18%)","No Balance Transfer Fee","No Annual Fee","No Foreign Tx Fee","Military-Exclusive Benefits","Fraud Protection","Freeze Card Feature"],transfers:[],link:"#",cat:["cash","noaf"],badges:["free"],best:"Basic card",tier:"D",slug:"navy-federal-platinum"}];
+
+function getTier(v){if(v>=2000)return'S';if(v>=1000)return'A';if(v>=500)return'B';if(v>=200)return'C';return'D'}
+function getCPP(card){var n=card.name,is=card.issuer;if(n.indexOf('Delta')>-1)return 1.2;if(n.indexOf('United')>-1||n.indexOf('Quest')>-1)return 1.5;if(n.indexOf('Southwest')>-1)return 1.5;if(n.indexOf('Hilton')>-1)return 0.6;if(n.indexOf('Alaska')>-1)return 1.8;if(n.indexOf('AAdvantage')>-1)return 1.77;if(n.indexOf('Bilt')>-1)return 2.2;if(is==='Chase')return 2.05;if(is==='Amex')return 2.0;if(is==='Capital One')return 1.85;if(is==='Citi')return 1.9;return 1.0;}
+
+function getVB(x){
+  var i=[];
+  var cpp=getCPP(x);
+  var bonusNote=(x.spend&&x.spend!=='—')?'Req. '+x.spend+' spend in '+x.time:'';
+  var bonusLabel=x.bonus+(cpp!==1.0?' @ '+cpp+'c':'');
+  i.push({type:'bonus',label:'Signup Bonus ('+bonusLabel+')',value:'$'+x.val.toLocaleString(),note:bonusNote});
+  var credits=0;
+  x.perks.forEach(function(p){if(p.charAt(0)==='$'&&p.indexOf(' X ')===-1&&p.charAt(1)!=='X'){var m=p.match(/[$][0-9,]+/);if(m){var amt=parseInt(m[0].replace(/[^0-9]/g,''))||0;credits+=amt;var lbl=p.replace(m[0],'').replace(/^[^a-zA-Z]*/,'').trim();i.push({type:'credit',label:lbl||p,value:m[0]});}}});
+  var fee=x.feeNote.indexOf('Waived')>-1?0:x.fee;
+  if(x.feeNote.indexOf('Waived')>-1){i.push({type:'fee',label:'Annual Fee (Waived 1st yr)',value:'$0'});}else{i.push({type:'fee',label:'Annual Fee',value:x.fee>0?'-$'+x.fee:'$0'});}
+  var net=x.val+credits-fee;
+  var netDisp=net>=0?'$'+net.toLocaleString():'-$'+Math.abs(net).toLocaleString();
+  i.push({type:'net',label:'Year 1 Net Value',value:net,disp:netDisp});
+  return i;
+}
+
+function getNetVal(card){
+  var credits=0;
+  card.perks.forEach(function(p){if(p.charAt(0)==='$'&&p.indexOf(' X ')===-1&&p.charAt(1)!=='X'){var m=p.match(/[$][0-9,]+/);if(m)credits+=parseInt(m[0].replace(/[^0-9]/g,''))||0;}});
+  var fee=card.feeNote.indexOf('Waived')>-1?0:card.fee;
+  return card.val+credits-fee;
+}
+
+function renderPage(card){
+  // Update meta tags for SEO
+  var title=card.name+' Review 2026 — Bonus History, Value & Full Details | CardTier';
+  var desc='Full '+card.name+' review: '+card.bonus+' signup bonus ('+card.valDisp+' value), $'+card.fee+' annual fee. '+card.desc+' See bonus history and real net value.';
+  document.title=title;
+  document.querySelector('meta[name="description"]').setAttribute('content',desc);
+  document.querySelector('meta[property="og:title"]')&&document.querySelector('meta[property="og:title"]').setAttribute('content',title);
+  document.querySelector('meta[property="og:description"]')&&document.querySelector('meta[property="og:description"]').setAttribute('content',desc);
+
+  // Canonical URL
+  var canonical=document.querySelector('link[rel="canonical"]');
+  if(!canonical){canonical=document.createElement('link');canonical.rel='canonical';document.head.appendChild(canonical);}
+  canonical.href='https://cardtier.com/cards/'+card.slug;
+
+  // Schema markup
+  var schema={
+    "@context":"https://schema.org",
+    "@type":"FinancialProduct",
+    "name":card.name,
+    "description":desc,
+    "url":"https://cardtier.com/cards/"+card.slug,
+    "provider":{"@type":"Organization","name":card.issuer},
+    "feesAndCommissionsSpecification":card.fee===0?"No annual fee":"$"+card.fee+" annual fee",
+    "annualPercentageRate":card.apr,
+    "offers":{"@type":"Offer","description":card.bonus+" sign-up bonus. "+card.valDisp+" estimated value."}
+  };
+  var schemaTag=document.createElement('script');
+  schemaTag.type='application/ld+json';
+  schemaTag.textContent=JSON.stringify(schema);
+  document.head.appendChild(schemaTag);
+
+  // Breadcrumb
+  document.getElementById('bc-name').textContent=card.name;
+
+  // Hero
+  var tier=card.tier||getTier(card.val);
+  var tb=document.getElementById('tier-badge');
+  tb.textContent=tier+' Tier';
+  tb.className='tier-badge tier-'+tier;
+  document.getElementById('issuer-tag').textContent=card.issuer+' · '+card.net;
+  document.getElementById('card-title').textContent=card.name;
+  document.getElementById('card-desc').textContent=card.desc||'';
+  document.getElementById('hs-bonus').textContent=card.bonus;
+  document.getElementById('hs-value').textContent=card.valDisp+' est. value';
+  var net=getNetVal(card);
+  var netEl=document.getElementById('hs-net');
+  netEl.textContent=(net>=0?'$':'-$')+Math.abs(net).toLocaleString();
+  netEl.style.color=net>=0?'#34d399':'#f87171';
+  document.getElementById('hs-fee').textContent=card.fee===0?'$0':('$'+card.fee);
+  document.getElementById('hs-feenote').textContent=card.feeNote||'';
+  document.getElementById('hs-spend').textContent=card.spend&&card.spend!=='—'?card.spend:'None';
+  document.getElementById('hs-time').textContent=card.time?'within '+card.time:'';
+  var applyBtn=document.getElementById('apply-btn');
+  if(card.link&&card.link!=='#'){applyBtn.href=card.link;}else{applyBtn.style.background='#374151';}
+
+  // Value Breakdown
+  var vbHtml=getVB(card).map(function(t){
+    if(t.type==='net'){var col=t.value>=0?'#059669':'#ef4444';return'<div class="perk-row net-row"><span style="font-weight:700;color:#111">Year 1 Net Value</span><strong style="color:'+col+'">'+t.disp+'</strong></div>';}
+    if(t.type==='bonus'){return'<div class="perk-row"><span>'+t.label+'</span><strong style="color:#059669">'+t.value+'</strong></div>'+(t.note?'<div style="font-size:11px;color:#9ca3af;padding-bottom:4px">* '+t.note+'</div>':'');}
+    if(t.type==='fee'){return'<div class="perk-row"><span>'+t.label+'</span><strong style="color:'+(t.value==='$0'?'#059669':'#ef4444')+'">'+t.value+'</strong></div>';}
+    return'<div class="perk-row"><span>'+t.label+'</span><strong style="color:#2563eb">'+t.value+'</strong></div>';
+  }).join('');
+  document.getElementById('vb-list').innerHTML=vbHtml;
+
+  // Bonus History
+  var histSec=document.getElementById('hist-section');
+  if(card.history){
+    var h=card.history;
+    var recs=h.records||[];
+    var maxV=Math.max.apply(null,recs.map(function(r){return r.v||0;}));
+    if(maxV===0)maxV=1;
+    var statsHtml='<div class="hist-stats">'+
+      ['<div class="hist-stat"><div class="hist-stat-val" style="color:#2563eb">'+(recs[0]&&recs[0].v||'—')+'K</div><div class="hist-stat-lbl">Current</div></div>',
+       '<div class="hist-stat"><div class="hist-stat-val" style="color:#6b7280">'+h.typical+'K</div><div class="hist-stat-lbl">Typical</div></div>',
+       '<div class="hist-stat"><div class="hist-stat-val" style="color:#059669">'+h.ath+'K</div><div class="hist-stat-lbl">All-Time High</div></div>',
+       '<div class="hist-stat"><div class="hist-stat-val" style="color:#9ca3af">'+h.atl+'K</div><div class="hist-stat-lbl">All-Time Low</div></div>'
+      ].join('')+'</div>';
+    var barsHtml=recs.map(function(r,i){
+      var pct=Math.round(((r.v||0)/maxV)*100);
+      var bg=i===0?'linear-gradient(90deg,#2563eb,#6366f1)':(r.v===h.ath?'linear-gradient(90deg,#059669,#10b981)':'#d1d5db');
+      return'<div class="hist-bar-wrap"><div class="hist-date">'+r.d+'</div><div class="hist-bar-bg"><div class="hist-bar-fill" style="width:'+pct+'%;background:'+bg+'">'+(r.v||'—')+'K'+(i===0?' ←':'')+'</div></div><div class="hist-val">'+(r.v||'—')+'K</div></div>';
+    }).join('');
+    var verdicts={wait:{bg:'#fef3c7',border:'#fde68a',icon:'⏳',title:'Consider Waiting',body:'Current offer is below the typical bonus. A better offer may return.'},elevated:{bg:'#dcfce7',border:'#86efac',icon:'🔥',title:'Apply Now — Elevated Offer',body:'Current offer is above the historical average. Act before it drops.'},average:{bg:'#f3f4f6',border:'#e5e7eb',icon:'✅',title:'Fair Offer',body:'Current offer is in line with the historical average.'}};
+    var v=verdicts[h.verdict]||verdicts.average;
+    var verdictHtml='<div class="verdict-box" style="background:'+v.bg+';border:1.5px solid '+v.border+'"><span style="font-size:20px">'+v.icon+'</span><div><div class="verdict-title">'+v.title+'</div><div class="verdict-body">'+v.body+'</div></div></div>';
+    document.getElementById('hist-content').innerHTML=statsHtml+barsHtml+verdictHtml;
+  } else {
+    histSec.style.display='none';
+  }
+
+  // Rewards
+  document.getElementById('rewards-grid').innerHTML=card.rewards.map(function(r){
+    return'<div class="reward-item"><div class="reward-rate">'+r[1]+'</div><div class="reward-cat">'+r[0]+'</div></div>';
+  }).join('');
+
+  // Perks
+  document.getElementById('perks-list').innerHTML=card.perks.map(function(p){
+    return'<li>'+p+'</li>';
+  }).join('');
+
+  // Transfers
+  if(card.transfers&&card.transfers.length){
+    document.getElementById('transfers-section').style.display='block';
+    document.getElementById('transfers-grid').innerHTML=card.transfers.map(function(t){
+      return'<div class="transfer-pill">'+t+'</div>';
+    }).join('');
+  }
+
+  // Card details
+  document.getElementById('details-list').innerHTML=[
+    {label:'Network',value:card.net},
+    {label:'Credit Score',value:card.score+' ('+card.scLabel+')'},
+    {label:'Regular APR',value:card.apr},
+    {label:'Intro APR',value:card.introApr||'None'},
+    {label:'Foreign Transaction Fee',value:card.ftf==='No'?'None':card.ftf},
+    {label:'Annual Fee',value:card.fee===0?'$0 — Free':'$'+card.fee+(card.feeNote?' ('+card.feeNote+')':'')},
+  ].map(function(d){
+    return'<div class="detail-item"><span class="detail-label">'+d.label+'</span><span class="detail-value">'+d.value+'</span></div>';
+  }).join('');
+
+  // Related cards — same category, sorted by value
+  var sameCat=cards.filter(function(c){return c.id!==card.id&&c.cat.some(function(cat){return card.cat.includes(cat);});});
+  sameCat.sort(function(a,b){return b.val-a.val;});
+  var related=sameCat.slice(0,3);
+  if(related.length){
+    document.getElementById('related-grid').innerHTML=related.map(function(c){
+      return'<a href="/cards/'+c.slug+'" class="related-card"><div class="related-card-name">'+c.name+'</div><div class="related-card-val">'+c.valDisp+' value</div><div class="related-card-fee">'+(c.fee===0?'No annual fee':'$'+c.fee+'/yr')+'</div></a>';
+    }).join('');
+  } else {
+    document.getElementById('related-section').style.display='none';
+  }
+}
+
+// Boot: find card from URL slug
+var slug=window.location.pathname.replace(/^\/cards\//,'').replace(/\/$/,'');
+var card=cards.find(function(c){return c.slug===slug;});
+if(card){
+  renderPage(card);
+} else {
+  document.getElementById('card-title').textContent='Card not found';
+  document.getElementById('card-desc').textContent='This card review page could not be found.';
+}
+</script>
+</body>
+</html>

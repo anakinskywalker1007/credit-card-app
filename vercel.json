@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/cards/:slug", "destination": "/card.html" },
+    { "source": "/best-travel-credit-cards", "destination": "/best-travel-credit-cards.html" },
+    { "source": "/best-cash-back-credit-cards", "destination": "/best-cash-back-credit-cards.html" },
+    { "source": "/best-premium-credit-cards", "destination": "/best-premium-credit-cards.html" },
+    { "source": "/best-business-credit-cards", "destination": "/best-business-credit-cards.html" },
+    { "source": "/best-no-annual-fee-credit-cards", "destination": "/best-no-annual-fee-credit-cards.html" }
+  ]
+}

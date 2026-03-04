@@ -1,0 +1,195 @@
+# robots.txt for cardtier.com
+# Last updated: March 2026
+# Reference: https://developers.google.com/search/docs/crawling-indexing/robots/intro
+
+# ============================================================
+# DEFAULT: ALL CRAWLERS
+# ============================================================
+User-agent: *
+
+# Allow all crawlable content
+Allow: /
+
+# Disallow admin, auth, and internal tooling
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /register/
+Disallow: /account/
+Disallow: /api/
+Disallow: /internal/
+
+# Disallow duplicate/low-value content paths
+Disallow: /search/
+Disallow: /?s=
+Disallow: /?q=
+Disallow: /tag/
+Disallow: /print/
+
+# Disallow URL query parameter variations that create duplicates
+# (e.g., ?sort=, ?filter=, ?ref=, ?utm_source=)
+Disallow: /*?sort=*
+Disallow: /*?filter=*
+Disallow: /*?page=*
+Disallow: /*?ref=*
+Disallow: /*?affiliate=*
+
+# Disallow staging/dev paths if they end up on production
+Disallow: /staging/
+Disallow: /dev/
+Disallow: /test/
+
+# Disallow file types that shouldn't be indexed
+Disallow: /*.json$
+Disallow: /*.xml$
+
+# IMPORTANT: Sitemap is XML but should be explicitly allowed via Sitemap directive (below)
+# The /*.xml$ disallow above applies to arbitrary XML files, not the sitemap.
+# The Sitemap directive below explicitly declares it.
+
+# ============================================================
+# GOOGLEBOT (Google Web Crawler)
+# ============================================================
+User-agent: Googlebot
+Allow: /
+
+# Allow Google to access CSS and JS (required for rendering — do NOT block)
+Allow: /*.css$
+Allow: /*.js$
+
+# Block Googlebot from admin/internal
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /account/
+
+# ============================================================
+# GOOGLEBOT-IMAGE (Google Images)
+# ============================================================
+User-agent: Googlebot-Image
+Allow: /images/cards/
+Allow: /images/blog/
+Allow: /images/authors/
+Allow: /images/logo.png
+# Disallow raw/original unoptimized assets if stored separately
+Disallow: /images/originals/
+Disallow: /images/temp/
+
+# ============================================================
+# GOOGLE ADS BOT (Do NOT block — needed for ad quality scores)
+# ============================================================
+User-agent: AdsBot-Google
+Allow: /
+
+# ============================================================
+# BINGBOT (Microsoft Bing)
+# ============================================================
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /account/
+Crawl-delay: 10
+
+# ============================================================
+# YANDEX (Russian Search Engine — optional but low cost)
+# ============================================================
+User-agent: YandexBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 10
+
+# ============================================================
+# AI TRAINING SCRAPERS — BLOCK ALL
+# ============================================================
+# Block GPTBot (OpenAI content training)
+User-agent: GPTBot
+Disallow: /
+
+# Block ChatGPT user-browsing plugin (this is different from training)
+# Keep allowed if you want ChatGPT to reference CardTier in answers
+# User-agent: ChatGPT-User
+# Allow: /
+
+# Block Google Extended (Gemini/Bard training — distinct from Googlebot)
+User-agent: Google-Extended
+Disallow: /
+
+# Block Anthropic's training crawler
+User-agent: anthropic-ai
+Disallow: /
+
+# Block Common Crawl (used to train many AI models)
+User-agent: CCBot
+Disallow: /
+
+# Block Meta's AI training crawler
+User-agent: FacebookBot
+Disallow: /
+
+# Block Apple's AI crawler
+User-agent: Applebot-Extended
+Disallow: /
+
+# Block ByteDance/TikTok AI
+User-agent: Bytespider
+Disallow: /
+
+# Block Cohere AI
+User-agent: cohere-ai
+Disallow: /
+
+# Block Perplexity AI indexing (separate from search; opt-in if you want citations)
+# User-agent: PerplexityBot
+# Allow: /
+
+# ============================================================
+# AGGRESSIVE/SCRAPERS — BLOCK
+# ============================================================
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# ============================================================
+# SITEMAP DECLARATION
+# ============================================================
+Sitemap: https://cardtier.com/sitemap.xml
+
+# ============================================================
+# NOTES FOR DEVELOPERS
+# ============================================================
+# 1. NEVER block /images/, /*.css$, or /*.js$ from Googlebot.
+#    Blocking these prevents Google from rendering your pages correctly,
+#    which tanks Core Web Vitals scores in Search Console.
+#
+# 2. The /*.xml$ block above is broad — if you add new XML files that
+#    SHOULD be crawled (like a news sitemap), add explicit Allow rules above it.
+#
+# 3. For the affiliate redirect paths (e.g., /go/chase-sapphire-preferred/),
+#    these should return 302 (temporary) redirects and should be blocked from
+#    indexing via meta robots noindex, NOT robots.txt. robots.txt blocking
+#    doesn't prevent indexing of linked pages — only crawling.
+#
+# 4. Crawl-delay is not respected by Googlebot. Google manages its own crawl
+#    rate. Use Google Search Console > Crawl Stats to monitor and adjust via
+#    the "Crawl rate" setting if needed.
+#
+# 5. To disallow a specific page from being indexed without blocking it in
+#    robots.txt (preferred for individual pages), use:
+#    <meta name="robots" content="noindex, nofollow">
+#    on that page's <head> section.

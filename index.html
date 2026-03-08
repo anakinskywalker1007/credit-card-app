@@ -649,7 +649,12 @@ function handleEmailSignup(e) {
   var form = document.getElementById('emailForm');
   var success = document.getElementById('emailSuccess');
   
-  // Store in localStorage (temporary - replace with real email service)
+  // Open email to Matt with the subscriber
+  var subject = encodeURIComponent('New CardTier Subscriber: ' + email);
+  var body = encodeURIComponent('New email signup from: ' + email);
+  window.open('mailto:cardtier@outlook.com?subject=' + subject + '&body=' + body);
+  
+  // Also store in localStorage as backup
   var subscribers = JSON.parse(localStorage.getItem('cardtier_subscribers') || '[]');
   if (!subscribers.includes(email)) {
     subscribers.push(email);

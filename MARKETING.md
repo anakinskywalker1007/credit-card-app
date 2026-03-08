@@ -1,109 +1,184 @@
-# CardTier Marketing Plan — March 2026
-
-## Phase 1: SEO Foundation (DONE ✅)
-- [x] Meta tags, Open Graph, Twitter cards
-- [x] FAQ schema (Google rich snippets)
-- [x] sitemap.xml + robots.txt
-- [x] Structured data (WebPage + FAQPage)
-- [x] Canonical URL + favicon
-- [ ] **Google Search Console** (Matt needs to do — see instructions below)
-- [ ] **Bing Webmaster Tools** (same process)
-
-## Phase 2: TikTok Content Strategy
-
-### The Angle
-Credit card TikTok is MASSIVE. The winning formula:
-- **Hook** (0-3 sec): Shocking number or bold claim
-- **Value** (3-20 sec): Quick breakdown of why
-- **CTA** (20-30 sec): "Link in bio" or "cardtier.com"
-
-### Content Pillars (rotate these)
-
-#### 1. "You're Leaving Money on the Table" (highest performer)
-- "The Chase Sapphire Reserve pays you $720 to sign up"
-- "This no-fee card gives you $300 for free"
-- "The Amex Gold card is secretly worth $1,450"
-- "Stop using a debit card — here's why"
-
-#### 2. "Best Card For..." (targeted, high intent)
-- "Best credit card for groceries (it's not what you think)"
-- "Best travel card if you hate annual fees"
-- "Best first credit card in 2026"
-- "Best card for Amazon/Costco/Uber/dining"
-
-#### 3. "Credit Card Tier Rankings" (shareable, debate-worthy)
-- "Ranking every Chase card from worst to best"
-- "S-tier credit cards — only 5 made the cut"
-- "These credit cards are a SCAM (D-tier exposed)"
-- "I ranked 50 credit cards so you don't have to"
-
-#### 4. "Hidden Perks Nobody Knows" (curiosity bait)
-- "Your Amex Platinum has a $200 Uber credit most people miss"
-- "Chase Sapphire Reserve gives you free DoorDash for a year"
-- "This card covers your Global Entry AND TSA PreCheck"
-- "5 credit card perks that nobody talks about"
-
-#### 5. "Math Breakdowns" (trust-building, educational)
-- "Is the $695 Amex Platinum worth it? Let's do the math"
-- "Annual fee vs signup bonus — the REAL calculation"
-- "How I value credit card points (the formula)"
-
-### Posting Schedule
-- **3-5 TikToks per week** to start
-- Best times: 7-9 AM, 12-1 PM, 7-9 PM (CST)
-- Cross-post to Instagram Reels + YouTube Shorts
-
-### Video Format (no face needed)
-- Screen recording of CardTier.com scrolling through cards
-- Text overlay with the hook
-- Voiceover explaining the value (use CapCut)
-- Or: green screen with card images behind text
-
-### Comment Strategy (FREE traffic)
-Go to popular finance TikToks and leave helpful comments:
-- "Fun fact: the CSP is worth $720 after subtracting the fee. I compared all 50 top cards at cardtier.com"
-- "I built a site that ranks every card by REAL value (signup bonus minus fees). It's wild how bad some popular cards are"
-- Don't spam — add genuine value, mention the site naturally
-- Target videos about: credit scores, first credit cards, travel hacking, Dave Ramsey (controversial = engagement)
-
-### Hashtags
-#creditcards #personalfinance #creditcardtips #moneytok #travelhacking
-#creditcardreview #signupbonus #financialliteracy #creditcard2026
-#chasesapphire #amexplatinum #bestcreditcard
-
-## Phase 3: SEO Content (Week 2+)
-Add blog-style pages for long-tail keywords:
-- /best-travel-credit-cards
-- /best-no-annual-fee-credit-cards  
-- /best-credit-cards-for-groceries
-- /chase-sapphire-preferred-vs-reserve
-- /amex-gold-vs-platinum
-
-Each page: 800-1200 words, comparison table, affiliate links, internal links to main CardTier page.
-
-## Phase 4: Email List
-- Already have email capture on CardTier
-- Send weekly "Credit Card Deal Alert" emails
-- "Chase Sapphire Preferred bonus just went UP — here's the math"
-- Build list → monetize with affiliate links in emails
+# CardTier Marketing Plan — FULL GAMEPLAN
+**Last Updated:** March 8, 2026
 
 ---
 
-## Google Search Console Setup (Matt do this!)
+## 🚦 CURRENT STATE
 
-1. Go to https://search.google.com/search-console/
-2. Click "Add Property" → choose "URL prefix"
-3. Enter: `https://cardtier.com`
-4. Choose "HTML tag" verification method
-5. Copy the meta tag they give you (looks like `<meta name="google-site-verification" content="xxxxx">`)
-6. Send me the tag — I'll add it to the site and push
-7. Click "Verify" in Search Console
-8. Go to Sitemaps → Submit: `https://cardtier.com/sitemap.xml`
-9. Use URL Inspection → enter `https://cardtier.com/` → click "Request Indexing"
+### Done ✅
+- [x] 50 cards in database with full data
+- [x] Homepage with filters, sorting, search
+- [x] Individual card pages (/cards/slug)
+- [x] Category pages (7 pages: travel, cash back, premium, business, no-annual-fee, first card, dining, groceries)
+- [x] Email signup form on homepage
+- [x] Comparison tool
+- [x] FAQ schema for SEO
+- [x] sitemap.xml (71 URLs)
+- [x] Basic meta tags + Open Graph
 
-**This gets CardTier into Google within 24-48 hours.**
+### NOT Done ❌
+- [ ] Google Search Console setup (needs Matt)
+- [ ] Bing Webmaster Tools
+- [ ] Email service connected to form (Formspree/ConvertKit)
+- [ ] TikTok content ( Strategy exists, no videos)
+- [ ] More comparison pages (only 1-2 exist)
+- [ ] "Best for X" landing pages (need more)
+- [ ] Internal linking between pages
+- [ ] Backlink outreach
 
 ---
 
-## Bing Webmaster Tools
-Same process at https://www.bing.com/webmasters/ — Bing has less competition, easier to rank.
+## 🎯 PRIORITY MATRIX — What to Work On
+
+| Priority | Initiative | Impact | Effort | Status |
+|----------|-----------|--------|--------|--------|
+| **P1** | Google Search Console | SEO indexing | Low | Blocked (needs Matt) |
+| **P1** | More comparison pages | SEO + engagement | Medium | Not started |
+| **P1** | "Best for X" pages (expand) | SEO long-tail | Medium | Partial |
+| **P2** | Connect email service | Capture leads | Low | Not started |
+| **P2** | TikTok content | Traffic + brand | High | Not started |
+| **P2** | Guest post / backlink outreach | Domain authority | High | Not started |
+| **P3** | YouTube long-form | Traffic | High | Not started |
+| **P3** | Reddit engagement | Traffic | Medium | Not started |
+
+---
+
+## 📋 ACTION ITEMS — Next 4 Hours
+
+### Hour 1: SEO Foundation & More Pages
+
+#### 1.1 Add More Comparison Pages (target: 10 more)
+Create dedicated compare pages for high-volume keywords:
+- `/compare/chase-sapphire-preferred-vs-capital-one-venture-x`
+- `/compare/amex-gold-vs-chase-sapphire-preferred`
+- `/compare/citi-double-cash-vs-chase-freedom-unlimited`
+- `/compare/capital-one-venture-x-vs-amex-platinum`
+- `/compare/chase-freedom-unlimited-vs-wells-fargo-active-cash`
+- `/compare/amex-platinum-vs-chase-sapphire-reserve`
+- `/compare/delta-skymiles-gold-vs-united-explorer`
+- `/compare/bilt-mastercard-vs-citi-custom-cash`
+- `/compare/hilton-honors-vs-marriott-bonvoy`
+- `/compare/discover-it-vs-capital-one-quicksilver`
+
+#### 1.2 Expand "Best For X" Pages
+Current: dining, groceries, travel, cash back, first card, no-annual-fee, business, premium
+Add:
+- `/best-credit-cards-for-gas-stations`
+- `/best-credit-cards-for-online-shopping`
+- `/best-credit-cards-for-streaming-services`
+- `/best-credit-cards-for-renters`
+- `/best-credit-cards-for-frequent-flyers`
+- `/best-credit-cards-for-small-business-owners`
+- `/best-credit-cards-for-travel-hackers`
+- `/best-credit-cards-with-no-foreign-transaction-fee`
+
+---
+
+### Hour 2: Technical SEO & Site Improvements
+
+#### 2.1 Add More Schema Markup
+- ReviewSchema on comparison pages
+- ProductSchema on card detail pages
+- HowToSchema for "how to apply" guides
+
+#### 2.2 Internal Linking
+- Add "Related cards" section to each card page
+- Add category links in footer
+- Add comparison page links on relevant card pages
+
+#### 2.3 Performance
+- Check page load times
+- Optimize images if needed
+
+---
+
+### Hour 3: Content & Social
+
+#### 3.1 TikTok Content Plan
+Based on existing strategy, create content outline:
+- **Video 1:** "You're Leaving $720 on the Table" (CSP)
+- **Video 2:** "Best Card for Groceries 2026"
+- **Video 3:** "Chase Sapphire Preferred vs Reserve"
+- **Video 4:** "No-Fee Cards Worth Having"
+- **Video 5:** "Credit Cards Ranked S-Tier"
+
+Each needs:
+- Hook (0-3 sec)
+- Value (3-20 sec)
+- CTA (20-30 sec)
+- Script outline
+
+#### 3.2 YouTube Shorts Strategy
+Same content, longer format for YouTube
+
+---
+
+### Hour 4: Traffic & Outreach
+
+#### 4.1 Reddit Engagement Plan
+Find subreddits: r/creditcards, r/churning, r/personalfinance
+Strategy:
+- Answer questions helpfully
+- Link to relevant CardTier pages when relevant
+- Don't spam — build authority
+
+#### 4.2 Guest Post Outreach
+Target: Personal finance blogs, travel blogs
+Angle: "I built a tool that ranks 50 credit cards by real value — here's what I learned"
+
+#### 4.3 HARO / Qwoted
+Sign up for HARO (Help A Reporter Out) — respond to journalist queries about credit cards
+
+---
+
+## 📊 KEYWORD TARGETS (Next 90 Days)
+
+### Month 1 (Now)
+- First page: "best first credit card"
+- First page: "best no annual fee travel card"
+- First page: "chase sapphire preferred vs capital one venture x"
+
+### Month 2
+- First page: "best credit card for beginners"
+- First page: "best cash back card no annual fee"
+- First page: "amex gold vs chase sapphire preferred"
+
+### Month 3
+- Top 10: "best travel credit card"
+- Top 10: "best rewards credit card"
+- Top 10: "best credit cards 2026"
+
+---
+
+## 📈 SUCCESS METRICS
+
+| Metric | Current | Month 1 Target | Month 3 Target |
+|--------|---------|----------------|---------------|
+| Monthly Visitors | TBD | 500 | 5,000 |
+| Email Subscribers | 0 | 50 | 500 |
+| Domain Authority | ~1 | 10 | 20 |
+| Indexed Pages | 71 | 90+ | 120+ |
+
+---
+
+## ⚠️ BLOCKERS / NEEDS MATT
+
+1. **Google Search Console** — Need Matt to set up and verify
+2. **Bing Webmaster Tools** — Same
+3. **Email Service** — Need to pick service (Formspree recommended for start)
+4. **TikTok Account** — Need Matt to create / provide access
+
+---
+
+## 🔄 NEXT SESSION
+
+After today:
+1. Check indexing status in GSC
+2. Review which pages are ranking
+3. Adjust content based on what resonates
+4. Start email welcome sequence
+5. Begin TikTok video creation
+
+---
+
+*Plan evolves weekly based on data.*

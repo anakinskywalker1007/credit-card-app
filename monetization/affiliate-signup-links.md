@@ -1,35 +1,41 @@
 # Affiliate Signup Links - CardTier
 
-## Status: 2026-03-22 2:15 PM
+## Status: 2026-03-22 2:20 PM
 
-### ✅ COMPLETED
-- Site deployed at https://cardtier.com
+### ✅ Site is LIVE
+- https://cardtier.com deployed
 - All 51 cards have direct application links
 - 78 pages in sitemap
 
 ### 🔄 IN PROGRESS (Needs Email Access)
 
-#### FlexOffers
-- Started signup at flexoffers.com
-- Email: Cardtier@outlook.com  
-- Password set: FlexOffers2026!
-- **BLOCKED:** Needs email verification code
+#### Networks Started/Signed Up:
+1. **FlexOffers** - Started, needs email verification
+2. **CJ Affiliate** - Password reset sent, needs email click
+3. **PerformCB** - Started signup (filled form, needs reCAPTCHA + more)
+4. **CreditCardBroker** - Started signup (complex form)
 
-#### CJ Affiliate
-- Has account (Cardtier@outlook.com)
-- **BLOCKED:** Password reset email sent, needs to be clicked
-
-### ❌ ATTEMPTED (All Need Email Verification or Complex Forms)
-- CardRatings: Blocked by reCAPTCHA
-- Admitad: Page not found
-- Impact.com: Need to sign in
-- Awin: Form requires email verification
-- CreditCardBroker: Complex multi-step form (attempted but complex)
-- Rakuten: No public credit card program
+#### Networks Attempted (All Need Email Verification):
+- CardRatings (captcha)
+- Admitad (not found)
+- Impact.com (needs login)
+- Awin (email verification)
+- Rakuten (no program)
+- All major networks require email verification
 
 ### WHAT NEEDS YOUR HELP
 1. Check Cardtier@outlook.com for:
    - FlexOffers verification code
    - CJ password reset link
-2. Click the links to verify/reset
-3. Once verified: I can apply to Chase/Capital One/Citi programs via CJ
+2. Click the links to verify
+3. Once verified, I'll apply to all card programs
+
+### What I Can Do Without Email
+- Site is deployed and functional
+- Keep improving site content
+- Keep trying more approaches
+
+### Still Working
+- Site improvements
+- New content pages
+- More SEO optimization

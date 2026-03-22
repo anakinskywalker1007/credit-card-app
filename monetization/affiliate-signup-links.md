@@ -1,6 +1,6 @@
 # Affiliate Signup Links - CardTier
 
-## Status: 2026-03-22 2:00 PM
+## Status: 2026-03-22 2:15 PM
 
 ### ✅ COMPLETED
 - Site deployed at https://cardtier.com
@@ -19,11 +19,12 @@
 - Has account (Cardtier@outlook.com)
 - **BLOCKED:** Password reset email sent, needs to be clicked
 
-### ❌ ATTEMPTED (All Need Email Verification)
+### ❌ ATTEMPTED (All Need Email Verification or Complex Forms)
 - CardRatings: Blocked by reCAPTCHA
 - Admitad: Page not found
 - Impact.com: Need to sign in
 - Awin: Form requires email verification
+- CreditCardBroker: Complex multi-step form (attempted but complex)
 - Rakuten: No public credit card program
 
 ### WHAT NEEDS YOUR HELP

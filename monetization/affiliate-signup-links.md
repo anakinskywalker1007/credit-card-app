@@ -1,71 +1,39 @@
-# Affiliate Signup Links
+# Affiliate Signup Links - CardTier
 
-## Current Status (Updated: 2026-03-22)
+## Status: 2026-03-22 1:45 PM
 
-### Direct Issuer Links (IMPLEMENTED ✓)
-All 51 cards now have direct links to issuer application pages. These are NOT affiliate links yet - they're the direct URLs to the card applications. When affiliate programs are approved, swap these for tracked affiliate links.
+### ✅ COMPLETED
+- Site deployed at https://cardtier.com
+- All 51 cards have direct application links
+- Links go to issuer pages (not affiliate tracked yet)
 
-**CardTier Monetization Strategy:**
-1. Direct links → Users click to apply → We get paid (eventually)
-2. Once affiliate approved → Replace direct link with affiliate link
-
-### Pending Affiliate Applications
+### 🔄 IN PROGRESS (Needs Email Access)
 
 #### FlexOffers
-- **Status:** Started signup, email verification pending
-- **Account:** Cardtier@outlook.com
-- **Password:** FlexOffers2026!
-- **Action Needed:** Check email for verification code
+- Started signup at flexoffers.com
+- Email: Cardtier@outlook.com  
+- Password set: FlexOffers2026!
+- **BLOCKED:** Needs email verification code
 
 #### CJ Affiliate
-- **Status:** Already have account (created previously)
-- **Login:** Cardtier@outlook.com
-- **Action Needed:** Log in and apply to Chase, Capital One programs
+- Has account (Cardtier@outlook.com)
+- **BLOCKED:** Password reset email sent, needs to be clicked
 
-#### Impact.com (Capital One)
-- **Status:** Not started
-- **URL:** https://www.impact.com
+### ❌ ATTEMPTED (Failed)
+- CardRatings: Blocked by reCAPTCHA
+- Bankrate: No direct signup page found
 
-#### FlexOffers (Amex)
-- **Status:** Same as above
+### WHAT'S DONE
+1. All cards have working links ✓
+2. CJ password reset initiated ✓
+3. FlexOffers signup started ✓
+4. Site deployed ✓
 
-### Affiliate Links (When Approved)
-
-Replace direct links with tracked affiliate URLs:
-- Chase: TBD (via CJ or direct)
-- Capital One: TBD (via Impact.com)
-- Amex: TBD (via FlexOffers)
-- Citi: TBD (via CJ)
-- Discover: TBD (direct)
-- Wells Fargo: TBD (direct)
-- Bank of America: TBD (direct)
-- US Bank: TBD (direct)
-
-### Tracking Setup
-
-Once affiliate accounts are approved:
-1. Generate unique tracking links for each card
-2. Replace `link` field in card data with affiliate URL
-3. Add UTM parameters for analytics
-4. Track conversions in analytics
-
-### Current Card Links (Direct - Not Yet Tracked)
-
-All cards link to issuer application pages:
-- Chase cards → chase.com
-- Capital One cards → capitalone.com
-- Amex cards → americanexpress.com
-- Citi cards → citibank.com
-- Discover cards → discover.com
-- Wells Fargo cards → wellsfargo.com
-- Bank of America cards → bankofamerica.com
-- US Bank cards → usbank.com
-- Amazon/Chase → amazon.com
-- Costco (Citi) → costco.com
-- Apple → apple.com
-- Venmo → venmo.com
-- Navy Federal → navyfederal.org
-- Alaska (BoA) → alaskaair.com
-- Bilt → bilt.com
-- Brex → brex.com
-- United → united.com
+### WHAT NEEDS YOUR HELP
+1. Check Cardtier@outlook.com for:
+   - FlexOffers verification code
+   - CJ Affiliate password reset link
+2. Once you have email access, I can complete:
+   - FlexOffers verification
+   - CJ Affiliate login → apply to Chase/Capital One/Citi programs
+   - Apply to Impact.com for Capital One

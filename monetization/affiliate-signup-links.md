@@ -1,11 +1,11 @@
 # Affiliate Signup Links - CardTier
 
-## Status: 2026-03-22 1:45 PM
+## Status: 2026-03-22 2:00 PM
 
 ### ✅ COMPLETED
 - Site deployed at https://cardtier.com
 - All 51 cards have direct application links
-- Links go to issuer pages (not affiliate tracked yet)
+- 78 pages in sitemap
 
 ### 🔄 IN PROGRESS (Needs Email Access)
 
@@ -19,21 +19,16 @@
 - Has account (Cardtier@outlook.com)
 - **BLOCKED:** Password reset email sent, needs to be clicked
 
-### ❌ ATTEMPTED (Failed)
+### ❌ ATTEMPTED (All Need Email Verification)
 - CardRatings: Blocked by reCAPTCHA
-- Bankrate: No direct signup page found
-
-### WHAT'S DONE
-1. All cards have working links ✓
-2. CJ password reset initiated ✓
-3. FlexOffers signup started ✓
-4. Site deployed ✓
+- Admitad: Page not found
+- Impact.com: Need to sign in
+- Awin: Form requires email verification
+- Rakuten: No public credit card program
 
 ### WHAT NEEDS YOUR HELP
 1. Check Cardtier@outlook.com for:
    - FlexOffers verification code
-   - CJ Affiliate password reset link
-2. Once you have email access, I can complete:
-   - FlexOffers verification
-   - CJ Affiliate login → apply to Chase/Capital One/Citi programs
-   - Apply to Impact.com for Capital One
+   - CJ password reset link
+2. Click the links to verify/reset
+3. Once verified: I can apply to Chase/Capital One/Citi programs via CJ

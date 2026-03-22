@@ -1,54 +1,71 @@
-# Affiliate Program Signup Links — CardTier
+# Affiliate Signup Links
 
-## Priority Order (apply in this order)
+## Current Status (Updated: 2026-03-22)
 
-### 1. FlexOffers — APPLY FIRST
-- Best for: Amex, Capital One, Chase, Citi ALL in one place
-- URL: https://www.flexoffers.com/affiliate-signup/
-- Commission: $100-$200+ per approval depending on card
-- Note: Credit cards have a separate sub-application within FlexOffers after main account approval
-- Chase is on FlexOffers (confirmed) — this is your path to Chase affiliate links
+### Direct Issuer Links (IMPLEMENTED ✓)
+All 51 cards now have direct links to issuer application pages. These are NOT affiliate links yet - they're the direct URLs to the card applications. When affiliate programs are approved, swap these for tracked affiliate links.
 
-### 2. CJ Affiliate (Commission Junction) — APPLY SECOND
-- Best for: Citi, some Chase cards, business cards
-- URL: https://signup.cj.com/member/signup/publisher/
-- Commission: $50-$180 per approval
-- Note: Already have account? W-9 filed. Check status at app.cj.com
+**CardTier Monetization Strategy:**
+1. Direct links → Users click to apply → We get paid (eventually)
+2. Once affiliate approved → Replace direct link with affiliate link
 
-### 3. Impact.com — APPLY THIRD
-- Best for: Capital One (Venture X, Venture), some premium cards
-- URL: https://app.impact.com/signup/publisher
-- Commission: $100-$150 per Capital One approval
-- Note: Capital One runs through Impact
+### Pending Affiliate Applications
 
-### 4. Bankrate Credit Cards Network — APPLY FOURTH
-- Best for: Direct partnerships with Chase, Amex, Citi, Cap One
-- URL: https://www.bankrate.com/credit-cards/partners/ (contact form)
-- Note: Established network that works directly with all major issuers
-- Requires some traffic to qualify — apply after first 1K monthly visitors
+#### FlexOffers
+- **Status:** Started signup, email verification pending
+- **Account:** Cardtier@outlook.com
+- **Password:** FlexOffers2026!
+- **Action Needed:** Check email for verification code
 
-### 5. American Express Direct (FlexOffers)
-- Amex is available through FlexOffers credit card sub-network
-- Commission: Up to $200 per approved Amex Platinum/Gold application
-- Apply to FlexOffers first, then request Amex program specifically
+#### CJ Affiliate
+- **Status:** Already have account (created previously)
+- **Login:** Cardtier@outlook.com
+- **Action Needed:** Log in and apply to Chase, Capital One programs
 
----
+#### Impact.com (Capital One)
+- **Status:** Not started
+- **URL:** https://www.impact.com
 
-## Commission Rates Reference
-| Card | Network | Commission |
-|------|---------|------------|
-| Chase Sapphire Preferred | FlexOffers/CJ | ~$100-150 |
-| Chase Sapphire Reserve | FlexOffers/CJ | ~$150-200 |
-| Amex Platinum | FlexOffers | ~$150-200 |
-| Amex Gold | FlexOffers | ~$100-150 |
-| Capital One Venture X | Impact | ~$100-150 |
-| Citi Strata Elite | CJ | ~$80-120 |
-| Capital One Spark Cash | FlexOffers | ~$100-150 |
+#### FlexOffers (Amex)
+- **Status:** Same as above
 
----
+### Affiliate Links (When Approved)
 
-## Status
-- [ ] FlexOffers — not applied yet
-- [ ] CJ Affiliate — account created, W-9 filed, awaiting approval
-- [ ] Impact.com — not applied yet
-- [ ] Bankrate — not applied yet (need traffic first)
+Replace direct links with tracked affiliate URLs:
+- Chase: TBD (via CJ or direct)
+- Capital One: TBD (via Impact.com)
+- Amex: TBD (via FlexOffers)
+- Citi: TBD (via CJ)
+- Discover: TBD (direct)
+- Wells Fargo: TBD (direct)
+- Bank of America: TBD (direct)
+- US Bank: TBD (direct)
+
+### Tracking Setup
+
+Once affiliate accounts are approved:
+1. Generate unique tracking links for each card
+2. Replace `link` field in card data with affiliate URL
+3. Add UTM parameters for analytics
+4. Track conversions in analytics
+
+### Current Card Links (Direct - Not Yet Tracked)
+
+All cards link to issuer application pages:
+- Chase cards → chase.com
+- Capital One cards → capitalone.com
+- Amex cards → americanexpress.com
+- Citi cards → citibank.com
+- Discover cards → discover.com
+- Wells Fargo cards → wellsfargo.com
+- Bank of America cards → bankofamerica.com
+- US Bank cards → usbank.com
+- Amazon/Chase → amazon.com
+- Costco (Citi) → costco.com
+- Apple → apple.com
+- Venmo → venmo.com
+- Navy Federal → navyfederal.org
+- Alaska (BoA) → alaskaair.com
+- Bilt → bilt.com
+- Brex → brex.com
+- United → united.com
